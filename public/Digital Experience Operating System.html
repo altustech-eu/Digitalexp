@@ -1,0 +1,3033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career360 — Digital Experience Operating System</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  --navy: #060E24;
+  --navy-mid: #0D1B3E;
+  --navy-light: #152144;
+  --blue: #1A5FE8;
+  --blue-bright: #2E80FF;
+  --gold: #E8B842;
+  --gold-light: #F5CC6A;
+  --gold-dark: #C49A1E;
+  --white: #FFFFFF;
+  --off-white: #F0F4FF;
+  --text-muted: #8899BB;
+  --text-body: #C8D4F0;
+  --border: rgba(232, 184, 66, 0.2);
+  --border-blue: rgba(26, 95, 232, 0.3);
+  --card-bg: rgba(21, 33, 68, 0.7);
+  --section-bg: rgba(13, 27, 62, 0.5);
+  --success: #22C55E;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+  --info: #3B82F6;
+  --purple: #8B5CF6;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--navy);
+  color: var(--text-body);
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* ── SIDEBAR NAV ── */
+#sidebar {
+  position: fixed;
+  left: 0; top: 0;
+  width: 260px;
+  height: 100vh;
+  background: var(--navy-mid);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  z-index: 100;
+  padding: 0 0 40px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-dark) transparent;
+}
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-track { background: transparent; }
+#sidebar::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 2px; }
+
+.sidebar-logo {
+  padding: 24px 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+.sidebar-logo .brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+}
+.sidebar-logo .sub {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 3px;
+}
+
+.nav-section-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  padding: 16px 20px 6px;
+  font-weight: 600;
+}
+
+.nav-item {
+  display: block;
+  padding: 8px 20px;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 12.5px;
+  font-weight: 400;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+  line-height: 1.4;
+}
+.nav-item:hover, .nav-item.active {
+  color: var(--gold);
+  border-left-color: var(--gold);
+  background: rgba(232, 184, 66, 0.06);
+}
+.nav-item.chapter {
+  color: var(--off-white);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.nav-item.chapter:hover { color: var(--gold); border-left-color: var(--gold); background: rgba(232,184,66,0.06); }
+
+/* ── MAIN CONTENT ── */
+#main {
+  margin-left: 260px;
+  min-height: 100vh;
+}
+
+/* ── COVER PAGE ── */
+#cover {
+  min-height: 100vh;
+  background: var(--navy);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 60px 80px;
+}
+
+.cover-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(26,95,232,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,95,232,0.07) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.cover-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(26,95,232,0.15) 0%, transparent 70%);
+  top: -100px; right: -100px;
+}
+.cover-glow2 {
+  position: absolute;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(232,184,66,0.1) 0%, transparent 70%);
+  bottom: -50px; left: -50px;
+}
+
+.cover-inner { position: relative; z-index: 1; max-width: 900px; width: 100%; }
+
+.cover-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(232,184,66,0.12);
+  border: 1px solid rgba(232,184,66,0.3);
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 32px;
+}
+.cover-dot {
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+.cover-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 72px;
+  font-weight: 900;
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 24px;
+}
+.cover-title .accent { color: var(--gold); }
+
+.cover-subtitle {
+  font-size: 20px;
+  color: var(--text-muted);
+  max-width: 620px;
+  line-height: 1.6;
+  margin-bottom: 48px;
+  font-weight: 300;
+}
+
+.cover-meta {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+}
+.cover-meta-item { display: flex; flex-direction: column; gap: 4px; }
+.cover-meta-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+}
+.cover-meta-value {
+  font-size: 14px;
+  color: var(--off-white);
+  font-weight: 500;
+}
+
+.cover-chapters {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.cover-chapter-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 16px;
+  transition: all 0.2s;
+}
+.cover-chapter-card:hover {
+  background: rgba(232,184,66,0.08);
+  border-color: rgba(232,184,66,0.2);
+}
+.cover-chapter-num {
+  font-size: 11px;
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.cover-chapter-name {
+  font-size: 12px;
+  color: var(--off-white);
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+/* ── CHAPTER SECTIONS ── */
+.chapter-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 60px;
+}
+
+.chapter-header {
+  margin-bottom: 60px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+.chapter-number {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.chapter-number::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.chapter-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.chapter-desc {
+  font-size: 17px;
+  color: var(--text-muted);
+  max-width: 680px;
+  line-height: 1.7;
+}
+
+/* ── SECTION DIVIDERS ── */
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 60px 0;
+}
+
+/* ── HEADINGS ── */
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  color: var(--white);
+  font-weight: 700;
+  margin-bottom: 20px;
+  margin-top: 56px;
+}
+h2:first-child { margin-top: 0; }
+
+h3 {
+  font-size: 20px;
+  color: var(--off-white);
+  font-weight: 600;
+  margin-bottom: 14px;
+  margin-top: 40px;
+}
+
+h4 {
+  font-size: 15px;
+  color: var(--gold);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  margin-top: 28px;
+}
+
+p { margin-bottom: 16px; color: var(--text-body); }
+
+/* ── CARDS ── */
+.card-grid {
+  display: grid;
+  gap: 20px;
+  margin: 24px 0;
+}
+.card-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.card-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.card-grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-blue);
+  border-radius: 16px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.card:hover {
+  border-color: rgba(232,184,66,0.3);
+  transform: translateY(-2px);
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--gold));
+}
+.card.gold-top::before { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+.card.blue-top::before { background: linear-gradient(90deg, var(--blue-bright), var(--blue)); }
+.card.purple-top::before { background: linear-gradient(90deg, var(--purple), var(--blue)); }
+.card.green-top::before { background: linear-gradient(90deg, var(--success), #16A34A); }
+
+.card-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  margin-bottom: 16px;
+  background: rgba(26,95,232,0.12);
+}
+.card-icon.gold { background: rgba(232,184,66,0.12); }
+.card-icon.green { background: rgba(34,197,94,0.12); }
+.card-icon.purple { background: rgba(139,92,246,0.12); }
+
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.card-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ── KPI CARDS ── */
+.kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin: 32px 0;
+}
+.kpi-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-blue);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+.kpi-card .kpi-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.kpi-card .kpi-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gold);
+}
+.kpi-card .kpi-sub { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+/* ── TABLES ── */
+.table-container {
+  overflow-x: auto;
+  margin: 24px 0;
+  border-radius: 12px;
+  border: 1px solid var(--border-blue);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+thead {
+  background: rgba(26,95,232,0.15);
+}
+thead th {
+  padding: 14px 18px;
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gold);
+  font-weight: 700;
+  border-bottom: 1px solid var(--border);
+}
+tbody tr {
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background 0.15s;
+}
+tbody tr:hover { background: rgba(26,95,232,0.06); }
+tbody tr:last-child { border-bottom: none; }
+tbody td {
+  padding: 12px 18px;
+  color: var(--text-body);
+  vertical-align: top;
+}
+tbody td:first-child { color: var(--off-white); font-weight: 500; }
+.tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.tag-blue { background: rgba(26,95,232,0.2); color: var(--blue-bright); }
+.tag-gold { background: rgba(232,184,66,0.2); color: var(--gold); }
+.tag-green { background: rgba(34,197,94,0.15); color: var(--success); }
+.tag-red { background: rgba(239,68,68,0.15); color: #F87171; }
+.tag-purple { background: rgba(139,92,246,0.15); color: #A78BFA; }
+
+/* ── CALLOUT BOXES ── */
+.callout {
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin: 28px 0;
+  position: relative;
+  padding-left: 40px;
+}
+.callout::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  border-radius: 4px 0 0 4px;
+}
+.callout.insight {
+  background: rgba(232,184,66,0.08);
+  border: 1px solid rgba(232,184,66,0.2);
+}
+.callout.insight::before { background: var(--gold); }
+.callout.insight .callout-title { color: var(--gold); }
+
+.callout.strategic {
+  background: rgba(26,95,232,0.08);
+  border: 1px solid rgba(26,95,232,0.25);
+}
+.callout.strategic::before { background: var(--blue-bright); }
+.callout.strategic .callout-title { color: var(--blue-bright); }
+
+.callout.warning {
+  background: rgba(239,68,68,0.08);
+  border: 1px solid rgba(239,68,68,0.2);
+}
+.callout.warning::before { background: var(--danger); }
+.callout.warning .callout-title { color: #F87171; }
+
+.callout.success {
+  background: rgba(34,197,94,0.08);
+  border: 1px solid rgba(34,197,94,0.2);
+}
+.callout.success::before { background: var(--success); }
+.callout.success .callout-title { color: var(--success); }
+
+.callout-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.callout p { margin-bottom: 0; font-size: 14px; }
+.callout blockquote {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.5;
+}
+
+/* ── FLOW DIAGRAMS ── */
+.flow-diagram {
+  background: var(--navy-light);
+  border: 1px solid var(--border-blue);
+  border-radius: 16px;
+  padding: 40px;
+  margin: 28px 0;
+}
+.flow-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.flow-title::before {
+  content: '';
+  width: 20px; height: 2px;
+  background: var(--gold);
+}
+
+.flow-linear {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+.flow-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 100px;
+}
+.flow-node-box {
+  background: var(--card-bg);
+  border: 1px solid var(--border-blue);
+  border-radius: 10px;
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--off-white);
+  width: 100%;
+  position: relative;
+}
+.flow-node-box.highlight {
+  border-color: var(--gold);
+  background: rgba(232,184,66,0.1);
+  color: var(--gold);
+}
+.flow-node-box.blue-highlight {
+  border-color: var(--blue-bright);
+  background: rgba(26,95,232,0.12);
+  color: #7EB8FF;
+}
+.flow-node-sub { font-size: 10px; color: var(--text-muted); margin-top: 4px; text-align: center; }
+.flow-arrow {
+  font-size: 18px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  padding: 0 8px;
+  margin-top: -16px;
+}
+
+.flow-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.flow-vertical .flow-step {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+.flow-vertical .step-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 32px;
+  flex-shrink: 0;
+}
+.step-circle {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(26,95,232,0.2);
+  border: 2px solid var(--blue-bright);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--blue-bright);
+  flex-shrink: 0;
+}
+.step-circle.gold {
+  background: rgba(232,184,66,0.15);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.step-line {
+  width: 2px;
+  flex: 1;
+  min-height: 20px;
+  background: linear-gradient(to bottom, var(--blue-bright), transparent);
+  margin: 4px auto;
+}
+.step-content { padding-bottom: 28px; flex: 1; }
+.step-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--off-white);
+  margin-bottom: 4px;
+}
+.step-detail { font-size: 12.5px; color: var(--text-muted); }
+
+/* ── SWIMLANE DIAGRAMS ── */
+.swimlane {
+  background: var(--navy-light);
+  border: 1px solid var(--border-blue);
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 28px 0;
+}
+.swimlane-header {
+  background: rgba(26,95,232,0.15);
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-blue);
+}
+.swimlane-title { font-size: 12px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
+.swimlane-body { display: flex; }
+.swimlane-lane {
+  flex: 1;
+  border-right: 1px solid rgba(255,255,255,0.05);
+  padding: 20px;
+}
+.swimlane-lane:last-child { border-right: none; }
+.lane-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.lane-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border-blue);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--text-body);
+  margin-bottom: 8px;
+}
+
+/* ── MATURITY MODEL ── */
+.maturity-model {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 28px 0;
+}
+.maturity-level {
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+}
+.maturity-num {
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.maturity-bar {
+  border-radius: 12px;
+  padding: 16px 24px;
+  flex: 1;
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+.maturity-bar::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 0;
+  background: rgba(255,255,255,0.03);
+}
+.mat-l1 { background: rgba(107,114,128,0.12); border-color: rgba(107,114,128,0.2); }
+.mat-l1 .mat-title { color: #9CA3AF; }
+.mat-l1 .maturity-num { color: #6B7280; }
+.mat-l2 { background: rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.2); }
+.mat-l2 .mat-title { color: var(--info); }
+.mat-l2 .maturity-num { color: var(--info); }
+.mat-l3 { background: rgba(139,92,246,0.1); border-color: rgba(139,92,246,0.2); }
+.mat-l3 .mat-title { color: var(--purple); }
+.mat-l3 .maturity-num { color: var(--purple); }
+.mat-l4 { background: rgba(232,184,66,0.08); border-color: rgba(232,184,66,0.2); }
+.mat-l4 .mat-title { color: var(--gold); }
+.mat-l4 .maturity-num { color: var(--gold); }
+.mat-l5 { background: rgba(34,197,94,0.08); border-color: rgba(34,197,94,0.25); }
+.mat-l5 .mat-title { color: var(--success); }
+.mat-l5 .maturity-num { color: var(--success); }
+.mat-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.mat-desc { font-size: 12.5px; color: var(--text-muted); }
+.mat-target {
+  position: absolute;
+  right: 16px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  background: rgba(34,197,94,0.2);
+  color: var(--success);
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ── BULLET LISTS ── */
+.styled-list {
+  list-style: none;
+  margin: 16px 0;
+}
+.styled-list li {
+  padding: 6px 0 6px 24px;
+  position: relative;
+  font-size: 14px;
+  color: var(--text-body);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.styled-list li:last-child { border-bottom: none; }
+.styled-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-size: 12px;
+}
+
+/* ── ROLE CARDS ── */
+.role-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-blue);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+.role-card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.role-avatar {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  background: rgba(26,95,232,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+.role-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white);
+}
+.role-mandate {
+  font-size: 12px;
+  color: var(--gold);
+  margin-top: 2px;
+}
+.role-kpis {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.kpi-pill {
+  background: rgba(26,95,232,0.1);
+  border: 1px solid rgba(26,95,232,0.2);
+  color: #7EB8FF;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* ── CODE BLOCKS ── */
+.code-block {
+  background: var(--navy);
+  border: 1px solid var(--border-blue);
+  border-radius: 10px;
+  padding: 20px 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  color: #A8D5FF;
+  overflow-x: auto;
+  margin: 20px 0;
+  line-height: 1.8;
+}
+.code-comment { color: var(--text-muted); }
+.code-key { color: var(--gold); }
+.code-val { color: #79D576; }
+
+/* ── VALUE LOOP / FLYWHEEL ── */
+.flywheel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 32px 0;
+  background: var(--navy-light);
+  border: 1px solid var(--border-blue);
+  border-radius: 16px;
+  padding: 32px;
+}
+.flywheel-node {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 100px; height: 100px;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--off-white);
+  flex-shrink: 0;
+  position: relative;
+}
+.flywheel-node.active {
+  border-color: var(--gold);
+  background: rgba(232,184,66,0.12);
+  color: var(--gold);
+}
+.flywheel-arrow {
+  font-size: 24px;
+  color: var(--gold);
+  flex-shrink: 0;
+  animation: fade-arrow 2s ease-in-out infinite;
+}
+@keyframes fade-arrow {
+  0%,100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* ── PHASE TIMELINE ── */
+.phase-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin: 28px 0;
+  position: relative;
+}
+.phase-timeline::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: 12.5%; right: 12.5%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--gold));
+  z-index: 0;
+}
+.phase-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.phase-dot {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--blue-bright);
+  background: var(--navy-mid);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+  color: var(--blue-bright);
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.phase-dot.gold { border-color: var(--gold); color: var(--gold); }
+.phase-content {
+  text-align: center;
+  background: var(--card-bg);
+  border: 1px solid var(--border-blue);
+  border-radius: 12px;
+  padding: 16px;
+  width: calc(100% - 16px);
+}
+.phase-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.phase-title { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 8px; }
+.phase-items { font-size: 11.5px; color: var(--text-muted); line-height: 1.7; }
+
+/* ── RACI TABLE ── */
+.raci-pill {
+  display: inline-block;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+}
+.raci-R { background: rgba(26,95,232,0.3); color: var(--blue-bright); }
+.raci-A { background: rgba(232,184,66,0.3); color: var(--gold); }
+.raci-C { background: rgba(139,92,246,0.2); color: #A78BFA; }
+.raci-I { background: rgba(107,114,128,0.2); color: #9CA3AF; }
+
+/* ── ORG CHART ── */
+.org-chart {
+  margin: 32px 0;
+  background: var(--navy-light);
+  border: 1px solid var(--border-blue);
+  border-radius: 16px;
+  padding: 32px;
+  overflow-x: auto;
+}
+.org-level {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 0;
+  position: relative;
+}
+.org-connector {
+  height: 30px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.org-connector::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--blue-bright), transparent);
+  left: 50%;
+}
+.org-node {
+  background: var(--card-bg);
+  border: 1px solid var(--border-blue);
+  border-radius: 10px;
+  padding: 12px 16px;
+  text-align: center;
+  min-width: 120px;
+}
+.org-node.top-node {
+  border-color: var(--gold);
+  background: rgba(232,184,66,0.1);
+}
+.org-node-title { font-size: 12px; font-weight: 700; color: var(--white); }
+.org-node-sub { font-size: 10px; color: var(--text-muted); margin-top: 3px; }
+
+/* ── EVENT DICTIONARY ── */
+.event-table tbody td:nth-child(2) { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #79D576; }
+
+/* ── SECTION PAGE BREAK ── */
+.chapter-break {
+  background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy-mid) 100%);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 60px;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+}
+.chapter-break-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(26,95,232,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,95,232,0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+.chapter-break-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; }
+
+/* ── SCROLL BAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: var(--border-blue); border-radius: 3px; }
+
+/* ── PRINT / PAGE ── */
+@media print {
+  #sidebar { display: none; }
+  #main { margin-left: 0; }
+}
+
+.highlight-box {
+  background: linear-gradient(135deg, rgba(26,95,232,0.12), rgba(232,184,66,0.08));
+  border: 1px solid rgba(232,184,66,0.25);
+  border-radius: 16px;
+  padding: 32px;
+  margin: 32px 0;
+}
+.highlight-box-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin: 24px 0; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin: 24px 0; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.badge-gold { background: rgba(232,184,66,0.15); color: var(--gold); border: 1px solid rgba(232,184,66,0.3); }
+.badge-blue { background: rgba(26,95,232,0.15); color: var(--blue-bright); border: 1px solid rgba(26,95,232,0.3); }
+.badge-green { background: rgba(34,197,94,0.1); color: var(--success); border: 1px solid rgba(34,197,94,0.25); }
+
+.l-tag {
+  display: inline-block;
+  background: rgba(26,95,232,0.2);
+  color: var(--blue-bright);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  margin-right: 6px;
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ SIDEBAR ══════════════════ -->
+<nav id="sidebar">
+  <div class="sidebar-logo">
+    <div class="brand">CAREER360</div>
+    <div class="sub">Digital Experience OS</div>
+  </div>
+  <div class="nav-section-label">Frontmatter</div>
+  <a href="#cover" class="nav-item">Cover</a>
+  <a href="#foreword" class="nav-item">Foreword</a>
+  <a href="#toc" class="nav-item">Table of Contents</a>
+  <div class="nav-section-label">Part I — Strategy</div>
+  <a href="#ch1" class="nav-item chapter">01 — Overview & Vision</a>
+  <a href="#ch2" class="nav-item chapter">02 — Process Architecture L0–L3</a>
+  <a href="#ch2-content" class="nav-item">Content Supply Chain</a>
+  <a href="#ch2-omni" class="nav-item">Omnichannel Delivery</a>
+  <a href="#ch2-lead" class="nav-item">Lead Capture & Conversion</a>
+  <a href="#ch2-analytics" class="nav-item">Analytics & Optimization</a>
+  <div class="nav-section-label">Part II — Systems</div>
+  <a href="#ch3" class="nav-item chapter">03 — UCC Dashboard Architecture</a>
+  <a href="#ch4" class="nav-item chapter">04 — API & Systems Integration</a>
+  <a href="#ch5" class="nav-item chapter">05 — AI Automation (129 Workflows)</a>
+  <a href="#ch6" class="nav-item chapter">06 — Data Architecture & ERD</a>
+  <a href="#ch6-events" class="nav-item">Event Dictionary (100+ Events)</a>
+  <div class="nav-section-label">Part III — People</div>
+  <a href="#ch7" class="nav-item chapter">07 — Org Design L1–L4</a>
+  <a href="#ch8" class="nav-item chapter">08 — Role Architecture</a>
+  <a href="#ch9" class="nav-item chapter">09 — Workforce System</a>
+  <a href="#ch9-comp" class="nav-item">Compensation Benchmarking</a>
+  <a href="#ch9-kpi" class="nav-item">KPI / OKR Framework</a>
+  <a href="#ch9-cap" class="nav-item">Capability Development</a>
+  <div class="nav-section-label">Part IV — Governance</div>
+  <a href="#ch10" class="nav-item chapter">10 — HRMS Blueprint</a>
+  <a href="#ch11" class="nav-item chapter">11 — SOPs & Playbooks</a>
+  <a href="#ch12" class="nav-item chapter">12 — ISO Governance</a>
+  <div class="nav-section-label">Part V — Roadmap</div>
+  <a href="#ch13" class="nav-item chapter">13 — Maturity Model & Roadmap</a>
+  <a href="#ch14" class="nav-item chapter">14 — SaaS & Revenue Engine</a>
+  <a href="#ch15" class="nav-item chapter">15 — Strategic Closure</a>
+</nav>
+
+<!-- ══════════════════ MAIN ══════════════════ -->
+<div id="main">
+
+<!-- ══════════════════ COVER ══════════════════ -->
+<section id="cover">
+  <div class="cover-grid"></div>
+  <div class="cover-glow"></div>
+  <div class="cover-glow2"></div>
+  <div class="cover-inner">
+    <div class="cover-eyebrow">
+      <div class="cover-dot"></div>
+      Enterprise Operating System · Confidential
+    </div>
+    <h1 class="cover-title">
+      Digital Experience<br>
+      <span class="accent">Operating System</span>
+    </h1>
+    <p class="cover-subtitle">
+      A complete enterprise blueprint for Career360 — covering Process Architecture, Team Structure, UCC Intelligence, AI Automation, Data Systems, Governance, and Revenue Engine.
+    </p>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Organisation</div>
+        <div class="cover-meta-value">Career360</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Function</div>
+        <div class="cover-meta-value">Digital Experience (DigitalExp)</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Architecture Levels</div>
+        <div class="cover-meta-value">L0 → L4</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Classification</div>
+        <div class="cover-meta-value">Internal · Leadership Use</div>
+      </div>
+    </div>
+    <div class="cover-chapters">
+      <div class="cover-chapter-card">
+        <div class="cover-chapter-num">PART I</div>
+        <div class="cover-chapter-name">Strategy & Process Architecture</div>
+      </div>
+      <div class="cover-chapter-card">
+        <div class="cover-chapter-num">PART II</div>
+        <div class="cover-chapter-name">Systems, Data & AI Automation</div>
+      </div>
+      <div class="cover-chapter-card">
+        <div class="cover-chapter-num">PART III</div>
+        <div class="cover-chapter-name">People, Org Design & Workforce</div>
+      </div>
+      <div class="cover-chapter-card">
+        <div class="cover-chapter-num">PART IV & V</div>
+        <div class="cover-chapter-name">Governance, ISO & Growth Roadmap</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ FOREWORD ══════════════════ -->
+<div class="chapter-break" id="foreword">
+  <div class="chapter-break-grid"></div>
+  <div class="chapter-break-inner">
+    <div class="badge badge-gold" style="margin-bottom:24px">Foreword</div>
+    <div style="font-family:'Playfair Display',serif; font-size:36px; color:var(--white); font-weight:700; line-height:1.2; margin-bottom:24px; max-width:700px">
+      From Marketing Function to <span style="color:var(--gold)">Revenue Operating System</span>
+    </div>
+    <p style="font-size:16px; color:var(--text-body); max-width:720px; line-height:1.8; margin-bottom:20px">
+      Most organisations treat Digital Experience as a marketing execution function. That is a structural mistake. At Career360, we are building something categorically different — a <strong style="color:var(--white)">Revenue Operating System (RevOS)</strong> that connects every piece of content, every user interaction, every lead, and every data point into a closed-loop intelligence engine.
+    </p>
+    <p style="font-size:16px; color:var(--text-body); max-width:720px; line-height:1.8; margin-bottom:28px">
+      This document is the complete blueprint. It covers every layer — from the L0 enterprise strategy down to L4 individual role execution, from high-level UCC dashboard architecture to field-level data dictionary definitions. Use it to align your team, build systems, govern processes, and scale globally.
+    </p>
+    <div class="callout insight" style="max-width:720px">
+      <div class="callout-title">Core Principle</div>
+      <blockquote>"Content = Demand Generation Asset · Data = Strategic Advantage · UX = Conversion Multiplier · Automation = Cost Efficiency · Analytics = Decision Engine"</blockquote>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ CH1: OVERVIEW ══════════════════ -->
+<section id="ch1" class="chapter-section">
+  <div class="chapter-header">
+    <div class="chapter-number">Chapter 01</div>
+    <h1 class="chapter-title">Overview & Strategic Vision</h1>
+    <p class="chapter-desc">The Digital Experience Command Centre (DXCC) is Career360's centralised value-creation engine — directly driving pipeline velocity, CAC efficiency, brand equity, and conversion yield across the entire ecosystem.</p>
+  </div>
+
+  <h2>What is DigitalExp?</h2>
+  <p>DigitalExp is not a marketing team. It is a <strong>Revenue Production System</strong> — a centralised shared-services command unit that sits at the intersection of Content, Technology, Data, and Commercial Operations. It serves every entity in the Career360 ecosystem: Career360Abroad, Career360Academy, euRecruiter, Altus Career, and myUniApply.</p>
+
+  <div class="callout strategic">
+    <div class="callout-title">Strategic Definition</div>
+    <blockquote>"DigitalExp is a Predictive Revenue Intelligence System where every content piece is a measurable asset, every user is a tracked journey, and every interaction is a monetisable signal."</blockquote>
+  </div>
+
+  <h2>The 6 Macro Value Streams (L0)</h2>
+  <p>At the highest level of abstraction, DigitalExp operates across six enterprise value streams:</p>
+
+  <div class="card-grid card-grid-3">
+    <div class="card gold-top">
+      <div class="card-icon gold">📡</div>
+      <div class="card-title">1. Experience Strategy &amp; Governance</div>
+      <div class="card-desc">Brand architecture, market positioning, UX design standards, content governance, campaign planning, BSC-aligned budgeting &amp; performance targets.</div>
+    </div>
+    <div class="card blue-top">
+      <div class="card-icon">🔍</div>
+      <div class="card-title">2. Audience Intelligence &amp; Research</div>
+      <div class="card-desc">Persona segmentation by country, program, and socio-economic profile. Behavioural analytics, market research, competitor benchmarking, keyword &amp; VOC.</div>
+    </div>
+    <div class="card purple-top">
+      <div class="card-icon purple">🎬</div>
+      <div class="card-title">3. Content Supply Chain</div>
+      <div class="card-desc">End-to-end content lifecycle: Strategy → Planning → Production → Structuring → Storage → Publishing → Localisation.</div>
+    </div>
+    <div class="card gold-top">
+      <div class="card-icon gold">🌐</div>
+      <div class="card-title">4. Omnichannel Experience Delivery</div>
+      <div class="card-desc">Website, landing pages, social media platforms, paid campaigns, email &amp; WhatsApp automation, events &amp; webinars.</div>
+    </div>
+    <div class="card blue-top">
+      <div class="card-icon">🎯</div>
+      <div class="card-title">5. Lead Capture, Nurture &amp; Conversion</div>
+      <div class="card-desc">Lead capture mechanisms, CRM routing, counselling funnel, appointment scheduling, sales pipeline management, conversion tracking.</div>
+    </div>
+    <div class="card green-top">
+      <div class="card-icon green">📊</div>
+      <div class="card-title">6. Experience Analytics &amp; Optimization</div>
+      <div class="card-desc">UCC dashboard monitoring, funnel drop-off analysis, campaign ROI, A/B testing, personalisation engine, continuous optimisation loop.</div>
+    </div>
+  </div>
+
+  <h2>The Growth Flywheel</h2>
+  <p>Every piece of work DigitalExp does must feed into this continuous compounding loop. This is the strategic layer most teams miss:</p>
+
+  <div class="flywheel">
+    <div class="flywheel-node active">Content</div>
+    <div class="flywheel-arrow">→</div>
+    <div class="flywheel-node">Attention</div>
+    <div class="flywheel-arrow">→</div>
+    <div class="flywheel-node">Engagement</div>
+    <div class="flywheel-arrow">→</div>
+    <div class="flywheel-node">Lead</div>
+    <div class="flywheel-arrow">→</div>
+    <div class="flywheel-node active">Conversion</div>
+    <div class="flywheel-arrow">→</div>
+    <div class="flywheel-node">Data</div>
+    <div class="flywheel-arrow">→</div>
+    <div class="flywheel-node">Insight</div>
+    <div class="flywheel-arrow">→</div>
+    <div class="flywheel-node active">Better Content</div>
+  </div>
+
+  <h2>Total Operating Model — End-to-End Value Stream</h2>
+
+  <div class="flow-diagram">
+    <div class="flow-title">L0 — End-to-End Digital Experience Flow</div>
+    <div class="flow-linear">
+      <div class="flow-node">
+        <div class="flow-node-box">Research</div>
+        <div class="flow-node-sub">Market &amp; Persona</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-box">Strategy</div>
+        <div class="flow-node-sub">Brand &amp; Campaign</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-box">Content</div>
+        <div class="flow-node-sub">Production</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-box highlight">Distribution</div>
+        <div class="flow-node-sub">Omnichannel</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-box">Lead Gen</div>
+        <div class="flow-node-sub">Capture</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-box">Nurture</div>
+        <div class="flow-node-sub">CRM + WhatsApp</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-box highlight">Conversion</div>
+        <div class="flow-node-sub">Revenue</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-box">Analytics</div>
+        <div class="flow-node-sub">Optimize</div>
+      </div>
+      <div class="flow-arrow">↩</div>
+    </div>
+  </div>
+
+  <h2>Swimlane Ownership Model</h2>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr><th>Function</th><th>Core Responsibility</th><th>Primary Output</th><th>Key System</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Strategy Team</td><td>Brand, Positioning, KPI Framework</td><td>Campaign briefs, Brand guidelines</td><td>BSC, Planning tools</td></tr>
+        <tr><td>Research Team</td><td>Persona, Market Intelligence</td><td>Segmentation reports, Journey maps</td><td>Analytics, CRM</td></tr>
+        <tr><td>Content Team</td><td>Creation &amp; Publishing</td><td>Videos, Blogs, Creatives</td><td>CMS, DAM, YouTube</td></tr>
+        <tr><td>MarTech Team</td><td>Automation &amp; Tools Integration</td><td>Workflow automations, APIs</td><td>CRM, CDP, CMS</td></tr>
+        <tr><td>Performance Marketing</td><td>Paid &amp; Organic Campaigns</td><td>Leads, Traffic, CPL efficiency</td><td>Meta Ads, Google Ads</td></tr>
+        <tr><td>Sales / Counselling</td><td>Conversion &amp; Revenue</td><td>Enrolled candidates, Revenue</td><td>CRM, ATS</td></tr>
+        <tr><td>Data / Analytics (UCC)</td><td>Insights &amp; Optimization</td><td>Dashboards, AI recommendations</td><td>UCC, Data Lake, BI</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
+
+<!-- ══════════════════ CH2: PROCESS ARCHITECTURE ══════════════════ -->
+<div class="chapter-break">
+  <div class="chapter-break-grid"></div>
+  <div class="chapter-break-inner">
+    <div class="badge badge-blue" style="margin-bottom:16px">Part I · Chapter 02</div>
+    <div style="font-family:'Playfair Display',serif;font-size:42px;color:var(--white);font-weight:700;margin-bottom:12px">Process Architecture<br><span style="color:var(--gold)">L0 → L3</span></div>
+    <p style="color:var(--text-muted);font-size:15px;max-width:600px">Decomposing every enterprise activity from strategic intent down to micro-task execution level.</p>
+  </div>
+</div>
+
+<section id="ch2" class="chapter-section">
+  <div class="chapter-header">
+    <div class="chapter-number">Chapter 02</div>
+    <h1 class="chapter-title">Process Architecture L0–L3</h1>
+    <p class="chapter-desc">A complete four-level decomposition of every DigitalExp process — from enterprise value streams to individual micro-task execution steps. This is the operational backbone of the entire system.</p>
+  </div>
+
+  <h2>Architecture Framework</h2>
+  <div class="card-grid card-grid-4">
+    <div class="card">
+      <div class="l-tag">L0</div>
+      <div class="card-title" style="margin-top:8px">Enterprise Stack</div>
+      <div class="card-desc">6 macro value streams. The 30,000-foot view for leadership alignment.</div>
+    </div>
+    <div class="card">
+      <div class="l-tag">L1</div>
+      <div class="card-title" style="margin-top:8px">Value Stream Breakdown</div>
+      <div class="card-desc">Core departments and functional pillars within each stream.</div>
+    </div>
+    <div class="card">
+      <div class="l-tag">L2</div>
+      <div class="card-title" style="margin-top:8px">Process Decomposition</div>
+      <div class="card-desc">Detailed sub-processes with system touchpoints and owners.</div>
+    </div>
+    <div class="card">
+      <div class="l-tag">L3</div>
+      <div class="card-title" style="margin-top:8px">Micro-Task Execution</div>
+      <div class="card-desc">Individual task-level steps that team members execute daily.</div>
+    </div>
+  </div>
+
+  <!-- VALUE STREAM 1 -->
+  <h2>Value Stream 1: Experience Strategy &amp; Governance</h2>
+  <div class="two-col">
+    <div>
+      <h3>L1 — Core Functions</h3>
+      <ul class="styled-list">
+        <li>Brand Architecture Strategy</li>
+        <li>Market Positioning &amp; Messaging</li>
+        <li>Experience Design Standards (UX/UI Systems)</li>
+        <li>Content Governance (DAM, CMS, KBM)</li>
+        <li>Campaign Planning Framework</li>
+        <li>Budgeting &amp; Performance Targets (BSC aligned)</li>
+      </ul>
+    </div>
+    <div>
+      <h3>L2 — Sub-Processes</h3>
+      <ul class="styled-list">
+        <li>Define Brand Guidelines</li>
+        <li>Define Content Taxonomy</li>
+        <li>Define Funnel Architecture</li>
+        <li>Define Channel Strategy</li>
+        <li>Define KPI Framework (BSC)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- VALUE STREAM 2 -->
+  <h2>Value Stream 2: Audience Intelligence &amp; Research</h2>
+  <div class="two-col">
+    <div>
+      <h3>L1 — Core Functions</h3>
+      <ul class="styled-list">
+        <li>Persona Segmentation (Country / Program / Socio-economic)</li>
+        <li>Behavioural Analytics (Web, Social, Funnel)</li>
+        <li>Market Research (Germany, GCC, India, EU)</li>
+        <li>Competitor Benchmarking</li>
+        <li>Keyword &amp; Search Intent Analysis</li>
+        <li>Voice of Customer (VOC)</li>
+      </ul>
+    </div>
+    <div>
+      <h3>L2 — Sub-Processes</h3>
+      <ul class="styled-list">
+        <li>Data Collection (Web, CRM, Social)</li>
+        <li>Segmentation Engine</li>
+        <li>Persona Mapping (Student, Parent, Agent)</li>
+        <li>Journey Mapping</li>
+        <li>Pain Point Identification</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="section-divider" id="ch2-content">
+
+  <!-- VALUE STREAM 3: CONTENT SUPPLY CHAIN -->
+  <h2>Value Stream 3: Content Supply Chain</h2>
+  <p>The Content Supply Chain is Career360's primary demand generation engine. Every piece of content must be treated as a compounding asset — planned, produced, published, and measured with precision.</p>
+
+  <div class="flow-diagram">
+    <div class="flow-title">L2 — Content Production Pipeline</div>
+    <div class="flow-vertical">
+      <div class="flow-step">
+        <div class="step-connector">
+          <div class="step-circle">1</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <div class="step-label">Content Strategy &amp; Planning</div>
+          <div class="step-detail">Topic ideation from SEO data, persona alignment, platform mapping, content calendar creation</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-connector">
+          <div class="step-circle">2</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <div class="step-label">Content Production</div>
+          <div class="step-detail">Video, Blog, Social, Creatives — script writing, shooting, editing, designing</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-connector">
+          <div class="step-circle">3</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <div class="step-label">Content Structuring</div>
+          <div class="step-detail">SEO optimisation, information architecture, tagging, metadata, CTA mapping</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-connector">
+          <div class="step-circle">4</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <div class="step-label">Content Storage (DAM)</div>
+          <div class="step-detail">Digital Asset Management — version control, approval workflows, archiving</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-connector">
+          <div class="step-circle">5</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <div class="step-label">Content Publishing (CMS + Landing Pages)</div>
+          <div class="step-detail">Multi-platform publishing via CMS, social schedulers, YouTube upload, email dispatch</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-connector">
+          <div class="step-circle gold">6</div>
+          <div class="step-line" style="background:linear-gradient(to bottom, var(--gold), transparent)"></div>
+        </div>
+        <div class="step-content">
+          <div class="step-label">Content Localisation</div>
+          <div class="step-detail">Language-specific, country-specific adaptation for India, GCC, Germany, EU markets</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>L3 — Micro Tasks: Content Supply Chain (Example: Ausbildung Nurse Germany)</h3>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr><th>#</th><th>Micro Task</th><th>Owner</th><th>System</th><th>Output</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Identify content topic (e.g., "Ausbildung Nurse Germany")</td><td>Content Strategist</td><td>SEO Tool</td><td>Approved topic brief</td></tr>
+        <tr><td>2</td><td>Map keyword intent ("salary Germany nurse")</td><td>SEO Specialist</td><td>Ahrefs/SEMrush</td><td>Keyword cluster</td></tr>
+        <tr><td>3</td><td>Create script outline</td><td>Script Writer</td><td>Docs</td><td>Approved script</td></tr>
+        <tr><td>4</td><td>Shoot video (native speaker + trainer)</td><td>Video Producer</td><td>Studio</td><td>Raw footage</td></tr>
+        <tr><td>5</td><td>Edit video (shorts + long format)</td><td>Video Editor</td><td>Premiere Pro</td><td>Final video files</td></tr>
+        <tr><td>6</td><td>Generate thumbnails</td><td>Graphic Designer</td><td>Figma/Canva</td><td>A/B thumbnail variants</td></tr>
+        <tr><td>7</td><td>Upload to YouTube + write SEO description</td><td>CMS Manager</td><td>YouTube Studio</td><td>Published video</td></tr>
+        <tr><td>8</td><td>Embed CTA (Book Appointment)</td><td>MarTech</td><td>CMS</td><td>CTA live on page</td></tr>
+        <tr><td>9</td><td>Publish to CMS</td><td>CMS Manager</td><td>CMS Platform</td><td>Live blog/page</td></tr>
+        <tr><td>10</td><td>Push to CRM audience segment</td><td>Automation Eng.</td><td>CRM + CDP</td><td>Audience notified</td></tr>
+        <tr><td>11</td><td>Track engagement (views, CTR, leads)</td><td>Analytics Team</td><td>UCC</td><td>Performance report</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="section-divider" id="ch2-omni">
+
+  <!-- VALUE STREAM 4: OMNICHANNEL -->
+  <h2>Value Stream 4: Omnichannel Experience Delivery</h2>
+
+  <div class="swimlane">
+    <div class="swimlane-header">
+      <div class="swimlane-title">L1 — Channel Architecture (Functional Swimlane)</div>
+    </div>
+    <div class="swimlane-body">
+      <div class="swimlane-lane">
+        <div class="lane-label">🌐 Website</div>
+        <div class="lane-item">Career360Abroad</div>
+        <div class="lane-item">Career360Academy</div>
+        <div class="lane-item">euRecruiter</div>
+        <div class="lane-item">myUniApply</div>
+        <div class="lane-item">Altus Career Portal</div>
+      </div>
+      <div class="swimlane-lane">
+        <div class="lane-label">📱 Social</div>
+        <div class="lane-item">YouTube (Long + Shorts)</div>
+        <div class="lane-item">Instagram (Reels + Feed)</div>
+        <div class="lane-item">LinkedIn</div>
+        <div class="lane-item">Facebook</div>
+      </div>
+      <div class="swimlane-lane">
+        <div class="lane-label">💰 Paid</div>
+        <div class="lane-item">Meta Ads</div>
+        <div class="lane-item">Google Ads</div>
+        <div class="lane-item">YouTube Ads</div>
+        <div class="lane-item">Display Retargeting</div>
+      </div>
+      <div class="swimlane-lane">
+        <div class="lane-label">📧 CRM</div>
+        <div class="lane-item">Email Automation</div>
+        <div class="lane-item">WhatsApp Sequences</div>
+        <div class="lane-item">SMS Triggers</div>
+        <div class="lane-item">Push Notifications</div>
+      </div>
+      <div class="swimlane-lane">
+        <div class="lane-label">🎙 Events</div>
+        <div class="lane-item">Webinars</div>
+        <div class="lane-item">Live Q&amp;A</div>
+        <div class="lane-item">University Fairs</div>
+        <div class="lane-item">Physical Events</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>L2 — Sub-Processes: Omnichannel Delivery</h3>
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <div class="card-title">Website UX Rendering</div>
+      <div class="card-desc">CRO-optimised page structure, mobile-first design, page speed under 2s, structured data markup</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Landing Page Optimisation</div>
+      <div class="card-desc">Multi-step forms, A/B headlines, social proof elements, urgency triggers, UTM tracking</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Ad Campaign Execution</div>
+      <div class="card-desc">Audience targeting, creative rotation, bid management, frequency caps, conversion tracking</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Social Publishing Automation</div>
+      <div class="card-desc">Scheduler tools, cross-posting workflows, hashtag strategy, engagement monitoring</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Email Automation</div>
+      <div class="card-desc">Drip sequences, behavioural triggers, segmented journeys, open rate optimisation</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Event Execution</div>
+      <div class="card-desc">Registration flows, reminder automation, live delivery, post-event follow-up sequences</div>
+    </div>
+  </div>
+
+  <hr class="section-divider" id="ch2-lead">
+
+  <!-- VALUE STREAM 5: LEAD CONVERSION -->
+  <h2>Value Stream 5: Lead Capture, Nurture &amp; Conversion</h2>
+
+  <div class="flow-diagram">
+    <div class="flow-title">L3 — Lead Conversion Funnel (Micro-Task Level)</div>
+    <div class="flow-linear">
+      <div class="flow-node">
+        <div class="flow-node-box">Ad Click</div>
+        <div class="flow-node-sub">Paid/Organic</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-box">Landing Page</div>
+        <div class="flow-node-sub">CTA + Form</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-box">Form Fill</div>
+        <div class="flow-node-sub">Lead Captured</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-box highlight">CRM Entry</div>
+        <div class="flow-node-sub">Tagged + Scored</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-box">WhatsApp</div>
+        <div class="flow-node-sub">Auto Trigger</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-box">Appointment</div>
+        <div class="flow-node-sub">Scheduled</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-box">Counselling</div>
+        <div class="flow-node-sub">Eligibility Check</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-box highlight">Offer + Enrol</div>
+        <div class="flow-node-sub">Revenue</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>L2 — Sub-Processes: Lead Management</h3>
+  <div class="table-container">
+    <table>
+      <thead><tr><th>Sub-Process</th><th>Description</th><th>System</th><th>SLA</th><th>KPI</th></tr></thead>
+      <tbody>
+        <tr><td>Multi-Step Form Design</td><td>Progressive form with conditional logic reducing friction</td><td>Website / CRM</td><td>Always on</td><td>Form completion rate</td></tr>
+        <tr><td>Lead Qualification</td><td>AI-assisted scoring based on program fit, intent signals, engagement</td><td>CRM + AI Engine</td><td>Instant</td><td>Lead score accuracy</td></tr>
+        <tr><td>CRM Allocation Logic</td><td>Rule-based assignment to counsellor by program, language, geo</td><td>CRM</td><td>&lt;5 minutes</td><td>Assignment compliance</td></tr>
+        <tr><td>Counsellor Workflow</td><td>Structured call script, eligibility checklist, objection handling</td><td>CRM + HRMS</td><td>Per schedule</td><td>Call quality score</td></tr>
+        <tr><td>Follow-up Automation</td><td>Day 1, Day 3, Day 7 sequences via WhatsApp + Email</td><td>CRM + MarTech</td><td>Automated</td><td>Response rate</td></tr>
+        <tr><td>Offer &amp; Enrollment Flow</td><td>Program offer generation, document collection, payment initiation</td><td>CRM + ERP</td><td>Within 24hrs</td><td>Conversion rate</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="section-divider" id="ch2-analytics">
+
+  <!-- VALUE STREAM 6: ANALYTICS -->
+  <h2>Value Stream 6: Analytics &amp; Optimisation</h2>
+
+  <div class="flow-diagram">
+    <div class="flow-title">L3 — Analytics Optimisation Loop</div>
+    <div class="flow-vertical">
+      <div class="flow-step">
+        <div class="step-connector"><div class="step-circle">1</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-label">Track CTR at Ad level · Track CPL at Campaign level · Track Conversion Rate at Funnel level</div>
+          <div class="step-detail">Pull data from Meta Ads, Google Ads, CRM, UCC Event Engine into unified dashboard</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-connector"><div class="step-circle">2</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-label">Identify Drop-off Stage</div>
+          <div class="step-detail">Funnel analysis — where are users exiting? Which step has highest abandonment?</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-connector"><div class="step-circle">3</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-label">Hypothesis Creation</div>
+          <div class="step-detail">"If we change LP headline to focus on salary outcome, conversion will improve by X%"</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-connector"><div class="step-circle">4</div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-label">A/B Test Landing Page Headline</div>
+          <div class="step-detail">Variant A vs Variant B — 50/50 traffic split, statistical significance threshold 95%</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-connector"><div class="step-circle gold">5</div><div class="step-line" style="background:linear-gradient(to bottom,var(--gold),transparent)"></div></div>
+        <div class="step-content">
+          <div class="step-label">Re-run Campaign → Compare → Update Strategy</div>
+          <div class="step-detail">Winner goes to production. Insight feeds back into content strategy and persona models.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════ CH3: UCC DASHBOARD ══════════════════ -->
+<div class="chapter-break" id="ch3">
+  <div class="chapter-break-grid"></div>
+  <div class="chapter-break-inner">
+    <div class="badge badge-gold" style="margin-bottom:16px">Part II · Chapter 03</div>
+    <div style="font-family:'Playfair Display',serif;font-size:42px;color:var(--white);font-weight:700;margin-bottom:12px">UCC Dashboard<br><span style="color:var(--gold)">Architecture</span></div>
+    <p style="color:var(--text-muted);font-size:15px;max-width:600px">The Unified Command Centre — the nervous system of Career360.</p>
+  </div>
+</div>
+
+<section class="chapter-section">
+  <div class="chapter-header">
+    <div class="chapter-number">Chapter 03</div>
+    <h1 class="chapter-title">UCC Dashboard Architecture</h1>
+    <p class="chapter-desc">The Unified Command Centre (UCC) is not a reporting tool — it is a real-time decision engine. Every metric must lead to action, every alert must trigger a workflow, every insight must drive revenue.</p>
+  </div>
+
+  <div class="callout insight">
+    <div class="callout-title">Design Principle</div>
+    <p>Every dashboard must answer four questions: <strong style="color:var(--white)">What is happening? Why is it happening? Who owns it? What action must be taken now?</strong></p>
+  </div>
+
+  <h2>UCC — Five Dashboard Layers</h2>
+  <div class="card-grid card-grid-3" style="margin-bottom:32px">
+    <div class="card gold-top">
+      <div class="card-icon gold">👑</div>
+      <div class="card-title">A. Founder / CXO Dashboard</div>
+      <div class="card-desc">Real-time business health &amp; decision control. Revenue intelligence, acquisition efficiency, funnel intelligence, market performance.</div>
+    </div>
+    <div class="card blue-top">
+      <div class="card-icon">⚙️</div>
+      <div class="card-title">B. Operations Dashboard (COO)</div>
+      <div class="card-desc">Execution discipline + SLA governance. Lead inflow vs assignment, counsellor workload, SLA breach alerts, follow-up completion.</div>
+    </div>
+    <div class="card purple-top">
+      <div class="card-icon purple">📈</div>
+      <div class="card-title">C. Marketing Dashboard (CMO)</div>
+      <div class="card-desc">Demand generation optimisation. Campaign performance, CTR, CPC, CPL, content performance, LP conversion rate, A/B test results.</div>
+    </div>
+    <div class="card green-top">
+      <div class="card-icon green">🎬</div>
+      <div class="card-title">D. Content Intelligence Dashboard</div>
+      <div class="card-desc">Content ROI (leads per content), watch time → conversion mapping, top performing topics, persona-wise engagement.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🧩</div>
+      <div class="card-title">E. Experience Analytics Dashboard</div>
+      <div class="card-desc">Scroll depth, click heatmaps, session recordings insights, drop-off stage analytics, device/location performance.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">👥</div>
+      <div class="card-title">F. HRMS / People Dashboard</div>
+      <div class="card-desc">Workforce utilisation, task completion, KPI achievement, training progress, attrition risk indicators.</div>
+    </div>
+  </div>
+
+  <h2>Founder / CXO Dashboard — Screen Design (Frame 03)</h2>
+  <div style="background:var(--navy); border:1px solid var(--border-blue); border-radius:16px; overflow:hidden; margin:24px 0">
+    <div style="background:rgba(26,95,232,0.1); padding:12px 20px; border-bottom:1px solid var(--border-blue); display:flex; gap:12px; align-items:center">
+      <span style="width:12px;height:12px;border-radius:50%;background:#EF4444;display:inline-block"></span>
+      <span style="width:12px;height:12px;border-radius:50%;background:#F59E0B;display:inline-block"></span>
+      <span style="width:12px;height:12px;border-radius:50%;background:#22C55E;display:inline-block"></span>
+      <span style="font-size:12px;color:var(--text-muted);margin-left:8px">Career360 — Executive Command Dashboard</span>
+    </div>
+    <div style="padding:24px">
+      <!-- KPI Strip -->
+      <div class="kpi-strip">
+        <div class="kpi-card">
+          <div class="kpi-label">Revenue MTD</div>
+          <div class="kpi-value">₹84L</div>
+          <div class="kpi-sub" style="color:var(--success)">↑ 23% vs LM</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Active Leads</div>
+          <div class="kpi-value">1,240</div>
+          <div class="kpi-sub" style="color:var(--success)">↑ 18%</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Conversion %</div>
+          <div class="kpi-value">14.2%</div>
+          <div class="kpi-sub" style="color:var(--warning)">↓ 1.1%</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">CAC</div>
+          <div class="kpi-value">₹4,200</div>
+          <div class="kpi-sub" style="color:var(--success)">↓ 8%</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">SLA Breach</div>
+          <div class="kpi-value" style="color:var(--danger)">7</div>
+          <div class="kpi-sub" style="color:var(--danger)">Needs action</div>
+        </div>
+      </div>
+      <!-- AI Insight Panel -->
+      <div style="background:rgba(232,184,66,0.08);border:1px solid rgba(232,184,66,0.2);border-radius:10px;padding:16px;margin-top:16px">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:10px;font-weight:700">⚡ AI Insights Panel</div>
+        <div style="font-size:13px;color:var(--text-body);line-height:1.8">
+          🔴 Conversion dropped 12% in GCC funnel — investigate counsellor response time<br>
+          🟡 Meta CPL increased by 18% — creative fatigue detected on Nurse Germany campaign<br>
+          🟢 YouTube Ausbildung content driving 34% of organic leads this week
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>UCC Data Flow Architecture</h2>
+  <div class="flow-diagram">
+    <div class="flow-title">Extended Data Flow — Career360 Ecosystem</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px">
+      <div style="background:rgba(26,95,232,0.08);border:1px solid var(--border-blue);border-radius:10px;padding:16px;text-align:center">
+        <div style="font-size:11px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Source Layer</div>
+        <div style="font-size:12px;color:var(--text-muted);line-height:1.8">Ad Platforms<br>Landing Pages<br>Website / CMS<br>Social Media</div>
+      </div>
+      <div style="background:rgba(232,184,66,0.07);border:1px solid rgba(232,184,66,0.2);border-radius:10px;padding:16px;text-align:center">
+        <div style="font-size:11px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Processing Layer</div>
+        <div style="font-size:12px;color:var(--text-muted);line-height:1.8">CRM → CDP<br>ATS → LMS<br>Event Engine<br>Data Lake</div>
+      </div>
+      <div style="background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.2);border-radius:10px;padding:16px;text-align:center">
+        <div style="font-size:11px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Intelligence Layer</div>
+        <div style="font-size:12px;color:var(--text-muted);line-height:1.8">UCC Dashboard<br>AI Engine<br>BI Tools<br>Decisions</div>
+      </div>
+    </div>
+    <div style="text-align:center;font-size:13px;color:var(--text-muted)">
+      <span style="color:var(--blue-bright)">User →</span> Website <span style="color:var(--text-muted)">→</span> CMS <span style="color:var(--text-muted)">→</span> CRM <span style="color:var(--text-muted)">→</span> ATS/LMS <span style="color:var(--text-muted)">→</span> Payment <span style="color:var(--gold)">→ UCC Dashboard</span>
+    </div>
+  </div>
+
+  <h2>UCC Navigation Structure — Left Panel</h2>
+  <div class="card-grid card-grid-4">
+    <div class="card"><div class="card-title">📊 Overview</div><div class="card-desc">Executive Summary — all entities, all metrics</div></div>
+    <div class="card"><div class="card-title">💰 Revenue Intelligence</div><div class="card-desc">Revenue by program, country, channel</div></div>
+    <div class="card"><div class="card-title">🌀 Funnel Analytics</div><div class="card-desc">Stage-wise conversion, drop-off heatmap</div></div>
+    <div class="card"><div class="card-title">📣 Campaign Performance</div><div class="card-desc">Meta, Google, SEO, Organic — all channels</div></div>
+    <div class="card"><div class="card-title">🎬 Content Intelligence</div><div class="card-desc">Content ROI, watch time → conversion</div></div>
+    <div class="card"><div class="card-title">🔍 Experience Analytics</div><div class="card-desc">Heatmaps, sessions, device analytics</div></div>
+    <div class="card"><div class="card-title">👥 CRM &amp; Sales Ops</div><div class="card-desc">Lead pipeline, counsellor perf., SLA</div></div>
+    <div class="card"><div class="card-title">⚠ Alerts &amp; Risk</div><div class="card-desc">Anomalies, SLA breaches, fraud flags</div></div>
+  </div>
+
+</section>
+
+<!-- ══════════════════ CH4: API ARCHITECTURE ══════════════════ -->
+<section id="ch4" class="chapter-section" style="border-top:1px solid var(--border)">
+  <div class="chapter-header">
+    <div class="chapter-number">Chapter 04</div>
+    <h1 class="chapter-title">API Architecture &amp; Systems Integration</h1>
+    <p class="chapter-desc">All systems must not integrate point-to-point. They must integrate through an event-driven intelligence layer — UCC + CDP. This is the enterprise integration backbone.</p>
+  </div>
+
+  <h2>47-Application Integration Architecture</h2>
+  <p>Career360's technology ecosystem is structured in six layers — from user-facing experience to governance and security. All layers flow data into the UCC intelligence core.</p>
+
+  <div class="table-container">
+    <table>
+      <thead><tr><th>Layer</th><th>Name</th><th>Systems &amp; Tools</th><th>Primary Function</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag tag-blue">Layer 1</span></td><td>Experience Layer</td><td>Career360Abroad, Academy, euRecruiter, Student Portal, Agent Portal</td><td>Front-end user interaction and engagement</td></tr>
+        <tr><td><span class="tag tag-gold">Layer 2</span></td><td>Engagement Systems</td><td>CMS, DAM, CDP, Marketing Automation, Email/WhatsApp Engines</td><td>Content delivery and customer data management</td></tr>
+        <tr><td><span class="tag tag-purple">Layer 3</span></td><td>Transaction Systems</td><td>CRM, ATS (euRecruiter), LMS (Academy), PIS (myUniApply), Agent Portal (Altus Career)</td><td>Lead management, recruitment, training, applications</td></tr>
+        <tr><td><span class="tag tag-green">Layer 4</span></td><td>Operations Systems</td><td>HRMS, Task Management, Contact Centre, Workforce Monitoring</td><td>People operations and workforce management</td></tr>
+        <tr><td><span class="tag tag-blue">Layer 5</span></td><td>Intelligence Layer (CORE)</td><td>UCC, Data Lake/Warehouse, Event Processing Engine, BI Tools</td><td>Analytics, AI, decision-making</td></tr>
+        <tr><td><span class="tag tag-red">Layer 6</span></td><td>Governance &amp; Security</td><td>IAM, GRC, Cybersecurity (DigitalDefence)</td><td>Access control, risk management, compliance</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Core API Flows</h2>
+  <div class="two-col">
+    <div class="card blue-top">
+      <div class="card-title">1. Website → CRM API</div>
+      <div class="card-desc">Lead capture → Push data to CRM → Trigger automation sequences</div>
+      <div class="code-block" style="margin-top:14px;font-size:11px">
+<span class="code-comment">// Lead Capture Event</span><br>
+POST /api/leads<br>
+<span class="code-key">{ persona</span>: <span class="code-val">"student"</span>,<br>
+&nbsp;&nbsp;<span class="code-key">program</span>: <span class="code-val">"ausbildung"</span>,<br>
+&nbsp;&nbsp;<span class="code-key">country</span>: <span class="code-val">"germany"</span>,<br>
+&nbsp;&nbsp;<span class="code-key">source</span>: <span class="code-val">"meta-ads"</span> }
+      </div>
+    </div>
+    <div class="card gold-top">
+      <div class="card-title">2. CRM → ATS API</div>
+      <div class="card-desc">Candidate mapping after conversion → Job allocation in ATS → Status sync back to CRM</div>
+      <div class="code-block" style="margin-top:14px;font-size:11px">
+<span class="code-comment">// Candidate Conversion</span><br>
+POST /api/candidates<br>
+<span class="code-key">{ lead_id</span>: <span class="code-val">"LID-001"</span>,<br>
+&nbsp;&nbsp;<span class="code-key">program</span>: <span class="code-val">"nurse-germany"</span>,<br>
+&nbsp;&nbsp;<span class="code-key">status</span>: <span class="code-val">"enrolled"</span> }
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">3. CRM → LMS API</div>
+      <div class="card-desc">Student onboarding to Academy → Course assignment → Training progress tracking back to UCC</div>
+    </div>
+    <div class="card">
+      <div class="card-title">4. CRM → UCC API</div>
+      <div class="card-desc">Real-time event push from all CRM actions → UCC dashboard real-time update → AI processing</div>
+    </div>
+    <div class="card">
+      <div class="card-title">5. Ad Platforms → CDP</div>
+      <div class="card-desc">Attribution tracking from Meta/Google → CDP identity resolution → Revenue attribution modelling</div>
+    </div>
+    <div class="card">
+      <div class="card-title">6. HRMS → UCC API</div>
+      <div class="card-desc">Employee performance events → UCC dashboards → AI productivity scoring &amp; anomaly detection</div>
+    </div>
+  </div>
+
+  <h2>Event-Driven Architecture (Critical)</h2>
+  <div class="callout insight">
+    <div class="callout-title">Architecture Principle</div>
+    <p>Every system in the Career360 ecosystem must emit standardised events. These events are the atomic units of intelligence that power the UCC, AI engine, and all decision systems.</p>
+  </div>
+
+  <div class="card-grid card-grid-4">
+    <div class="card"><div class="card-title">Page Viewed</div><div class="card-desc">Triggers: traffic analytics, user journey tracking</div></div>
+    <div class="card"><div class="card-title">CTA Clicked</div><div class="card-desc">Triggers: engagement scoring, intent detection</div></div>
+    <div class="card"><div class="card-title">Lead Created</div><div class="card-desc">Triggers: CRM entry, WhatsApp automation, assignment</div></div>
+    <div class="card"><div class="card-title">Counselling Done</div><div class="card-desc">Triggers: conversion probability update, follow-up sequence</div></div>
+    <div class="card"><div class="card-title">Conversion Done</div><div class="card-desc">Triggers: revenue recording, LMS onboarding, ATS entry</div></div>
+    <div class="card"><div class="card-title">Training Completed</div><div class="card-desc">Triggers: certification, employer notification, ATS update</div></div>
+    <div class="card"><div class="card-title">Payment Completed</div><div class="card-desc">Triggers: ERP entry, LMS access grant, revenue dashboard</div></div>
+    <div class="card"><div class="card-title">Anomaly Detected</div><div class="card-desc">Triggers: alert to manager, AI investigation, risk flag</div></div>
+  </div>
+
+</section>
+
+<!-- ══════════════════ CH5: AI AUTOMATION ══════════════════ -->
+<section id="ch5" class="chapter-section" style="border-top:1px solid var(--border)">
+  <div class="chapter-header">
+    <div class="chapter-number">Chapter 05</div>
+    <h1 class="chapter-title">AI Automation Layer — 129 Workflows</h1>
+    <p class="chapter-desc">The AI layer transforms Career360 from a data-collecting organisation into a self-optimising growth engine. 129 workflows across 9 categories — each following the Input → Processing → Prediction → Action → Feedback loop.</p>
+  </div>
+
+  <div class="callout strategic">
+    <div class="callout-title">AI Workflow Architecture Principle</div>
+    <p>Every workflow: <strong style="color:var(--white)">Input → Processing → Prediction → Action → Feedback</strong>. No AI workflow exists without a feedback loop. Without feedback, the model degrades.</p>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead><tr><th>Category</th><th>Workflows</th><th>Business Impact</th><th>Priority</th></tr></thead>
+      <tbody>
+        <tr><td>1. Lead Intelligence</td><td>Lead scoring, intent prediction, hot lead prioritisation, drop-off risk, no-show prediction</td><td>Increase conversion rate, reduce counsellor wasted time</td><td><span class="tag tag-red">Critical</span></td></tr>
+        <tr><td>2. Marketing Optimisation</td><td>CPL prediction, campaign ROI forecasting, channel mix optimisation, budget allocation AI, ad creative performance prediction</td><td>Reduce CAC, improve ROAS</td><td><span class="tag tag-red">Critical</span></td></tr>
+        <tr><td>3. Content Intelligence</td><td>Topic recommendation, keyword clustering, script generation, thumbnail optimisation, engagement prediction</td><td>Increase content ROI, scale production</td><td><span class="tag tag-gold">High</span></td></tr>
+        <tr><td>4. Sales Optimisation</td><td>Counsellor matching engine, follow-up timing prediction, conversion probability scoring, script recommendation AI</td><td>Improve conversion, reduce time-to-close</td><td><span class="tag tag-red">Critical</span></td></tr>
+        <tr><td>5. Experience Personalisation</td><td>Dynamic landing pages, personalised content feed, behavioural nudges, geo-based personalisation</td><td>Increase engagement, improve UX conversion</td><td><span class="tag tag-gold">High</span></td></tr>
+        <tr><td>6. Operations Automation</td><td>Task auto-assignment, SLA breach prediction, workflow automation, escalation engine</td><td>Reduce manual ops overhead, improve SLA</td><td><span class="tag tag-gold">High</span></td></tr>
+        <tr><td>7. Fraud &amp; Risk Detection</td><td>Fake lead detection, agent fraud detection, data anomaly detection</td><td>Protect revenue quality, maintain data integrity</td><td><span class="tag tag-blue">Medium</span></td></tr>
+        <tr><td>8. Financial Intelligence</td><td>Revenue forecasting, CAC recovery modelling, cohort profitability, lifetime value prediction</td><td>Enable accurate planning, investor-grade forecasting</td><td><span class="tag tag-gold">High</span></td></tr>
+        <tr><td>9. Knowledge &amp; Support AI</td><td>Chatbot automation, knowledge base recommendation, ticket classification</td><td>Reduce support costs, improve response time</td><td><span class="tag tag-blue">Medium</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Revenue Formula — AI's Primary Target</h2>
+  <div class="highlight-box">
+    <div class="highlight-box-title">The Fundamental Revenue Equation</div>
+    <div style="font-family:'Playfair Display',serif;font-size:28px;color:var(--gold);margin:16px 0;text-align:center">
+      Revenue = Traffic × Conversion Rate × Average Ticket Size
+    </div>
+    <div class="three-col" style="margin-top:24px">
+      <div style="text-align:center">
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:8px">Increase Traffic via</div>
+        <div style="font-size:13px;color:var(--off-white);line-height:1.8">Content Engine<br>Paid Campaigns<br>SEO</div>
+      </div>
+      <div style="text-align:center">
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:8px">Increase Conversion via</div>
+        <div style="font-size:13px;color:var(--off-white);line-height:1.8">UX Optimisation<br>Counsellor Performance<br>Personalisation</div>
+      </div>
+      <div style="text-align:center">
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:8px">Increase Ticket Size via</div>
+        <div style="font-size:13px;color:var(--off-white);line-height:1.8">Premium Programs<br>Upsell Modules<br>Financing Models</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════ CH6: DATA ARCHITECTURE ══════════════════ -->
+<section id="ch6" class="chapter-section" style="border-top:1px solid var(--border)">
+  <div class="chapter-header">
+    <div class="chapter-number">Chapter 06</div>
+    <h1 class="chapter-title">Data Architecture, ERD &amp; Event Dictionary</h1>
+    <p class="chapter-desc">The single source of truth model across the Career360 ecosystem — standardised entities, relationships, field-level data dictionary, and the 100+ event taxonomy that powers the UCC intelligence layer.</p>
+  </div>
+
+  <div class="callout warning">
+    <div class="callout-title">Critical Warning</div>
+    <p>"If data is not standardised, your AI, dashboards, and decisions will fail." Every field must be defined, validated, owned, and governed.</p>
+  </div>
+
+  <h2>Core Data Entities — ERD Overview</h2>
+  <div class="card-grid card-grid-3">
+    <div class="card gold-top">
+      <div class="card-title">PERSON</div>
+      <div class="card-desc">person_id · name · phone · email · country · persona_type (Student/Parent/Agent)</div>
+    </div>
+    <div class="card blue-top">
+      <div class="card-title">LEAD</div>
+      <div class="card-desc">lead_id · person_id(FK) · source_channel · campaign_id · program_interest · status · lead_score · created_at</div>
+    </div>
+    <div class="card">
+      <div class="card-title">CAMPAIGN</div>
+      <div class="card-desc">campaign_id · channel · budget · CPL · start_date · end_date · objective · ROI</div>
+    </div>
+    <div class="card">
+      <div class="card-title">CONTENT</div>
+      <div class="card-desc">content_id · type · topic · platform · persona · funnel_stage · publish_date · engagement_score</div>
+    </div>
+    <div class="card">
+      <div class="card-title">CONVERSION</div>
+      <div class="card-desc">conversion_id · lead_id · amount · program · date · channel_attribution · counsellor_id</div>
+    </div>
+    <div class="card gold-top">
+      <div class="card-title">EVENT LOG ⭐</div>
+      <div class="card-desc">event_id · event_name · person_id · system_source · timestamp · funnel_stage · metadata (JSON)</div>
+    </div>
+  </div>
+
+  <h3>Relationship Logic</h3>
+  <ul class="styled-list">
+    <li>Person → Lead (1:Many) — one person can have multiple lead records</li>
+    <li>Campaign → Lead (1:Many) — one campaign generates many leads</li>
+    <li>Content → Interaction (1:Many) — one content piece has many user interactions</li>
+    <li>Lead → Conversion (1:1 or 1:Many) — a lead may convert to multiple programs</li>
+    <li>All Entities → Event Log (centralised) — every action emits an event</li>
+  </ul>
+
+  <h2>Master Data Dictionary — Person Master</h2>
+  <div class="table-container">
+    <table>
+      <thead><tr><th>Field Name</th><th>Type</th><th>Description</th><th>Source</th><th>Validation</th><th>Owner</th></tr></thead>
+      <tbody>
+        <tr><td>person_id</td><td>UUID</td><td>System-generated unique identifier</td><td>System</td><td>Auto-generated</td><td>Data Team</td></tr>
+        <tr><td>full_name</td><td>Text</td><td>Candidate/Person full name</td><td>Form</td><td>Mandatory, min 2 chars</td><td>Ops</td></tr>
+        <tr><td>phone</td><td>Number</td><td>Mobile contact number</td><td>Form</td><td>OTP Verified, 10 digits</td><td>CRM</td></tr>
+        <tr><td>email</td><td>Text</td><td>Email address</td><td>Form</td><td>Regex validated</td><td>CRM</td></tr>
+        <tr><td>country</td><td>Dropdown</td><td>Country of residence</td><td>User Input</td><td>ISO 3166 code</td><td>Data Team</td></tr>
+        <tr><td>persona_type</td><td>Enum</td><td>Student / Parent / Agent</td><td>Segmentation Engine</td><td>Fixed values only</td><td>Data Team</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Data Governance Rules</h2>
+  <div class="card-grid card-grid-3">
+    <div class="card"><div class="card-title">🎯 Single Source of Truth</div><div class="card-desc">No data must exist in two places without a master record. SSOT must be defined per entity and documented.</div></div>
+    <div class="card"><div class="card-title">🔍 Deduplication Engine</div><div class="card-desc">No duplicate leads allowed. Deduplication by phone + email + program combination before CRM entry.</div></div>
+    <div class="card"><div class="card-title">✅ Mandatory Validation</div><div class="card-desc">All mandatory fields validated at point of entry. Invalid records quarantined, not stored.</div></div>
+    <div class="card"><div class="card-title">👤 Data Ownership</div><div class="card-desc">Every data field has a named owner responsible for quality, accuracy, and timeliness.</div></div>
+    <div class="card"><div class="card-title">📋 Audit Logs</div><div class="card-desc">All data changes logged with timestamp, user ID, before/after values. ISO 27001 compliant.</div></div>
+    <div class="card"><div class="card-title">🔒 Access Control</div><div class="card-desc">Role-based access — no user sees data outside their defined scope. RBAC enforced at API level.</div></div>
+  </div>
+
+  <hr class="section-divider" id="ch6-events">
+
+  <h2>Event Dictionary — 100+ Events Framework</h2>
+  <p>The Event Dictionary is the foundation of the UCC intelligence layer. Every event must carry: event_id · event_name · user_id · persona · source · campaign · timestamp · metadata (JSON).</p>
+
+  <div class="table-container event-table">
+    <table>
+      <thead><tr><th>Event ID</th><th>Event Name</th><th>Category</th><th>Trigger</th><th>System</th><th>KPI Impact</th></tr></thead>
+      <tbody>
+        <tr><td>EVT-UX-001</td><td>Page Viewed</td><td><span class="tag tag-blue">UX</span></td><td>Page Load</td><td>Web</td><td>Traffic</td></tr>
+        <tr><td>EVT-UX-002</td><td>Scroll Depth</td><td><span class="tag tag-blue">UX</span></td><td>Scroll %</td><td>Web</td><td>Engagement</td></tr>
+        <tr><td>EVT-UX-003</td><td>CTA Click</td><td><span class="tag tag-blue">UX</span></td><td>Button Click</td><td>Web</td><td>Intent</td></tr>
+        <tr><td>EVT-UX-004</td><td>Video Played</td><td><span class="tag tag-blue">UX</span></td><td>Play Button</td><td>Web/YT</td><td>Engagement</td></tr>
+        <tr><td>EVT-UX-005</td><td>Video Completed</td><td><span class="tag tag-blue">UX</span></td><td>End of Video</td><td>Web/YT</td><td>Watch Time</td></tr>
+        <tr><td>EVT-MKT-001</td><td>Ad Click</td><td><span class="tag tag-gold">Marketing</span></td><td>Ad Platform</td><td>Meta/Google</td><td>CTR</td></tr>
+        <tr><td>EVT-MKT-002</td><td>Impression</td><td><span class="tag tag-gold">Marketing</span></td><td>Ad Platform</td><td>Meta/Google</td><td>Reach</td></tr>
+        <tr><td>EVT-MKT-003</td><td>Campaign Trigger</td><td><span class="tag tag-gold">Marketing</span></td><td>CRM Rule</td><td>CRM/MarTech</td><td>Automation</td></tr>
+        <tr><td>EVT-MKT-004</td><td>CPL Generated</td><td><span class="tag tag-gold">Marketing</span></td><td>Lead Created</td><td>CRM</td><td>CAC</td></tr>
+        <tr><td>EVT-CRM-001</td><td>Lead Created</td><td><span class="tag tag-purple">CRM</span></td><td>Form Submit</td><td>CRM</td><td>Funnel Entry</td></tr>
+        <tr><td>EVT-CRM-002</td><td>Lead Assigned</td><td><span class="tag tag-purple">CRM</span></td><td>CRM Rule</td><td>CRM</td><td>SLA</td></tr>
+        <tr><td>EVT-CRM-003</td><td>Lead Contacted</td><td><span class="tag tag-purple">CRM</span></td><td>Call Logged</td><td>CRM</td><td>Engagement</td></tr>
+        <tr><td>EVT-CRM-004</td><td>Follow-up Done</td><td><span class="tag tag-purple">CRM</span></td><td>Activity Log</td><td>CRM</td><td>Nurture Rate</td></tr>
+        <tr><td>EVT-SALES-001</td><td>Appointment Booked</td><td><span class="tag tag-green">Sales</span></td><td>Calendly/CRM</td><td>CRM</td><td>Qualified Leads</td></tr>
+        <tr><td>EVT-SALES-002</td><td>Counselling Completed</td><td><span class="tag tag-green">Sales</span></td><td>Call Logged</td><td>CRM</td><td>Pipeline</td></tr>
+        <tr><td>EVT-SALES-003</td><td>Offer Given</td><td><span class="tag tag-green">Sales</span></td><td>CRM Stage</td><td>CRM</td><td>Offer Rate</td></tr>
+        <tr><td>EVT-SALES-004</td><td>Converted</td><td><span class="tag tag-green">Sales</span></td><td>Payment Done</td><td>ERP/CRM</td><td>Revenue</td></tr>
+        <tr><td>EVT-CNT-001</td><td>Content Published</td><td><span class="tag tag-blue">Content</span></td><td>CMS Publish</td><td>CMS</td><td>Output Velocity</td></tr>
+        <tr><td>EVT-CNT-002</td><td>Content Viewed</td><td><span class="tag tag-blue">Content</span></td><td>Page Load</td><td>Web/YT</td><td>Content Reach</td></tr>
+        <tr><td>EVT-CNT-003</td><td>Content Shared</td><td><span class="tag tag-blue">Content</span></td><td>Share Button</td><td>Social</td><td>Virality</td></tr>
+        <tr><td>EVT-FIN-001</td><td>Payment Initiated</td><td><span class="tag tag-gold">Financial</span></td><td>Payment Gateway</td><td>ERP</td><td>Revenue Pipeline</td></tr>
+        <tr><td>EVT-FIN-002</td><td>Payment Completed</td><td><span class="tag tag-gold">Financial</span></td><td>Gateway Confirm</td><td>ERP/UCC</td><td>Revenue Booked</td></tr>
+        <tr><td>EVT-ANL-001</td><td>Drop-off Detected</td><td><span class="tag tag-red">Analytics</span></td><td>Funnel Gap</td><td>UCC</td><td>Optimization Trigger</td></tr>
+        <tr><td>EVT-ANL-002</td><td>Conversion Spike</td><td><span class="tag tag-green">Analytics</span></td><td>Anomaly Engine</td><td>UCC/AI</td><td>Insight</td></tr>
+        <tr><td>EVT-ANL-003</td><td>Anomaly Detected</td><td><span class="tag tag-red">Analytics</span></td><td>AI Model</td><td>UCC/AI</td><td>Risk Alert</td></tr>
+        <tr><td>EVT-HR-001</td><td>Employee Joined</td><td><span class="tag tag-purple">HR</span></td><td>Onboarding</td><td>HRMS</td><td>Headcount</td></tr>
+        <tr><td>EVT-HR-004</td><td>KPI Achieved</td><td><span class="tag tag-purple">HR</span></td><td>KPI Threshold</td><td>HRMS/UCC</td><td>Performance</td></tr>
+        <tr><td>EVT-HR-005</td><td>SLA Breach</td><td><span class="tag tag-red">HR</span></td><td>Deadline Missed</td><td>HRMS</td><td>Escalation Alert</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
+
+<!-- ══════════════════ CH7: ORG DESIGN ══════════════════ -->
+<div class="chapter-break" id="ch7">
+  <div class="chapter-break-grid"></div>
+  <div class="chapter-break-inner">
+    <div class="badge badge-gold" style="margin-bottom:16px">Part III · Chapter 07</div>
+    <div style="font-family:'Playfair Display',serif;font-size:42px;color:var(--white);font-weight:700;margin-bottom:12px">Organisation Design<br><span style="color:var(--gold)">L1 → L4</span></div>
+    <p style="color:var(--text-muted);font-size:15px;max-width:600px">A performance-driven, modular, multi-entity structure aligned to the revenue engine and global delivery model.</p>
+  </div>
+</div>
+
+<section class="chapter-section">
+  <div class="chapter-header">
+    <div class="chapter-number">Chapter 07</div>
+    <h1 class="chapter-title">Organisation Design L1–L4</h1>
+    <p class="chapter-desc">DigitalExp is structured not around departments and roles, but around Value Streams, Data, and Outcomes. This is the structural difference between a marketing team and a Revenue Production System.</p>
+  </div>
+
+  <h2>L1 — 8 Core Pillars of DigitalExp</h2>
+  <div class="card-grid card-grid-4">
+    <div class="card gold-top"><div class="card-icon gold">🎯</div><div class="card-title">1. Experience Strategy &amp; Governance</div><div class="card-desc">Brand, Positioning, Campaign Planning, BSC Alignment</div></div>
+    <div class="card blue-top"><div class="card-icon">🔍</div><div class="card-title">2. Audience Intelligence &amp; Research</div><div class="card-desc">Market Research, Persona Segmentation, Competitor Intel</div></div>
+    <div class="card purple-top"><div class="card-icon purple">🎬</div><div class="card-title">3. Content &amp; Creative Production</div><div class="card-desc">Video, Design, SEO, Copywriting, Distribution</div></div>
+    <div class="card gold-top"><div class="card-icon gold">📈</div><div class="card-title">4. Performance Marketing &amp; Growth</div><div class="card-desc">Paid Media, SEO, Funnel Optimisation, Campaign Analytics</div></div>
+    <div class="card blue-top"><div class="card-icon">🤝</div><div class="card-title">5. CRM &amp; Conversion Operations</div><div class="card-desc">Lead Management, Counselling, Conversion Management</div></div>
+    <div class="card"><div class="card-icon">⚙️</div><div class="card-title">6. Experience Engineering (UX + MarTech)</div><div class="card-desc">UX Design, Website, Landing Pages, CMS/CDP/CRM Integration</div></div>
+    <div class="card green-top"><div class="card-icon green">📊</div><div class="card-title">7. Data, Analytics &amp; UCC</div><div class="card-desc">Dashboarding, Data Engineering, AI/ML, Event Tracking</div></div>
+    <div class="card"><div class="card-icon">📞</div><div class="card-title">8. Customer Experience &amp; Contact Centre</div><div class="card-desc">Inbound/Outbound, WhatsApp/Email Support, Agent Support</div></div>
+  </div>
+
+  <h2>Org Chart — L2 Structure</h2>
+  <div class="org-chart">
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="display:inline-block;background:rgba(232,184,66,0.15);border:2px solid var(--gold);border-radius:12px;padding:16px 32px">
+        <div style="font-size:14px;font-weight:700;color:var(--gold)">CDXO / Head of DigitalExp</div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:4px">Chief Digital Experience Officer</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+      <div class="org-node"><div class="org-node-title">VP Growth &amp; Performance</div><div class="org-node-sub">Campaigns · SEO · Funnel</div></div>
+      <div class="org-node"><div class="org-node-title">Director — Content &amp; Brand</div><div class="org-node-sub">YouTube · Reels · Blogs</div></div>
+      <div class="org-node"><div class="org-node-title">Director — CRM &amp; Conversion</div><div class="org-node-sub">Leads · Counselling · Revenue</div></div>
+      <div class="org-node"><div class="org-node-title">Director — Data, UCC &amp; AI</div><div class="org-node-sub">Dashboards · Events · Models</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px">
+      <div class="org-node"><div class="org-node-title">Head — UX &amp; MarTech</div><div class="org-node-sub">UX · Website · Automation</div></div>
+      <div class="org-node"><div class="org-node-title">Head — Research</div><div class="org-node-sub">Persona · Market Intel</div></div>
+      <div class="org-node"><div class="org-node-title">Head — Contact Centre</div><div class="org-node-sub">Inbound · QA · Agents</div></div>
+      <div class="org-node"><div class="org-node-title">Head — Strategy</div><div class="org-node-sub">Brand · GTM · BSC</div></div>
+    </div>
+  </div>
+
+  <h2>Global Delivery Model</h2>
+  <div class="card-grid card-grid-4">
+    <div class="card gold-top">
+      <div class="card-title">🇮🇳 India — DigitalExp Core</div>
+      <div class="card-desc">Content Production · Performance Marketing · Contact Centre · Back Office · Data Engineering</div>
+    </div>
+    <div class="card blue-top">
+      <div class="card-title">🇦🇪 UAE — Strategy &amp; Finance</div>
+      <div class="card-desc">Budget Control · Strategic Planning · Investor Relations · GCC Market Operations</div>
+    </div>
+    <div class="card purple-top">
+      <div class="card-title">🇬🇪 Georgia — HQ &amp; Ops Control</div>
+      <div class="card-desc">Training Delivery · EU Coordination · Legal Entity · Program Management</div>
+    </div>
+    <div class="card green-top">
+      <div class="card-title">🇪🇺 EU — Market Layer</div>
+      <div class="card-desc">Employer Acquisition · Local Partnerships · Candidate Placement · Regulatory Compliance</div>
+    </div>
+  </div>
+
+  <h2>RACI Matrix — Simplified</h2>
+  <div class="table-container">
+    <table>
+      <thead><tr><th>Activity</th><th>Strategy</th><th>Content</th><th>Marketing</th><th>Sales</th><th>Data</th></tr></thead>
+      <tbody>
+        <tr><td>Campaign Planning</td><td><span class="raci-pill raci-R">R</span></td><td><span class="raci-pill raci-C">C</span></td><td><span class="raci-pill raci-A">A</span></td><td><span class="raci-pill raci-C">C</span></td><td><span class="raci-pill raci-C">C</span></td></tr>
+        <tr><td>Content Creation</td><td><span class="raci-pill raci-C">C</span></td><td><span class="raci-pill raci-R">R</span></td><td><span class="raci-pill raci-A">A</span></td><td><span class="raci-pill raci-I">I</span></td><td><span class="raci-pill raci-I">I</span></td></tr>
+        <tr><td>Lead Conversion</td><td><span class="raci-pill raci-I">I</span></td><td><span class="raci-pill raci-I">I</span></td><td><span class="raci-pill raci-C">C</span></td><td><span class="raci-pill raci-R">R</span></td><td><span class="raci-pill raci-C">C</span></td></tr>
+        <tr><td>UCC Analytics</td><td><span class="raci-pill raci-C">C</span></td><td><span class="raci-pill raci-I">I</span></td><td><span class="raci-pill raci-C">C</span></td><td><span class="raci-pill raci-C">C</span></td><td><span class="raci-pill raci-R">R</span></td></tr>
+        <tr><td>System Integration</td><td><span class="raci-pill raci-I">I</span></td><td><span class="raci-pill raci-I">I</span></td><td><span class="raci-pill raci-C">C</span></td><td><span class="raci-pill raci-I">I</span></td><td><span class="raci-pill raci-R">R</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="margin-top:12px;font-size:12px;color:var(--text-muted)">
+    <span class="raci-pill raci-R" style="width:auto;padding:2px 8px">R</span> Responsible &nbsp;
+    <span class="raci-pill raci-A" style="width:auto;padding:2px 8px">A</span> Accountable &nbsp;
+    <span class="raci-pill raci-C" style="width:auto;padding:2px 8px">C</span> Consulted &nbsp;
+    <span class="raci-pill raci-I" style="width:auto;padding:2px 8px">I</span> Informed
+  </div>
+
+  <h2>Span of Control</h2>
+  <div class="card-grid card-grid-3">
+    <div class="card"><div class="kpi-value" style="font-size:36px">1 : 6–8</div><div class="card-title" style="margin-top:8px">Manager : Executives</div><div class="card-desc">Direct reports per team manager</div></div>
+    <div class="card"><div class="kpi-value" style="font-size:36px">1 : 3–5</div><div class="card-title" style="margin-top:8px">Director : Managers</div><div class="card-desc">Functional oversight span</div></div>
+    <div class="card"><div class="kpi-value" style="font-size:36px">1 : 5–7</div><div class="card-title" style="margin-top:8px">CXO : Directors</div><div class="card-desc">Executive leadership span</div></div>
+  </div>
+
+</section>
+
+<!-- ══════════════════ CH8: ROLE ARCHITECTURE ══════════════════ -->
+<section id="ch8" class="chapter-section" style="border-top:1px solid var(--border)">
+  <div class="chapter-header">
+    <div class="chapter-number">Chapter 08</div>
+    <h1 class="chapter-title">Role Architecture — L4 Execution Level</h1>
+    <p class="chapter-desc">Every role is mapped to value creation, KPIs, UCC events, and business outcomes. High-performing organisations hire for impact on the revenue engine, not just skills and experience.</p>
+  </div>
+
+  <h2>CXO / Leadership Roles</h2>
+
+  <div class="role-card">
+    <div class="role-card-header">
+      <div class="role-avatar">👑</div>
+      <div>
+        <div class="role-name">Chief Digital Experience Officer (CDXO)</div>
+        <div class="role-mandate">Mandate: Own the end-to-end revenue engine — Demand → Conversion → Optimisation</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div>
+        <h4>Key Responsibilities</h4>
+        <ul class="styled-list">
+          <li>Define digital growth strategy across all entities</li>
+          <li>Align Content + Marketing + Sales + Data teams</li>
+          <li>Drive CAC vs LTV optimisation</li>
+          <li>Own UCC intelligence layer and AI roadmap</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Core KPIs</h4>
+        <div class="role-kpis">
+          <div class="kpi-pill">Revenue Growth %</div>
+          <div class="kpi-pill">CAC Payback Period</div>
+          <div class="kpi-pill">Conversion Rate</div>
+          <div class="kpi-pill">ROI (Channel-wise)</div>
+          <div class="kpi-pill">LTV/CAC Ratio</div>
+        </div>
+        <h4 style="margin-top:16px">UCC Events Owned</h4>
+        <div class="role-kpis">
+          <div class="kpi-pill" style="background:rgba(232,184,66,0.1);color:var(--gold)">EVT-ANL-003 Anomaly Detection</div>
+          <div class="kpi-pill" style="background:rgba(232,184,66,0.1);color:var(--gold)">EVT-SALES-004 Conversion</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="role-card">
+      <div class="role-card-header">
+        <div class="role-avatar">📈</div>
+        <div>
+          <div class="role-name">VP / Director — Growth &amp; Performance</div>
+          <div class="role-mandate">Scale demand generation efficiently</div>
+        </div>
+      </div>
+      <h4>KPIs</h4>
+      <div class="role-kpis">
+        <div class="kpi-pill">CPL</div>
+        <div class="kpi-pill">CTR</div>
+        <div class="kpi-pill">Lead Volume</div>
+        <div class="kpi-pill">Channel ROI</div>
+      </div>
+    </div>
+    <div class="role-card">
+      <div class="role-card-header">
+        <div class="role-avatar">🎬</div>
+        <div>
+          <div class="role-name">Director — Content &amp; Brand</div>
+          <div class="role-mandate">Build attention engine + brand equity</div>
+        </div>
+      </div>
+      <h4>KPIs</h4>
+      <div class="role-kpis">
+        <div class="kpi-pill">Content ROI (Leads/content)</div>
+        <div class="kpi-pill">Engagement Rate</div>
+        <div class="kpi-pill">Watch Time</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Role → KPI → Value Mapping</h2>
+  <div class="table-container">
+    <table>
+      <thead><tr><th>Role</th><th>Primary KPI</th><th>Secondary KPI</th><th>Business Impact</th><th>Maturity Level</th></tr></thead>
+      <tbody>
+        <tr><td>Content Strategist</td><td>Leads per content</td><td>Engagement Rate</td><td>Demand Generation</td><td><span class="tag tag-blue">L2 Ownership</span></td></tr>
+        <tr><td>Campaign Manager</td><td>CPL</td><td>ROI per Channel</td><td>Cost Efficiency</td><td><span class="tag tag-blue">L2 Ownership</span></td></tr>
+        <tr><td>Media Buyer</td><td>CTR / CPC</td><td>ROAS</td><td>Traffic Volume</td><td><span class="tag tag-purple">L1 Execution</span></td></tr>
+        <tr><td>Counsellor</td><td>Conversion %</td><td>Response Time</td><td>Revenue Direct</td><td><span class="tag tag-blue">L2 Ownership</span></td></tr>
+        <tr><td>UX Designer</td><td>LP Conversion Rate</td><td>Session Depth</td><td>Revenue Multiplier</td><td><span class="tag tag-gold">L3 Optimisation</span></td></tr>
+        <tr><td>Data Analyst / BI</td><td>Insight Accuracy</td><td>Dashboard Latency</td><td>Decision Quality</td><td><span class="tag tag-gold">L3 Optimisation</span></td></tr>
+        <tr><td>AI Engineer</td><td>Prediction Accuracy</td><td>Automation Coverage</td><td>Scale Engine</td><td><span class="tag tag-green">L4 Intelligence</span></td></tr>
+        <tr><td>SEO Specialist</td><td>Organic Traffic</td><td>Keyword Rankings</td><td>Low-CAC Leads</td><td><span class="tag tag-blue">L2 Ownership</span></td></tr>
+        <tr><td>CRM Manager</td><td>Lead Lifecycle Speed</td><td>SLA Compliance</td><td>Funnel Efficiency</td><td><span class="tag tag-blue">L2 Ownership</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Role Maturity Model</h2>
+  <div class="maturity-model">
+    <div class="maturity-level"><div class="maturity-num mat-l1" style="color:#6B7280">1</div><div class="maturity-bar mat-l1"><div class="mat-title">Execution (Task-based Roles)</div><div class="mat-desc">Roles focused on executing defined tasks to specification. Media Buyers, Call Agents, Video Editors, Graphic Designers.</div></div></div>
+    <div class="maturity-level"><div class="maturity-num mat-l2" style="color:var(--info)">2</div><div class="maturity-bar mat-l2"><div class="mat-title">Ownership (KPI-driven Roles)</div><div class="mat-desc">Roles accountable for measurable outcomes. Campaign Managers, Content Strategists, CRM Managers, Counsellors.</div></div></div>
+    <div class="maturity-level"><div class="maturity-num mat-l3" style="color:var(--purple)">3</div><div class="maturity-bar mat-l3"><div class="mat-title">Optimisation (Data-driven Roles)</div><div class="mat-desc">Roles that analyse, hypothesise, test, and improve. Performance Analysts, UX Designers, Funnel Optimisation Specialists.</div></div></div>
+    <div class="maturity-level"><div class="maturity-num mat-l4" style="color:var(--gold)">4</div><div class="maturity-bar mat-l4"><div class="mat-title">Intelligence (AI-assisted Roles)</div><div class="mat-desc">Roles that leverage AI tools to amplify output. Attribution Analysts, BI Engineers, AI-assisted Content Strategists.</div></div></div>
+    <div class="maturity-level"><div class="maturity-num mat-l5" style="color:var(--success)">5</div><div class="maturity-bar mat-l5"><div class="mat-title">Autonomous (AI-led Roles)</div><div class="mat-desc">Roles that design and govern autonomous systems. AI Engineers, Personalisation Engineers, Revenue Intelligence Leads.</div><div class="mat-target">Target</div></div></div>
+  </div>
+
+</section>
+
+<!-- ══════════════════ CH9: WORKFORCE SYSTEM ══════════════════ -->
+<section id="ch9" class="chapter-section" style="border-top:1px solid var(--border)">
+  <div class="chapter-header">
+    <div class="chapter-number">Chapter 09</div>
+    <h1 class="chapter-title">Workforce System</h1>
+    <p class="chapter-desc">Hiring Plan, Compensation Benchmarking, KPI/OKR Framework, and Capability Development — the complete workforce operating model for DigitalExp.</p>
+  </div>
+
+  <h2>Phase-wise Hiring Plan</h2>
+
+  <div class="phase-timeline">
+    <div class="phase-item">
+      <div class="phase-dot">1</div>
+      <div class="phase-content">
+        <div class="phase-label">Phase 1 · 0–60 Days</div>
+        <div class="phase-title">Foundation Team</div>
+        <div class="phase-items">CDXO (1) · Campaign Manager (1) · Media Buyer (1) · Content Strategist (1) · Video Editor (2) · Designer (1) · CRM Manager (1) · Counsellors (3-5) · BI Analyst (1) · Call Agents (5-8)</div>
+      </div>
+    </div>
+    <div class="phase-item">
+      <div class="phase-dot">2</div>
+      <div class="phase-content">
+        <div class="phase-label">Phase 2 · 60–120 Days</div>
+        <div class="phase-title">Scale Team</div>
+        <div class="phase-items">SEO Specialist (1) · Performance Analyst (1) · Automation Engineer (1) · Data Engineer (1) · Additional Counsellors (5-10) · QA Analyst (1)</div>
+      </div>
+    </div>
+    <div class="phase-item">
+      <div class="phase-dot">3</div>
+      <div class="phase-content">
+        <div class="phase-label">Phase 3 · 120–180 Days</div>
+        <div class="phase-title">Optimisation Team</div>
+        <div class="phase-items">AI Engineer (1-2) · Attribution Analyst (1) · Funnel Optimisation Specialist (1) · Personalisation Engineer (1) · Growth Hacker (1)</div>
+      </div>
+    </div>
+    <div class="phase-item">
+      <div class="phase-dot gold">4</div>
+      <div class="phase-content">
+        <div class="phase-label">Phase 4 · 180+ Days</div>
+        <div class="phase-title">Multi-Country Scale</div>
+        <div class="phase-items">Country Managers (EU/GCC) · Local Content Creators · Regional Sales Teams · Language Specialists</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:24px;margin:24px 0">
+    <div class="kpi-card" style="flex:1"><div class="kpi-label">Phase 1 Team Size</div><div class="kpi-value">20–25</div><div class="kpi-sub">Core Foundation</div></div>
+    <div class="kpi-card" style="flex:1"><div class="kpi-label">Phase 2 Team Size</div><div class="kpi-value">35–45</div><div class="kpi-sub">Scale Ready</div></div>
+    <div class="kpi-card" style="flex:1"><div class="kpi-label">Phase 3 Team Size</div><div class="kpi-value">50–65</div><div class="kpi-sub">AI-Enabled</div></div>
+    <div class="kpi-card" style="flex:1"><div class="kpi-label">Phase 4+</div><div class="kpi-value">80+</div><div class="kpi-sub">Global Scale</div></div>
+  </div>
+
+  <hr class="section-divider" id="ch9-comp">
+
+  <h2>Compensation Benchmarking</h2>
+  <div class="three-col">
+    <div>
+      <h3>🇮🇳 India (DigitalExp Core)</h3>
+      <div class="table-container">
+        <table>
+          <thead><tr><th>Role</th><th>Monthly (INR)</th></tr></thead>
+          <tbody>
+            <tr><td>Campaign Manager</td><td>₹60K – ₹1.5L</td></tr>
+            <tr><td>Media Buyer</td><td>₹40K – ₹1L</td></tr>
+            <tr><td>Video Editor</td><td>₹25K – ₹60K</td></tr>
+            <tr><td>SEO Specialist</td><td>₹35K – ₹80K</td></tr>
+            <tr><td>Counsellor</td><td>₹25K – ₹50K + incentive</td></tr>
+            <tr><td>Data Analyst</td><td>₹50K – ₹1.2L</td></tr>
+            <tr><td>AI Engineer</td><td>₹1L – ₹2.5L</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <h3>🇦🇪 UAE (Strategy Layer)</h3>
+      <div class="table-container">
+        <table>
+          <thead><tr><th>Role</th><th>Monthly (AED)</th></tr></thead>
+          <tbody>
+            <tr><td>Director</td><td>AED 20K – 40K</td></tr>
+            <tr><td>Marketing Head</td><td>AED 15K – 30K</td></tr>
+            <tr><td>Country Manager</td><td>AED 12K – 22K</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <h3>🇪🇺 EU (Market Layer)</h3>
+      <div class="table-container">
+        <table>
+          <thead><tr><th>Role</th><th>Monthly (EUR)</th></tr></thead>
+          <tbody>
+            <tr><td>Country Manager</td><td>€3K – €7K</td></tr>
+            <tr><td>Recruiter</td><td>€2K – €4K</td></tr>
+            <tr><td>Partnership Manager</td><td>€2.5K – €5K</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <h3>Compensation Structure Model</h3>
+  <div class="card-grid card-grid-3">
+    <div class="card gold-top">
+      <div class="card-title">Fixed + Variable Model</div>
+      <div class="card-desc">60–70% Fixed Base · 30–40% Performance-based variable</div>
+    </div>
+    <div class="card blue-top">
+      <div class="card-title">Sales Incentives</div>
+      <div class="card-desc">Per conversion bonus · Revenue % share · Tier-based commissions on enrollments</div>
+    </div>
+    <div class="card purple-top">
+      <div class="card-title">Content / Marketing Incentives</div>
+      <div class="card-desc">Leads generated per content · ROI-based bonuses · Engagement milestone rewards</div>
+    </div>
+  </div>
+
+  <hr class="section-divider" id="ch9-kpi">
+
+  <h2>KPI / OKR Framework</h2>
+
+  <div class="highlight-box">
+    <div class="highlight-box-title">Company OKR — Top Level</div>
+    <div style="margin-top:12px">
+      <div style="font-size:13px;color:var(--text-muted);margin-bottom:8px">Objective: Scale revenue with efficient CAC</div>
+      <div class="role-kpis">
+        <div class="kpi-pill" style="background:rgba(34,197,94,0.1);color:var(--success)">KR1: 3X Revenue Growth</div>
+        <div class="kpi-pill" style="background:rgba(34,197,94,0.1);color:var(--success)">KR2: Reduce CAC by 30%</div>
+        <div class="kpi-pill" style="background:rgba(34,197,94,0.1);color:var(--success)">KR3: Improve Conversion by 25%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead><tr><th>Function</th><th>OKR Objective</th><th>Key Results / KPIs</th><th>Frequency</th></tr></thead>
+      <tbody>
+        <tr><td>Marketing</td><td>Generate qualified demand cost-efficiently</td><td>CPL target, CTR &gt;3-5%, Lead volume, Channel ROI</td><td>Daily</td></tr>
+        <tr><td>Content</td><td>Build compounding content engine</td><td>100+ assets/month, 30% leads via content, Engagement rate</td><td>Weekly</td></tr>
+        <tr><td>Sales / CRM</td><td>Maximise conversion velocity</td><td>Conversion rate &gt;15%, Response time &lt;5 mins, Show rate</td><td>Daily</td></tr>
+        <tr><td>UX / MarTech</td><td>Remove friction from every journey</td><td>LP conversion rate, Form completion %, Page speed &lt;2s</td><td>Weekly</td></tr>
+        <tr><td>Data / UCC</td><td>Enable data-driven decisions</td><td>100% event coverage, Dashboard latency real-time, Accuracy %</td><td>Weekly</td></tr>
+        <tr><td>Contact Centre</td><td>Support conversion and retention</td><td>Call quality score, Follow-up %, Lead reactivation rate</td><td>Daily</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="section-divider" id="ch9-cap">
+
+  <h2>Capability Development Framework</h2>
+  <div class="flow-diagram">
+    <div class="flow-title">Training Lifecycle — All Roles</div>
+    <div class="flow-linear">
+      <div class="flow-node">
+        <div class="flow-node-box">Onboarding<br>(0–30 Days)</div>
+        <div class="flow-node-sub">Business model, CRM tools, Process walkthrough</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-box">Functional Training<br>(30–60 Days)</div>
+        <div class="flow-node-sub">Campaign mgmt, Content production, Counselling scripts</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-box highlight">Advanced Training<br>(60–120 Days)</div>
+        <div class="flow-node-sub">Data-driven decisions, Funnel optimisation, AI tools</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="flow-node-box">Leadership<br>(120+ Days)</div>
+        <div class="flow-node-sub">Strategy, Performance management, Cross-functional leadership</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout insight">
+    <div class="callout-title">Hiring Philosophy</div>
+    <blockquote>"Hire for outcomes → Train for excellence → Optimize for performance → Automate for scale"</blockquote>
+  </div>
+
+</section>
+
+<!-- ══════════════════ CH10: HRMS ══════════════════ -->
+<div class="chapter-break" id="ch10">
+  <div class="chapter-break-grid"></div>
+  <div class="chapter-break-inner">
+    <div class="badge badge-blue" style="margin-bottom:16px">Part IV · Chapter 10</div>
+    <div style="font-family:'Playfair Display',serif;font-size:42px;color:var(--white);font-weight:700;margin-bottom:12px">HRMS Blueprint<br><span style="color:var(--gold)">People Operating System</span></div>
+    <p style="color:var(--text-muted);font-size:15px;max-width:600px">PeopleOS — tightly integrated with UCC, CRM, ATS, LMS, and the Data Layer.</p>
+  </div>
+</div>
+
+<section class="chapter-section">
+  <div class="chapter-header">
+    <div class="chapter-number">Chapter 10</div>
+    <h1 class="chapter-title">HRMS System Blueprint</h1>
+    <p class="chapter-desc">The People Operating System (PeopleOS) is not an HR administration tool. It is a Performance Intelligence System where every employee is a measurable asset, every task is a tracked output, and every KPI is revenue-linked.</p>
+  </div>
+
+  <div class="callout strategic">
+    <div class="callout-title">Core Design Principle</div>
+    <blockquote>"People Data = Performance Data = Revenue Impact"</blockquote>
+  </div>
+
+  <h2>6 HRMS Core Modules</h2>
+  <div class="card-grid card-grid-3">
+    <div class="card gold-top">
+      <div class="card-icon gold">🎯</div>
+      <div class="card-title">1. Talent Acquisition (ATS Integration)</div>
+      <div class="card-desc">Job requisition, candidate sourcing, screening, interview scorecards, offer rollout, onboarding</div>
+    </div>
+    <div class="card blue-top">
+      <div class="card-icon">👤</div>
+      <div class="card-title">2. Employee Lifecycle Management</div>
+      <div class="card-desc">Onboarding → Probation → Confirmation → Performance Cycle → Promotion → Exit</div>
+    </div>
+    <div class="card purple-top">
+      <div class="card-icon purple">📊</div>
+      <div class="card-title">3. Performance &amp; OKR Management</div>
+      <div class="card-desc">Goal setting, weekly tracking, mid-review, final evaluation, rating, incentives/actions</div>
+    </div>
+    <div class="card green-top">
+      <div class="card-icon green">📚</div>
+      <div class="card-title">4. Learning &amp; Capability (LMS Integration)</div>
+      <div class="card-desc">Skill gap identification, training assignment, learning module, assessment, certification</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🖥️</div>
+      <div class="card-title">5. Workforce Operations &amp; Monitoring</div>
+      <div class="card-desc">Login/logout tracking, task monitoring, SLA tracking, performance logging, activity dashboard</div>
+    </div>
+    <div class="card gold-top">
+      <div class="card-icon gold">💰</div>
+      <div class="card-title">6. Compensation, Payroll &amp; Rewards</div>
+      <div class="card-desc">Base + variable pay, commission engine, performance incentives, payroll automation</div>
+    </div>
+  </div>
+
+  <h2>Hire-to-Exit Lifecycle Flow</h2>
+  <div class="flow-diagram">
+    <div class="flow-title">Complete Employee Journey</div>
+    <div class="flow-linear">
+      <div class="flow-node"><div class="flow-node-box">Hiring</div><div class="flow-node-sub">JD → Interview → Offer</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="flow-node-box">Onboard</div><div class="flow-node-sub">Docs · Access · Induction</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="flow-node-box highlight">Train</div><div class="flow-node-sub">Functional + Tools</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="flow-node-box">Perform</div><div class="flow-node-sub">KPI · OKR · Tasks</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="flow-node-box">Review</div><div class="flow-node-sub">Quarterly + Annual</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="flow-node-box highlight">Promote</div><div class="flow-node-sub">Or Remediate</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="flow-node-box">Exit</div><div class="flow-node-sub">Knowledge Transfer</div></div>
+    </div>
+  </div>
+
+  <h2>Workforce Monitoring Features</h2>
+  <div class="card-grid card-grid-4">
+    <div class="card"><div class="card-title">⏰ Login/Logout Tracking</div><div class="card-desc">Real-time attendance with work hours calculation and productivity scoring</div></div>
+    <div class="card"><div class="card-title">📋 Task Assignment &amp; SLA</div><div class="card-desc">Every task has an owner, deadline, and SLA. Auto-escalation on breach.</div></div>
+    <div class="card"><div class="card-title">📊 Performance Logging</div><div class="card-desc">Daily KPI updates fed directly to UCC dashboard for real-time team scoring</div></div>
+    <div class="card"><div class="card-title">🤖 Anomaly Detection</div><div class="card-desc">AI detects idle time, unusual patterns, SLA risks before they become breaches</div></div>
+  </div>
+
+  <h2>HRMS UCC Event Integration</h2>
+  <div class="table-container">
+    <table>
+      <thead><tr><th>Event ID</th><th>Event Name</th><th>Trigger</th><th>Dashboard Impact</th></tr></thead>
+      <tbody>
+        <tr><td>EVT-HR-001</td><td>Employee Joined</td><td>Onboarding complete</td><td>Headcount updated in real-time</td></tr>
+        <tr><td>EVT-HR-002</td><td>Task Assigned</td><td>Manager assigns task</td><td>Task dashboard + workload view</td></tr>
+        <tr><td>EVT-HR-003</td><td>Task Completed</td><td>Employee updates status</td><td>Productivity score recalculated</td></tr>
+        <tr><td>EVT-HR-004</td><td>SLA Breach</td><td>Deadline missed</td><td>Escalation alert to manager + COO</td></tr>
+        <tr><td>EVT-HR-005</td><td>KPI Updated</td><td>KPI progress submitted</td><td>Performance dashboard refreshed</td></tr>
+        <tr><td>EVT-HR-006</td><td>Training Completed</td><td>LMS completion signal</td><td>Skill score + certification board</td></tr>
+        <tr><td>EVT-HR-007</td><td>Performance Review Submitted</td><td>Manager rating submitted</td><td>Appraisal dashboard updated</td></tr>
+        <tr><td>EVT-HR-008</td><td>Incentive Triggered</td><td>KPI threshold met</td><td>Payroll dashboard + notification</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>HRMS Policy Pack — Required Documents</h2>
+  <div class="three-col">
+    <div>
+      <h3>Employment &amp; Legal</h3>
+      <ul class="styled-list">
+        <li>Offer Letter Template</li>
+        <li>Employment Agreement</li>
+        <li>NDA / Confidentiality Agreement</li>
+        <li>IP Assignment Agreement</li>
+        <li>Remote Work Agreement</li>
+        <li>Probation Confirmation Letter</li>
+        <li>Exit / Relieving Letter</li>
+      </ul>
+    </div>
+    <div>
+      <h3>HR Operations Policies</h3>
+      <ul class="styled-list">
+        <li>Attendance &amp; Leave Policy</li>
+        <li>Work From Home Policy</li>
+        <li>Performance Management Policy</li>
+        <li>Incentive &amp; Commission Policy</li>
+        <li>Training &amp; Certification Policy</li>
+        <li>Code of Conduct</li>
+        <li>Disciplinary Action Policy</li>
+        <li>Exit &amp; Knowledge Transfer Policy</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Digital Workplace Policies</h3>
+      <ul class="styled-list">
+        <li>IT Asset Usage Policy</li>
+        <li>Data Protection Policy</li>
+        <li>Access Control Policy</li>
+        <li>Screen Monitoring Policy</li>
+        <li>Communication Policy</li>
+        <li>Email / CRM Usage Policy</li>
+        <li>Information Security Policy</li>
+        <li>Anti-Fraud Policy</li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════ CH11: SOPs ══════════════════ -->
+<section id="ch11" class="chapter-section" style="border-top:1px solid var(--border)">
+  <div class="chapter-header">
+    <div class="chapter-number">Chapter 11</div>
+    <h1 class="chapter-title">Standard Operating Procedures &amp; Exception Playbooks</h1>
+    <p class="chapter-desc">SOPs are your execution playbooks. Exception handling is where most organisations fail — this chapter defines both the standard flow and the contingency responses for every critical scenario.</p>
+  </div>
+
+  <h2>SOP A: Lead Management</h2>
+  <div class="flow-diagram">
+    <div class="flow-title">Lead Management SOP — Trigger: Lead Created</div>
+    <div class="flow-vertical">
+      <div class="flow-step"><div class="step-connector"><div class="step-circle">1</div><div class="step-line"></div></div><div class="step-content"><div class="step-label">Auto Lead Capture via CRM</div><div class="step-detail">Form submission → CRM entry auto-created · KPI: Form → CRM sync rate 100%</div></div></div>
+      <div class="flow-step"><div class="step-connector"><div class="step-circle">2</div><div class="step-line"></div></div><div class="step-content"><div class="step-label">Lead Scoring Applied</div><div class="step-detail">AI model scores lead 0-100 based on program fit, intent signals, engagement history · KPI: Score accuracy</div></div></div>
+      <div class="flow-step"><div class="step-connector"><div class="step-circle">3</div><div class="step-line"></div></div><div class="step-content"><div class="step-label">Lead Assigned Within SLA (5 Minutes)</div><div class="step-detail">Rule-based assignment by program, language, geography · KPI: Assignment within SLA %</div></div></div>
+      <div class="flow-step"><div class="step-connector"><div class="step-circle">4</div><div class="step-line"></div></div><div class="step-content"><div class="step-label">WhatsApp + Email Triggered Automatically</div><div class="step-detail">Personalised first-touch message with program info + appointment link · KPI: Open rate, Response rate</div></div></div>
+      <div class="flow-step"><div class="step-connector"><div class="step-circle">5</div><div class="step-line"></div></div><div class="step-content"><div class="step-label">Appointment Scheduled</div><div class="step-detail">Calendly/CRM appointment link + reminder sequence · KPI: Appointment show rate</div></div></div>
+      <div class="flow-step"><div class="step-connector"><div class="step-circle gold">6</div><div class="step-line" style="background:linear-gradient(to bottom,var(--gold),transparent)"></div></div><div class="step-content"><div class="step-label">Counselling → Eligibility → Status Updated</div><div class="step-detail">Structured call → eligibility check → CRM status updated → Revenue recorded · KPI: Conversion rate</div></div></div>
+    </div>
+  </div>
+
+  <h2>SOP B: Campaign Execution</h2>
+  <div class="card-grid card-grid-3">
+    <div class="card"><div class="card-title">Step 1: Campaign Brief</div><div class="card-desc">Define objective, target persona, geography, budget, timeline, success KPIs</div></div>
+    <div class="card"><div class="card-title">Step 2: Creative Development</div><div class="card-desc">Script → Design → Video → A/B variants → Internal review → Approval</div></div>
+    <div class="card"><div class="card-title">Step 3: Platform Setup</div><div class="card-desc">Audience targeting, pixel placement, UTM tracking, bid strategy, frequency caps</div></div>
+    <div class="card"><div class="card-title">Step 4: Launch + Monitor Daily</div><div class="card-desc">Daily CTR, CPL, ROAS review. Pause underperformers within 24hrs of detection.</div></div>
+    <div class="card"><div class="card-title">Step 5: Optimise</div><div class="card-desc">Creative rotation, audience refresh, budget reallocation to best-performing adsets</div></div>
+    <div class="card"><div class="card-title">Step 6: Report + Archive</div><div class="card-desc">Campaign post-mortem report → Store in DAM → Feed learnings into next brief</div></div>
+  </div>
+
+  <h2>Exception Handling Playbooks</h2>
+  <p>This is where most organisations fail. Every exception must have a defined trigger, immediate action, and root cause protocol.</p>
+
+  <div class="table-container">
+    <table>
+      <thead><tr><th>Exception</th><th>Trigger Condition</th><th>Immediate Action</th><th>Root Cause Protocol</th><th>Owner</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tag tag-red">CRITICAL</span><br>Lead Not Contacted</td>
+          <td>No call within 5 minutes of lead creation</td>
+          <td>Auto escalation alert → Reassign to available counsellor → Notify manager</td>
+          <td>SLA breach report → Counsellor workload review → Roster adjustment</td>
+          <td>CRM Manager</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-red">CRITICAL</span><br>Low Conversion Rate</td>
+          <td>Conversion &lt; benchmark for 3 consecutive days</td>
+          <td>Funnel audit → Counsellor listening session → Script review</td>
+          <td>Stage-by-stage funnel analysis → Counsellor training → Persona re-evaluation</td>
+          <td>Director CRM</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-gold">HIGH</span><br>High CPL Spike</td>
+          <td>CPL &gt; threshold for 24 hours</td>
+          <td>Pause underperforming campaigns → Switch creatives → Reallocate budget</td>
+          <td>Creative fatigue analysis → Audience saturation check → Fresh brief</td>
+          <td>Campaign Manager</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-gold">HIGH</span><br>Data Anomaly</td>
+          <td>Sudden spike or drop in key metrics &gt;30%</td>
+          <td>Data audit → System health check → Notify data team</td>
+          <td>Event log investigation → Pixel/tracking audit → Fraud check</td>
+          <td>Data Team</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-blue">MEDIUM</span><br>Content Underperformance</td>
+          <td>Engagement rate &lt;50% of average for 7 days</td>
+          <td>Topic re-evaluation → Thumbnail A/B test → Re-distribution on alternate platforms</td>
+          <td>Audience insight review → Persona shift analysis → Keyword trend update</td>
+          <td>Content Head</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
+
+<!-- ══════════════════ CH12: ISO GOVERNANCE ══════════════════ -->
+<section id="ch12" class="chapter-section" style="border-top:1px solid var(--border)">
+  <div class="chapter-header">
+    <div class="chapter-number">Chapter 12</div>
+    <h1 class="chapter-title">ISO Governance Mapping</h1>
+    <p class="chapter-desc">Career360's operating system is built to be auditable, investor-ready, and globally scalable. This chapter maps every governance dimension to its ISO standard and defines the compliance controls.</p>
+  </div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card gold-top">
+      <div class="card-title">ISO 27001 — Information Security</div>
+      <div class="card-desc">
+        <ul class="styled-list" style="margin:0">
+          <li>Role-based access control (RBAC)</li>
+          <li>Data encryption at rest and in transit</li>
+          <li>Comprehensive audit logs</li>
+          <li>Secure API authentication (JWT/OAuth)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card blue-top">
+      <div class="card-title">ISO 8000 — Data Quality</div>
+      <div class="card-desc">
+        <ul class="styled-list" style="margin:0">
+          <li>Field-level validation rules</li>
+          <li>Deduplication engine</li>
+          <li>Accuracy checks and quality scoring</li>
+          <li>Single Source of Truth enforcement</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card purple-top">
+      <div class="card-title">ISO 30405 — Recruitment</div>
+      <div class="card-desc">
+        <ul class="styled-list" style="margin:0">
+          <li>Candidate lifecycle documentation</li>
+          <li>Selection process transparency</li>
+          <li>Equal opportunity compliance</li>
+          <li>ATS audit trails</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card green-top">
+      <div class="card-title">ISO 30401 — Knowledge Management</div>
+      <div class="card-desc">
+        <ul class="styled-list" style="margin:0">
+          <li>Content repository (KBM)</li>
+          <li>SOP documentation standards</li>
+          <li>Version control and governance</li>
+          <li>Knowledge transfer on exit</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">ISO 9001 — Quality Management</div>
+      <div class="card-desc">
+        <ul class="styled-list" style="margin:0">
+          <li>Process standardisation</li>
+          <li>Continuous improvement cycles</li>
+          <li>Customer satisfaction measurement</li>
+          <li>Non-conformance reporting</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">ISO 30414 — Human Capital Reporting</div>
+      <div class="card-desc">
+        <ul class="styled-list" style="margin:0">
+          <li>Workforce analytics reporting</li>
+          <li>Performance metrics standardisation</li>
+          <li>Diversity and inclusion metrics</li>
+          <li>Revenue per employee tracking</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <h2>Governance Operating Cadence</h2>
+  <div class="card-grid card-grid-4">
+    <div class="card gold-top"><div class="card-title">📅 Daily</div><div class="card-desc">Campaign review · Lead tracking · SLA monitoring · KPI dashboard check</div></div>
+    <div class="card blue-top"><div class="card-title">📅 Weekly</div><div class="card-desc">Funnel review · Content performance · CRM audit · Team KPI review</div></div>
+    <div class="card purple-top"><div class="card-title">📅 Monthly</div><div class="card-desc">KPI review · Strategy adjustments · Compensation payout · Exception report</div></div>
+    <div class="card green-top"><div class="card-title">📅 Quarterly</div><div class="card-desc">Business review · Technology upgrades · ISO compliance audit · OKR reset</div></div>
+  </div>
+
+</section>
+
+<!-- ══════════════════ CH13: MATURITY MODEL ══════════════════ -->
+<section id="ch13" class="chapter-section" style="border-top:1px solid var(--border)">
+  <div class="chapter-header">
+    <div class="chapter-number">Chapter 13</div>
+    <h1 class="chapter-title">Maturity Model &amp; Implementation Roadmap</h1>
+    <p class="chapter-desc">Where is Career360 now? Where must it go? And how to get there — phase by phase, with clear outcomes at each stage.</p>
+  </div>
+
+  <h2>Digital Experience Maturity Model</h2>
+  <div class="maturity-model">
+    <div class="maturity-level"><div class="maturity-num" style="color:#6B7280">1</div><div class="maturity-bar mat-l1"><div class="mat-title">Disconnected Marketing</div><div class="mat-desc">Siloed teams, manual processes, no unified data. Marketing, sales, and content operate independently with no shared intelligence.</div></div></div>
+    <div class="maturity-level"><div class="maturity-num" style="color:var(--info)">2</div><div class="maturity-bar mat-l2"><div class="mat-title">Funnel-Based Marketing</div><div class="mat-desc">Basic funnel tracking in place. CRM installed. Lead count and conversion tracked. Still largely manual and reactive.</div></div></div>
+    <div class="maturity-level"><div class="maturity-num" style="color:var(--purple)">3</div><div class="maturity-bar mat-l3"><div class="mat-title">Integrated Omnichannel</div><div class="mat-desc">Systems connected. CRM, CMS, CDP, ATS integrated. Multi-channel campaigns coordinated. Attribution tracking functional.</div></div></div>
+    <div class="maturity-level"><div class="maturity-num" style="color:var(--gold)">4</div><div class="maturity-bar mat-l4"><div class="mat-title">Data-Driven Experience Engine</div><div class="mat-desc">UCC live. Event tracking complete. AI-assisted decisions. Personalisation active. SOPs governing every process. ISO compliance achieved.</div></div></div>
+    <div class="maturity-level"><div class="maturity-num" style="color:var(--success)">5</div><div class="maturity-bar mat-l5"><div class="mat-title">Autonomous AI-Driven Growth System</div><div class="mat-desc">129 AI workflows operational. Predictive revenue engine live. Self-optimising campaigns. Automated counsellor matching. Multi-country autonomous scaling.</div><div class="mat-target">Target State</div></div></div>
+  </div>
+
+  <h2>4-Phase Implementation Roadmap</h2>
+  <div class="table-container">
+    <table>
+      <thead><tr><th>Phase</th><th>Timeline</th><th>Objective</th><th>Build</th><th>Success Indicator</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tag tag-blue">Phase 1</span></td>
+          <td>0–30 Days</td>
+          <td>Foundation</td>
+          <td>Deploy CRM + Funnel tracking · Launch content engine · Start UCC basic dashboard · Foundation team hired</td>
+          <td>First leads tracked · CRM live · First content published</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-gold">Phase 2</span></td>
+          <td>30–90 Days</td>
+          <td>Integration</td>
+          <td>Integrate CMS + CRM + CDP · Implement campaign optimisation · Build full KPI dashboards · SOPs documented</td>
+          <td>Full funnel tracked · CPL optimising · Team scaled to 35+</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-purple">Phase 3</span></td>
+          <td>90–180 Days</td>
+          <td>Intelligence</td>
+          <td>Deploy AI workflows · Build personalisation engine · Optimise conversion · Event dictionary live · ISO alignment</td>
+          <td>AI scoring live · Conversion rate improving · UCC fully operational</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-green">Phase 4</span></td>
+          <td>180+ Days</td>
+          <td>Autonomous Scale</td>
+          <td>Full automation · Predictive revenue system · Multi-country scaling · 129 workflows deployed</td>
+          <td>3X revenue · 30% lower CAC · Global operations running</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
+
+<!-- ══════════════════ CH14: SAAS & REVENUE ENGINE ══════════════════ -->
+<section id="ch14" class="chapter-section" style="border-top:1px solid var(--border)">
+  <div class="chapter-header">
+    <div class="chapter-number">Chapter 14</div>
+    <h1 class="chapter-title">SaaS Productisation &amp; Revenue Engine</h1>
+    <p class="chapter-desc">The HRMS and DigitalExp OS built for Career360 has the architecture and IP to become a productised SaaS offering — a category-creating Workforce Intelligence Platform for the recruitment, education, and staffing industries globally.</p>
+  </div>
+
+  <div class="callout insight">
+    <div class="callout-title">Product Positioning</div>
+    <blockquote>"A unified system that connects People, Performance, and Revenue — powered by data and AI."</blockquote>
+  </div>
+
+  <h2>SaaS Pricing Model</h2>
+  <div class="card-grid card-grid-4">
+    <div class="card">
+      <div class="card-title">🌱 Starter Plan</div>
+      <div style="font-family:'Playfair Display',serif;font-size:24px;color:var(--gold);margin:12px 0">$3–5 <span style="font-size:14px;color:var(--text-muted)">/user/mo</span></div>
+      <div class="card-desc">Basic HRMS · Attendance · Tasks · Limited dashboards</div>
+    </div>
+    <div class="card blue-top">
+      <div class="card-title">📈 Growth Plan</div>
+      <div style="font-family:'Playfair Display',serif;font-size:24px;color:var(--gold);margin:12px 0">$8–12 <span style="font-size:14px;color:var(--text-muted)">/user/mo</span></div>
+      <div class="card-desc">KPI system · CRM integration · Performance dashboards · Analytics</div>
+    </div>
+    <div class="card gold-top">
+      <div class="card-title">🚀 Pro Plan</div>
+      <div style="font-family:'Playfair Display',serif;font-size:24px;color:var(--gold);margin:12px 0">$15–25 <span style="font-size:14px;color:var(--text-muted)">/user/mo</span></div>
+      <div class="card-desc">AI insights · UCC dashboards · Automation workflows · Full integration suite</div>
+    </div>
+    <div class="card purple-top">
+      <div class="card-title">🏢 Enterprise</div>
+      <div style="font-family:'Playfair Display',serif;font-size:24px;color:var(--gold);margin:12px 0">Custom</div>
+      <div class="card-desc">Custom integrations · Advanced AI · Dedicated support · White-label option</div>
+    </div>
+  </div>
+
+  <h2>Competitive Positioning</h2>
+  <div class="table-container">
+    <table>
+      <thead><tr><th>Competitor</th><th>Category Gap</th><th>Career360 Advantage</th></tr></thead>
+      <tbody>
+        <tr><td>Zoho People</td><td>No deep performance intelligence</td><td>UCC-integrated real-time decision engine</td></tr>
+        <tr><td>SAP SuccessFactors</td><td>Complex, expensive, not SMB-friendly</td><td>Modular, scalable, domain-specific</td></tr>
+        <tr><td>Workday</td><td>Enterprise-only, no SMB accessibility</td><td>Built for growing orgs in education/staffing</td></tr>
+        <tr><td>Generic CRMs</td><td>No people + revenue connection</td><td>Connects employee performance to revenue outcomes</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Unit Economics Model</h2>
+  <div class="highlight-box">
+    <div class="highlight-box-title">ARR Projection Formula</div>
+    <div style="font-family:'Playfair Display',serif;font-size:24px;color:var(--gold);text-align:center;margin:16px 0">ARR = Users × Price per User × 12 Months</div>
+    <div class="three-col" style="margin-top:20px">
+      <div class="kpi-card"><div class="kpi-label">1,000 Users @ $10/mo</div><div class="kpi-value">$120K</div><div class="kpi-sub">ARR</div></div>
+      <div class="kpi-card"><div class="kpi-label">5,000 Users @ $12/mo</div><div class="kpi-value">$720K</div><div class="kpi-sub">ARR</div></div>
+      <div class="kpi-card"><div class="kpi-label">10,000 Users @ $15/mo</div><div class="kpi-value">$1.8M</div><div class="kpi-sub">ARR</div></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════ CH15: STRATEGIC CLOSURE ══════════════════ -->
+<section id="ch15" class="chapter-section" style="border-top:1px solid var(--border)">
+  <div class="chapter-header">
+    <div class="chapter-number">Chapter 15</div>
+    <h1 class="chapter-title">Strategic Closure — The Career360 Digital Empire</h1>
+    <p class="chapter-desc">What you have built is not software, not a team structure, not a dashboard. You have built a scalable digital infrastructure that can replicate across countries, programs, and industries.</p>
+  </div>
+
+  <h2>What You Now Have — Layer Stack</h2>
+  <div class="maturity-model">
+    <div class="maturity-level"><div class="maturity-num" style="color:var(--gold)">1</div><div class="maturity-bar mat-l4"><div class="mat-title">Process Architecture</div><div class="mat-desc">L0–L3 process decomposition across all 6 value streams · Complete BPMN swimlane ownership model</div></div></div>
+    <div class="maturity-level"><div class="maturity-num" style="color:var(--gold)">2</div><div class="maturity-bar mat-l4"><div class="mat-title">Execution System</div><div class="mat-desc">Master Tracker (Process Registry, Content Pipeline, Campaign, Funnel, CRM, UCC KPI, Event Mapping)</div></div></div>
+    <div class="maturity-level"><div class="maturity-num" style="color:var(--gold)">3</div><div class="maturity-bar mat-l4"><div class="mat-title">Data &amp; Event Intelligence</div><div class="mat-desc">ERD (8 core entities) · Event Dictionary (100+ events) · Data Dictionary (field-level) · Governance rules</div></div></div>
+    <div class="maturity-level"><div class="maturity-num" style="color:var(--gold)">4</div><div class="maturity-bar mat-l4"><div class="mat-title">Intelligence Layer</div><div class="mat-desc">UCC Dashboard Architecture (6 role-specific views) · 129 AI Workflow categories · Revenue forecasting engine</div></div></div>
+    <div class="maturity-level"><div class="maturity-num" style="color:var(--gold)">5</div><div class="maturity-bar mat-l4"><div class="mat-title">Governance &amp; Workforce OS</div><div class="mat-desc">ISO governance mapping · SOPs · Exception playbooks · HRMS PeopleOS · Org Design L1–L4 · Hiring plan</div></div></div>
+  </div>
+
+  <h2>What This Enables for Career360</h2>
+  <div class="card-grid card-grid-3">
+    <div class="card gold-top"><div class="card-icon gold">🌍</div><div class="card-title">Global Scalability</div><div class="card-desc">EU, GCC, India operations running from a single intelligence layer. Country-specific without country-specific chaos.</div></div>
+    <div class="card blue-top"><div class="card-icon">📊</div><div class="card-title">Investor Readiness</div><div class="card-desc">Auditable processes, ISO-aligned governance, revenue forecasting, and proven unit economics.</div></div>
+    <div class="card purple-top"><div class="card-icon purple">🤖</div><div class="card-title">AI Integration Readiness</div><div class="card-desc">Event-driven architecture, standardised data model, and clean pipelines ready for AI model deployment.</div></div>
+    <div class="card green-top"><div class="card-icon green">⚡</div><div class="card-title">Automation at Scale</div><div class="card-desc">129 AI workflow categories ready for phased deployment. CAC reduction and conversion improvement baked in.</div></div>
+    <div class="card"><div class="card-icon">🏆</div><div class="card-title">Operational Excellence</div><div class="card-desc">Every process has an owner, SLA, KPI, and exception protocol. Zero ambiguity in execution.</div></div>
+    <div class="card"><div class="card-icon">💎</div><div class="card-title">Data as Moat</div><div class="card-desc">Proprietary dataset on candidate journeys, employer demand, and program outcomes — a strategic asset that compounds.</div></div>
+  </div>
+
+  <div class="callout insight" style="margin-top:48px">
+    <div class="callout-title">Final Strategic Insight — For Every Leader Reading This</div>
+    <blockquote>"You are not building a marketing team. You are not building a CRM. You are not building a dashboard.<br><br>You are building a Unified Growth Intelligence Platform where Data is the Asset, Experience is the Product, Automation is the Scale engine, and Intelligence is the Moat.<br><br>Build it right. Build it once. Then let it compound."</blockquote>
+  </div>
+
+  <!-- FINAL SUMMARY TABLE -->
+  <h2>Quick Reference — The Complete System</h2>
+  <div class="table-container">
+    <table>
+      <thead><tr><th>Chapter</th><th>What It Covers</th><th>Who Uses It</th></tr></thead>
+      <tbody>
+        <tr><td>01 — Overview</td><td>6 value streams, growth flywheel, swimlane model</td><td>All Leadership</td></tr>
+        <tr><td>02 — Process Architecture</td><td>L0–L3 process decomposition, all value streams, micro tasks</td><td>All Teams</td></tr>
+        <tr><td>03 — UCC Dashboard</td><td>6-layer dashboard architecture, screen designs, data flow</td><td>Leadership + Data Team</td></tr>
+        <tr><td>04 — API Architecture</td><td>47-app integration model, 6 core API flows, event-driven design</td><td>Tech Team + MarTech</td></tr>
+        <tr><td>05 — AI Automation</td><td>129 workflows across 9 categories, revenue formula</td><td>Data + AI Team</td></tr>
+        <tr><td>06 — Data Architecture</td><td>ERD, data dictionary, 100+ event dictionary, governance rules</td><td>Data Team + All</td></tr>
+        <tr><td>07 — Org Design</td><td>L1–L4 org structure, RACI, global delivery model</td><td>Leadership + HR</td></tr>
+        <tr><td>08 — Role Architecture</td><td>Every role: mandate, KPIs, UCC events, maturity level</td><td>HR + Managers</td></tr>
+        <tr><td>09 — Workforce System</td><td>Hiring plan, compensation, KPI/OKR, capability framework</td><td>HR + Leadership</td></tr>
+        <tr><td>10 — HRMS Blueprint</td><td>6 HRMS modules, workflows, policy pack, UCC integration</td><td>HR + Tech Team</td></tr>
+        <tr><td>11 — SOPs &amp; Playbooks</td><td>4 core SOPs, exception handling playbook for 5 scenarios</td><td>All Teams</td></tr>
+        <tr><td>12 — ISO Governance</td><td>6 ISO standards mapped, governance cadence</td><td>Compliance + Leadership</td></tr>
+        <tr><td>13 — Maturity Roadmap</td><td>5-level maturity model, 4-phase implementation plan</td><td>Leadership + All</td></tr>
+        <tr><td>14 — SaaS &amp; Revenue Engine</td><td>Productisation blueprint, pricing model, competitive positioning</td><td>Leadership + Investors</td></tr>
+        <tr><td>15 — Strategic Closure</td><td>Full layer stack summary, capabilities unlocked, final vision</td><td>All</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="margin-top:80px;padding-top:40px;border-top:1px solid var(--border);text-align:center">
+    <div style="font-family:'Playfair Display',serif;font-size:32px;color:var(--gold);margin-bottom:12px">CAREER360</div>
+    <div style="font-size:12px;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:24px">Digital Experience Operating System · Internal · Confidential</div>
+    <p style="font-size:13px;color:var(--text-muted);max-width:600px;margin:0 auto">This document is the intellectual property of Career360. It is intended for internal leadership and team use only. Distribution outside the organisation requires explicit written approval from the founding team.</p>
+    <div style="margin-top:32px;font-size:13px;color:var(--text-muted)">Chapters 01–15 · 6 Value Streams · 15 Process Groups · 100+ UCC Events · 129 AI Workflows · L0–L4 Architecture</div>
+  </div>
+</section>
+
+</div><!-- end #main -->
+
+<script>
+// Active nav highlight on scroll
+const sections = document.querySelectorAll('[id]');
+const navItems = document.querySelectorAll('.nav-item');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navItems.forEach(item => item.classList.remove('active'));
+      const active = document.querySelector(`.nav-item[href="#${entry.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { threshold: 0.2 });
+
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,2317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career360 Enterprise Operating Model — TOM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Lato:wght@300;400;700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628;
+    --navy-mid: #122040;
+    --navy-light: #1E3055;
+    --gold: #C8A84B;
+    --gold-light: #E8C96B;
+    --gold-pale: #F5EDD3;
+    --white: #FFFFFF;
+    --off-white: #F8F6F0;
+    --gray-100: #F0EEE8;
+    --gray-200: #D8D4C8;
+    --gray-400: #9A9488;
+    --gray-600: #5A5650;
+    --teal: #1A7A8A;
+    --teal-light: #2A9AAA;
+    --red-accent: #C04040;
+    --green-accent: #2A7A4A;
+    --amber: #D48020;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--off-white);
+    color: var(--navy);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ── COVER PAGE ── */
+  .cover {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 40px;
+    page-break-after: always;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 80%, rgba(200,168,75,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(26,122,138,0.15) 0%, transparent 60%);
+  }
+
+  .cover-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,168,75,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,168,75,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .cover-content { position: relative; z-index: 2; max-width: 900px; }
+
+  .cover-eyebrow {
+    font-family: 'Lato', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .cover-logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 48px;
+    letter-spacing: 2px;
+  }
+
+  .cover-logo-text span { color: var(--gold); }
+
+  .cover-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 7vw, 80px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+  }
+
+  .cover-title .highlight { color: var(--gold); }
+
+  .cover-subtitle {
+    font-size: 20px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 48px;
+    letter-spacing: 0.5px;
+  }
+
+  .cover-divider {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 40px;
+  }
+
+  .cover-tagline {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .cover-orb {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    border: 1px solid rgba(200,168,75,0.15);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .cover-orb:nth-child(2) { width: 700px; height: 700px; border-color: rgba(200,168,75,0.08); }
+  .cover-orb:nth-child(3) { width: 900px; height: 900px; border-color: rgba(200,168,75,0.04); }
+
+  /* ── NAVIGATION ── */
+  .toc-page {
+    min-height: 100vh;
+    background: var(--navy-mid);
+    padding: 80px 80px;
+    page-break-after: always;
+  }
+
+  .toc-header {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .toc-sub { color: var(--gold); font-size: 13px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 56px; }
+
+  .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+
+  .toc-section { padding: 20px 32px 20px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+
+  .toc-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .toc-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--white);
+    text-decoration: none;
+    display: block;
+    transition: color 0.2s;
+  }
+
+  .toc-title:hover { color: var(--gold); }
+
+  .toc-desc { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 4px; }
+
+  /* ── PAGE LAYOUT ── */
+  .chapter {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 60px;
+  }
+
+  .chapter-break { page-break-before: always; }
+
+  /* ── CHAPTER HEADER ── */
+  .chapter-header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 80px 60px 60px;
+    margin-bottom: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .chapter-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 60px;
+    right: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .chapter-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .chapter-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .chapter-desc {
+    font-size: 16px;
+    color: rgba(255,255,255,0.65);
+    max-width: 640px;
+    font-weight: 300;
+  }
+
+  /* ── CONTENT ELEMENTS ── */
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--navy);
+    margin: 56px 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--gold-pale);
+    position: relative;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+  }
+
+  .subsection-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--navy-light);
+    margin: 36px 0 12px;
+  }
+
+  .h4 {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin: 28px 0 10px;
+  }
+
+  p { margin-bottom: 16px; color: var(--gray-600); }
+
+  /* ── CALLOUT BOXES ── */
+  .callout {
+    border-left: 4px solid var(--gold);
+    background: var(--gold-pale);
+    padding: 20px 24px;
+    margin: 28px 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .callout.insight { border-color: var(--teal); background: rgba(26,122,138,0.06); }
+  .callout.warning { border-color: var(--red-accent); background: rgba(192,64,64,0.05); }
+  .callout.success { border-color: var(--green-accent); background: rgba(42,122,74,0.06); }
+
+  .callout-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .callout.insight .callout-label { color: var(--teal); }
+
+  .callout p { color: var(--navy); font-size: 14px; margin: 0; }
+
+  /* ── TABLES ── */
+  .table-wrap { overflow-x: auto; margin: 24px 0; border-radius: 8px; box-shadow: 0 2px 16px rgba(10,22,40,0.08); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    background: var(--white);
+  }
+
+  thead { background: var(--navy); }
+
+  thead th {
+    color: var(--white);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 14px 16px;
+    text-align: left;
+  }
+
+  thead th:first-child { border-radius: 8px 0 0 0; }
+  thead th:last-child { border-radius: 0 8px 0 0; }
+
+  tbody tr { border-bottom: 1px solid var(--gray-100); }
+  tbody tr:hover { background: var(--gold-pale); }
+
+  tbody td {
+    padding: 12px 16px;
+    color: var(--gray-600);
+    vertical-align: top;
+  }
+
+  tbody td:first-child { font-weight: 600; color: var(--navy); }
+
+  tbody tr:nth-child(even) { background: var(--gray-100); }
+  tbody tr:nth-child(even):hover { background: var(--gold-pale); }
+
+  /* ── PROCESS FLOW ── */
+  .flow-container {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 36px;
+    margin: 28px 0;
+    box-shadow: 0 4px 24px rgba(10,22,40,0.08);
+    overflow-x: auto;
+  }
+
+  .flow-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  /* ── CARDS ── */
+  .card-grid { display: grid; gap: 20px; margin: 24px 0; }
+  .card-grid-2 { grid-template-columns: 1fr 1fr; }
+  .card-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .card-grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+  .card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 2px 16px rgba(10,22,40,0.06);
+    border-top: 3px solid var(--gold);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(10,22,40,0.12); }
+  .card.teal { border-top-color: var(--teal); }
+  .card.navy { border-top-color: var(--navy); background: var(--navy); color: var(--white); }
+  .card.navy .card-title { color: var(--gold); }
+  .card.navy p { color: rgba(255,255,255,0.7); }
+
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--gold-pale);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    font-size: 20px;
+  }
+
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  /* ── STAT BLOCKS ── */
+  .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 28px 0; }
+
+  .stat-block {
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.6); letter-spacing: 1px; text-transform: uppercase; }
+
+  /* ── PROCESS STEPS ── */
+  .steps { display: flex; flex-direction: column; gap: 0; margin: 24px 0; }
+
+  .step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--gray-100);
+  }
+
+  .step:last-child { border-bottom: none; }
+
+  .step-num {
+    width: 36px;
+    height: 36px;
+    background: var(--navy);
+    color: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .step-content { flex: 1; }
+
+  .step-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .step-desc { font-size: 14px; color: var(--gray-600); }
+
+  /* ── ROLE BADGES ── */
+  .badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 3px;
+  }
+
+  .badge-gold { background: var(--gold-pale); color: var(--amber); }
+  .badge-navy { background: var(--navy); color: var(--white); }
+  .badge-teal { background: rgba(26,122,138,0.1); color: var(--teal); }
+  .badge-green { background: rgba(42,122,74,0.1); color: var(--green-accent); }
+  .badge-red { background: rgba(192,64,64,0.1); color: var(--red-accent); }
+
+  /* ── MATURITY LEVELS ── */
+  .maturity-bar {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 32px;
+    margin: 24px 0;
+    box-shadow: 0 2px 16px rgba(10,22,40,0.06);
+  }
+
+  .maturity-levels { display: flex; gap: 0; align-items: stretch; margin-top: 16px; }
+
+  .maturity-level {
+    flex: 1;
+    padding: 20px 16px;
+    text-align: center;
+    position: relative;
+    border-radius: 8px;
+    margin: 0 4px;
+  }
+
+  .maturity-level::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .ml-1 { background: rgba(192,64,64,0.06); } .ml-1::before { background: #C04040; }
+  .ml-2 { background: rgba(212,128,32,0.06); } .ml-2::before { background: #D4A020; }
+  .ml-3 { background: rgba(200,168,75,0.1); } .ml-3::before { background: var(--gold); }
+  .ml-4 { background: rgba(26,122,138,0.06); } .ml-4::before { background: var(--teal); }
+  .ml-5 { background: rgba(42,122,74,0.08); } .ml-5::before { background: var(--green-accent); }
+
+  .ml-num { font-size: 28px; font-weight: 900; margin-bottom: 4px; }
+  .ml-name { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .ml-desc { font-size: 11px; color: var(--gray-400); }
+
+  /* ── SWIMLANE ── */
+  .swimlane {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(10,22,40,0.08);
+    margin: 24px 0;
+  }
+
+  .swimlane-header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 16px 24px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .swimlane-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    border-bottom: 1px solid var(--gray-100);
+  }
+
+  .swimlane-lane {
+    background: var(--navy-mid);
+    color: var(--gold);
+    padding: 16px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+  }
+
+  .swimlane-tasks {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .swim-task {
+    background: var(--gold-pale);
+    border: 1px solid var(--gold);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .swim-arrow { color: var(--gray-400); font-size: 16px; }
+
+  /* ── FLYWHEEL ── */
+  .flywheel-container {
+    background: var(--navy);
+    border-radius: 16px;
+    padding: 48px;
+    margin: 28px 0;
+    text-align: center;
+  }
+
+  /* ── PAGE DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gray-200), transparent);
+    margin: 48px 0;
+  }
+
+  /* ── LISTS ── */
+  ul, ol { padding-left: 24px; margin: 12px 0 16px; }
+  li { color: var(--gray-600); margin-bottom: 6px; font-size: 14px; }
+  li strong { color: var(--navy); }
+
+  /* ── HIGHLIGHT BLOCK ── */
+  .highlight-block {
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 16px;
+    padding: 48px;
+    margin: 36px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .highlight-block::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(200,168,75,0.08);
+  }
+
+  .highlight-block h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .highlight-block p { color: rgba(255,255,255,0.75); position: relative; margin-bottom: 12px; }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.4);
+    padding: 40px 60px;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-top: 80px;
+  }
+
+  .page-footer strong { color: var(--gold); }
+
+  /* ── PRINT ── */
+  @media print {
+    .cover, .toc-page, .chapter-header { page-break-after: always; }
+    .chapter { page-break-inside: avoid; }
+    a { color: inherit; }
+  }
+
+  @media (max-width: 768px) {
+    .card-grid-2, .card-grid-3, .card-grid-4 { grid-template-columns: 1fr; }
+    .stat-row { grid-template-columns: 1fr 1fr; }
+    .toc-grid { grid-template-columns: 1fr; }
+    .chapter { padding: 40px 24px; }
+    .chapter-header { padding: 40px 24px; }
+    .toc-page { padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════ COVER PAGE ══ -->
+<div class="cover">
+  <div class="cover-grid"></div>
+  <div class="cover-orb"></div>
+  <div class="cover-orb"></div>
+  <div class="cover-orb"></div>
+  <div class="cover-content">
+    <div class="cover-eyebrow">Confidential Internal Document · 2025–2026</div>
+    <div class="cover-logo-text">CAREER<span>360</span> GROUP</div>
+    <h1 class="cover-title">Enterprise <span class="highlight">Operating</span><br>Model</h1>
+    <p class="cover-subtitle">Target Operating Model · Business Architecture · Process Orchestration</p>
+    <div class="cover-divider"></div>
+    <p class="cover-tagline">Global Talent Supply Chain Platform</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ TABLE OF CONTENTS ══ -->
+<div class="toc-page">
+  <div class="toc-sub">Table of Contents</div>
+  <h1 class="toc-header">What's<br>Inside</h1>
+  <div class="toc-grid">
+    <div class="toc-section">
+      <div class="toc-num">01</div>
+      <a href="#ch1" class="toc-title">Enterprise Overview</a>
+      <div class="toc-desc">The Global Talent Supply Chain, flywheel & strategic identity</div>
+    </div>
+    <div class="toc-section">
+      <div class="toc-num">02</div>
+      <a href="#ch2" class="toc-title">Enterprise Process Stack</a>
+      <div class="toc-desc">L0 Control architecture — Corporate, Business, Core & Support</div>
+    </div>
+    <div class="toc-section">
+      <div class="toc-num">03</div>
+      <a href="#ch3" class="toc-title">Strategic Management</a>
+      <div class="toc-desc">Corporate strategy, OKR cascade, governance & risk</div>
+    </div>
+    <div class="toc-section">
+      <div class="toc-num">04</div>
+      <a href="#ch4" class="toc-title">Enterprise Intelligence</a>
+      <div class="toc-desc">Market research, competitor analysis, web mining</div>
+    </div>
+    <div class="toc-section">
+      <div class="toc-num">05</div>
+      <a href="#ch5" class="toc-title">Business Layer</a>
+      <div class="toc-desc">Opportunity exploration, pricing strategy, partnerships</div>
+    </div>
+    <div class="toc-section">
+      <div class="toc-num">06</div>
+      <a href="#ch6" class="toc-title">Core Process Architecture</a>
+      <div class="toc-desc">Candidate, Employer & Agent lifecycle — end to end</div>
+    </div>
+    <div class="toc-section">
+      <div class="toc-num">07</div>
+      <a href="#ch7" class="toc-title">L0–L3 Process Decomposition</a>
+      <div class="toc-desc">Full micro-level task breakdown with AI augmentation</div>
+    </div>
+    <div class="toc-section">
+      <div class="toc-num">08</div>
+      <a href="#ch8" class="toc-title">Functional & Support Processes</a>
+      <div class="toc-desc">Marketing, Sales, Finance, HR, IT, Data, Compliance</div>
+    </div>
+    <div class="toc-section">
+      <div class="toc-num">09</div>
+      <a href="#ch9" class="toc-title">RACI & Governance</a>
+      <div class="toc-desc">Role clarity, accountability, escalation matrix</div>
+    </div>
+    <div class="toc-section">
+      <div class="toc-num">10</div>
+      <a href="#ch10" class="toc-title">KPI Dictionary</a>
+      <div class="toc-desc">300+ KPIs mapped to process, role and dashboard</div>
+    </div>
+    <div class="toc-section">
+      <div class="toc-num">11</div>
+      <a href="#ch11" class="toc-title">Data Architecture & Forms</a>
+      <div class="toc-desc">Field dictionary, validation rules, master form templates</div>
+    </div>
+    <div class="toc-section">
+      <div class="toc-num">12</div>
+      <a href="#ch12" class="toc-title">UCC — Unified Command Centre</a>
+      <div class="toc-desc">Event engine, dashboards, AI decision layer</div>
+    </div>
+    <div class="toc-section">
+      <div class="toc-num">13</div>
+      <a href="#ch13" class="toc-title">System Architecture</a>
+      <div class="toc-desc">Database schema, API design, 47-app integration</div>
+    </div>
+    <div class="toc-section">
+      <div class="toc-num">14</div>
+      <a href="#ch14" class="toc-title">Target Operating Model</a>
+      <div class="toc-desc">TOM layers, service blueprint, transformation roadmap</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ CH 1: OVERVIEW ══ -->
+<div id="ch1">
+<div class="chapter-header">
+  <div class="chapter-num">Chapter 01</div>
+  <h1 class="chapter-title">Enterprise Overview</h1>
+  <p class="chapter-desc">Understanding Career360 as a Global Talent Supply Chain Platform — not a training company, not a recruitment agency, but a vertically integrated intelligence-driven ecosystem.</p>
+</div>
+
+<div class="chapter">
+  <h2 class="section-title">Strategic Identity</h2>
+  <p>Career360 Group is a <strong>multi-entity, multi-geography platform business</strong> operating at the intersection of EdTech, HRTech, and Global Talent Mobility. It serves as the connective tissue between talent supply markets (India, Africa, Eastern Europe) and talent demand markets (Germany, Europe, GCC).</p>
+
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <div class="card-icon">🌍</div>
+      <div class="card-title">What We Are NOT</div>
+      <p>A training company. A recruitment agency. A visa consultancy. A standalone EdTech platform.</p>
+    </div>
+    <div class="card navy">
+      <div class="card-icon" style="background:rgba(200,168,75,0.2)">⚡</div>
+      <div class="card-title">What We ARE</div>
+      <p>A Global Talent Supply Chain Platform — connecting structured training, intelligent matching, and compliant placement across borders.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">The Group Entity Ecosystem</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Entity</th><th>Function</th><th>Market</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Career360 Group</td><td>Corporate holding & strategy governance</td><td>Global</td></tr>
+        <tr><td>Career360 Academy</td><td>Language & vocational training delivery</td><td>India, GCC</td></tr>
+        <tr><td>Career360Tech</td><td>Platform development (47 apps + UCC)</td><td>Internal</td></tr>
+        <tr><td>Career360Abroad</td><td>Study abroad & institutional admissions</td><td>India</td></tr>
+        <tr><td>Altus Career</td><td>Ausbildung & skilled worker recruitment</td><td>Germany, Europe</td></tr>
+        <tr><td>euRecruiter.eu / .de</td><td>European employer acquisition & HRTech</td><td>EU</td></tr>
+        <tr><td>myUniApply</td><td>University application management</td><td>India, GCC</td></tr>
+        <tr><td>myUniAssist</td><td>Admission support & counseling</td><td>India</td></tr>
+        <tr><td>DigitalExp</td><td>Digital experience & UX design</td><td>Internal</td></tr>
+        <tr><td>DigitalDefence</td><td>Cybersecurity & data protection</td><td>Internal</td></tr>
+        <tr><td>MAAS Global</td><td>Mobility-as-a-Service orchestration</td><td>Global</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">The Core Flywheel</h2>
+  <div class="highlight-block">
+    <h3>Data → Insight → Acquisition → Training → Placement → Revenue → Data</h3>
+    <p>Every component of Career360 feeds this flywheel. Content generates leads. Leads become candidates. Candidates complete training. Trained candidates are placed. Placements generate revenue. Revenue funds more content and market intelligence. Intelligence improves every step.</p>
+    <p>This is not a linear process — it is a <strong>self-reinforcing growth engine</strong>.</p>
+  </div>
+
+  <!-- Flywheel SVG -->
+  <div class="flow-container">
+    <div class="flow-title">The Career360 Value Flywheel</div>
+    <svg viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;display:block;margin:0 auto">
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#C8A84B"/>
+        </marker>
+      </defs>
+      <!-- Center circle -->
+      <circle cx="350" cy="200" r="60" fill="#0A1628" stroke="#C8A84B" stroke-width="2"/>
+      <text x="350" y="195" text-anchor="middle" fill="#C8A84B" font-family="Cormorant Garamond" font-size="16" font-weight="700">Career360</text>
+      <text x="350" y="213" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-family="Lato" font-size="10">Flywheel</text>
+      <!-- Nodes -->
+      <g transform="translate(350,55)">
+        <circle r="36" fill="#1E3055" stroke="#C8A84B" stroke-width="1.5"/>
+        <text text-anchor="middle" y="-5" fill="#C8A84B" font-family="Lato" font-size="10" font-weight="700">DATA &amp;</text>
+        <text text-anchor="middle" y="9" fill="#C8A84B" font-family="Lato" font-size="10" font-weight="700">INSIGHT</text>
+      </g>
+      <g transform="translate(540,120)">
+        <circle r="36" fill="#1E3055" stroke="#C8A84B" stroke-width="1.5"/>
+        <text text-anchor="middle" y="-5" fill="#E8C96B" font-family="Lato" font-size="10" font-weight="700">LEAD</text>
+        <text text-anchor="middle" y="9" fill="#E8C96B" font-family="Lato" font-size="10" font-weight="700">ACQN</text>
+      </g>
+      <g transform="translate(540,280)">
+        <circle r="36" fill="#1E3055" stroke="#1A7A8A" stroke-width="1.5"/>
+        <text text-anchor="middle" y="-5" fill="#2A9AAA" font-family="Lato" font-size="10" font-weight="700">TRAINING</text>
+        <text text-anchor="middle" y="9" fill="#2A9AAA" font-family="Lato" font-size="10" font-weight="700">&amp; CERT</text>
+      </g>
+      <g transform="translate(350,345)">
+        <circle r="36" fill="#1E3055" stroke="#2A7A4A" stroke-width="1.5"/>
+        <text text-anchor="middle" y="-5" fill="#3AAA6A" font-family="Lato" font-size="10" font-weight="700">PLACE</text>
+        <text text-anchor="middle" y="9" fill="#3AAA6A" font-family="Lato" font-size="10" font-weight="700">MENT</text>
+      </g>
+      <g transform="translate(160,280)">
+        <circle r="36" fill="#1E3055" stroke="#C8A84B" stroke-width="1.5"/>
+        <text text-anchor="middle" y="-5" fill="#C8A84B" font-family="Lato" font-size="10" font-weight="700">REVENUE</text>
+        <text text-anchor="middle" y="9" fill="#C8A84B" font-family="Lato" font-size="10" font-weight="700">&amp; ROI</text>
+      </g>
+      <g transform="translate(160,120)">
+        <circle r="36" fill="#1E3055" stroke="#D48020" stroke-width="1.5"/>
+        <text text-anchor="middle" y="-5" fill="#D4A040" font-family="Lato" font-size="10" font-weight="700">CONTENT</text>
+        <text text-anchor="middle" y="9" fill="#D4A040" font-family="Lato" font-size="10" font-weight="700">&amp; BRAND</text>
+      </g>
+      <!-- Arrows -->
+      <path d="M 375,88 L 508,118" stroke="#C8A84B" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+      <path d="M 540,158 L 540,242" stroke="#C8A84B" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+      <path d="M 508,302 L 390,338" stroke="#C8A84B" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+      <path d="M 312,338 L 194,302" stroke="#C8A84B" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+      <path d="M 160,242 L 160,158" stroke="#C8A84B" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+      <path d="M 194,105 L 312,72" stroke="#C8A84B" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+    </svg>
+  </div>
+
+  <h2 class="section-title">Geographic Operating Model</h2>
+  <div class="card-grid card-grid-2">
+    <div class="card teal">
+      <div class="card-icon" style="background:rgba(26,122,138,0.15)">📤</div>
+      <div class="card-title">Supply Side (Employers)</div>
+      <p><strong>Europe:</strong> Germany, Poland, Eastern Europe</p>
+      <p><strong>Gulf:</strong> UAE, Kuwait, Oman, Saudi Arabia</p>
+      <p><strong>Need:</strong> Skilled, language-ready workers</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📥</div>
+      <div class="card-title">Demand Side (Candidates)</div>
+      <p><strong>Primary:</strong> India (Kerala, Tamil Nadu, Telangana)</p>
+      <p><strong>Emerging:</strong> Pakistan, Africa, Eastern Europe</p>
+      <p><strong>Profile:</strong> 12th-pass, nurses, IT professionals</p>
+    </div>
+  </div>
+
+  <div class="callout insight">
+    <div class="callout-label">CEO Leadership Insight</div>
+    <p>Your real competitive asset is not candidates or employers — it is <strong>structured intelligence converted into decision velocity</strong>. Companies that win in talent mobility are those that know demand before employers post it, and know candidates before they enquire.</p>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════ CH 2: PROCESS STACK ══ -->
+<div id="ch2">
+<div class="chapter-header chapter-break">
+  <div class="chapter-num">Chapter 02</div>
+  <h1 class="chapter-title">Enterprise Process Stack</h1>
+  <p class="chapter-desc">The layered control architecture — from Corporate Strategy through to Operational Execution. A top-down system where every layer controls the layer beneath it.</p>
+</div>
+
+<div class="chapter">
+  <h2 class="section-title">Process Classification Framework</h2>
+  <p>Every process in Career360 belongs to one of three categories. Misclassification leads to confusion about ownership, priority, and measurement.</p>
+
+  <div class="card-grid card-grid-3">
+    <div class="card navy">
+      <div class="card-icon" style="background:rgba(200,168,75,0.15)">🎯</div>
+      <div class="card-title">Management Processes</div>
+      <p>Control the direction of the company. These decide WHERE we go and WHY.</p>
+      <div style="margin-top:12px">
+        <span class="badge badge-gold">Corporate Strategy</span>
+        <span class="badge badge-gold">OKR Management</span>
+        <span class="badge badge-gold">Governance</span>
+        <span class="badge badge-gold">Risk Management</span>
+        <span class="badge badge-gold">Portfolio Management</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">💰</div>
+      <div class="card-title">Core Processes</div>
+      <p>Directly create revenue and customer value. These are HOW we deliver.</p>
+      <div style="margin-top:12px">
+        <span class="badge badge-teal">Candidate Acquisition</span>
+        <span class="badge badge-teal">Training Delivery</span>
+        <span class="badge badge-teal">Placement Management</span>
+        <span class="badge badge-teal">Employer Acquisition</span>
+      </div>
+    </div>
+    <div class="card teal">
+      <div class="card-icon" style="background:rgba(26,122,138,0.15)">⚙️</div>
+      <div class="card-title">Support Processes</div>
+      <p>Enable the business to run. These are WHAT makes delivery possible.</p>
+      <div style="margin-top:12px">
+        <span class="badge badge-navy">HR</span>
+        <span class="badge badge-navy">Finance</span>
+        <span class="badge badge-navy">IT</span>
+        <span class="badge badge-navy">Data</span>
+        <span class="badge badge-navy">Compliance</span>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">L0–L3 Decomposition Logic</h2>
+  <p>Every process is decomposed from macro to atomic level. This enables precise ownership, measurement, and automation at every layer.</p>
+
+  <!-- Process Hierarchy SVG -->
+  <div class="flow-container">
+    <div class="flow-title">Process Hierarchy — L0 to L3</div>
+    <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;display:block;margin:0 auto">
+      <!-- L0 -->
+      <rect x="250" y="10" width="200" height="44" rx="8" fill="#0A1628"/>
+      <text x="350" y="28" text-anchor="middle" fill="#C8A84B" font-family="Lato" font-size="11" font-weight="700">L0 — MACRO PROCESS</text>
+      <text x="350" y="46" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-family="Lato" font-size="10">e.g. Candidate Lifecycle</text>
+      <!-- connector -->
+      <line x1="350" y1="54" x2="350" y2="78" stroke="#C8A84B" stroke-width="1.5"/>
+      <!-- L1 -->
+      <rect x="80" y="78" width="540" height="44" rx="8" fill="#1E3055"/>
+      <text x="350" y="97" text-anchor="middle" fill="#E8C96B" font-family="Lato" font-size="11" font-weight="700">L1 — PROCESS GROUP</text>
+      <text x="350" y="113" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="Lato" font-size="10">e.g. Lead Generation · Lead Management · Counseling · Training · Placement · Post-Landing</text>
+      <!-- connectors -->
+      <line x1="200" y1="122" x2="200" y2="146" stroke="#C8A84B" stroke-width="1.5"/>
+      <line x1="350" y1="122" x2="350" y2="146" stroke="#C8A84B" stroke-width="1.5"/>
+      <line x1="500" y1="122" x2="500" y2="146" stroke="#C8A84B" stroke-width="1.5"/>
+      <!-- L2 groups -->
+      <rect x="80" y="146" width="220" height="40" rx="6" fill="rgba(26,122,138,0.2)" stroke="#1A7A8A" stroke-width="1"/>
+      <text x="190" y="162" text-anchor="middle" fill="#2A9AAA" font-family="Lato" font-size="10" font-weight="700">L2 — SUB PROCESS</text>
+      <text x="190" y="178" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="Lato" font-size="9">e.g. Digital Marketing / Events</text>
+      <rect x="240" y="146" width="220" height="40" rx="6" fill="rgba(26,122,138,0.2)" stroke="#1A7A8A" stroke-width="1"/>
+      <text x="350" y="162" text-anchor="middle" fill="#2A9AAA" font-family="Lato" font-size="10" font-weight="700">L2 — SUB PROCESS</text>
+      <text x="350" y="178" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="Lato" font-size="9">e.g. Lead Capture / Scoring</text>
+      <rect x="400" y="146" width="220" height="40" rx="6" fill="rgba(26,122,138,0.2)" stroke="#1A7A8A" stroke-width="1"/>
+      <text x="510" y="162" text-anchor="middle" fill="#2A9AAA" font-family="Lato" font-size="10" font-weight="700">L2 — SUB PROCESS</text>
+      <text x="510" y="178" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="Lato" font-size="9">e.g. Assessment / Mock Exam</text>
+      <!-- connectors to L3 -->
+      <line x1="190" y1="186" x2="190" y2="210" stroke="#C8A84B" stroke-width="1"/>
+      <line x1="350" y1="186" x2="350" y2="210" stroke="#C8A84B" stroke-width="1"/>
+      <line x1="510" y1="186" x2="510" y2="210" stroke="#C8A84B" stroke-width="1"/>
+      <!-- L3 -->
+      <rect x="60" y="210" width="160" height="36" rx="6" fill="rgba(200,168,75,0.12)" stroke="#C8A84B" stroke-width="1"/>
+      <text x="140" y="224" text-anchor="middle" fill="#C8A84B" font-family="Lato" font-size="9" font-weight="700">L3 — ATOMIC TASK</text>
+      <text x="140" y="238" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-family="Lato" font-size="8">Run Meta / Google Ads</text>
+      <rect x="270" y="210" width="160" height="36" rx="6" fill="rgba(200,168,75,0.12)" stroke="#C8A84B" stroke-width="1"/>
+      <text x="350" y="224" text-anchor="middle" fill="#C8A84B" font-family="Lato" font-size="9" font-weight="700">L3 — ATOMIC TASK</text>
+      <text x="350" y="238" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-family="Lato" font-size="8">Score Lead → Route to Counselor</text>
+      <rect x="480" y="210" width="160" height="36" rx="6" fill="rgba(200,168,75,0.12)" stroke="#C8A84B" stroke-width="1"/>
+      <text x="560" y="224" text-anchor="middle" fill="#C8A84B" font-family="Lato" font-size="9" font-weight="700">L3 — ATOMIC TASK</text>
+      <text x="560" y="238" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-family="Lato" font-size="8">Speech analysis → Weak area flag</text>
+    </svg>
+  </div>
+
+  <h2 class="section-title">The Four-Layer Operating Stack</h2>
+
+  <div class="swimlane">
+    <div class="swimlane-header">Enterprise Process Stack — Layers & Purpose</div>
+    <div class="swimlane-row">
+      <div class="swimlane-lane">L0 Corporate</div>
+      <div class="swimlane-tasks">
+        <span class="swim-task">Vision & Mission</span><span class="swim-arrow">→</span>
+        <span class="swim-task">Portfolio Strategy</span><span class="swim-arrow">→</span>
+        <span class="swim-task">Market Selection</span><span class="swim-arrow">→</span>
+        <span class="swim-task">Capital Allocation</span><span class="swim-arrow">→</span>
+        <span class="swim-task">Governance</span>
+      </div>
+    </div>
+    <div class="swimlane-row">
+      <div class="swimlane-lane">L1 Business</div>
+      <div class="swimlane-tasks">
+        <span class="swim-task">Opportunity Exploration</span><span class="swim-arrow">→</span>
+        <span class="swim-task">Pricing Strategy</span><span class="swim-arrow">→</span>
+        <span class="swim-task">Brand Positioning</span><span class="swim-arrow">→</span>
+        <span class="swim-task">Partnership Models</span>
+      </div>
+    </div>
+    <div class="swimlane-row">
+      <div class="swimlane-lane">L2 Core</div>
+      <div class="swimlane-tasks">
+        <span class="swim-task">Candidate Lifecycle</span><span class="swim-arrow">→</span>
+        <span class="swim-task">Employer Lifecycle</span><span class="swim-arrow">→</span>
+        <span class="swim-task">Agent Lifecycle</span><span class="swim-arrow">→</span>
+        <span class="swim-task">Training Delivery</span><span class="swim-arrow">→</span>
+        <span class="swim-task">Visa & Docs</span>
+      </div>
+    </div>
+    <div class="swimlane-row">
+      <div class="swimlane-lane">L3 Support</div>
+      <div class="swimlane-tasks">
+        <span class="swim-task">Marketing & Sales</span><span class="swim-arrow">→</span>
+        <span class="swim-task">Finance</span><span class="swim-arrow">→</span>
+        <span class="swim-task">HR</span><span class="swim-arrow">→</span>
+        <span class="swim-task">IT & Data</span><span class="swim-arrow">→</span>
+        <span class="swim-task">Compliance</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════ CH 3: STRATEGIC MGMT ══ -->
+<div id="ch3">
+<div class="chapter-header chapter-break">
+  <div class="chapter-num">Chapter 03</div>
+  <h1 class="chapter-title">Strategic Management</h1>
+  <p class="chapter-desc">How Career360 converts founder vision into executable organizational direction — from strategic theme to OKR cascade to daily execution.</p>
+</div>
+
+<div class="chapter">
+
+  <div class="callout">
+    <div class="callout-label">Leadership Principle</div>
+    <p>Strategy is not planning — it is <strong>resource allocation under uncertainty</strong>. Your advantage comes from where you say <strong>NO</strong>. Every strategic decision is a rejection of all alternatives.</p>
+  </div>
+
+  <h2 class="section-title">Corporate Strategy Formulation Process</h2>
+  <h3 class="subsection-title">Step-by-Step SOP</h3>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Capture Strategic Inputs</div>
+        <div class="step-desc">Strategy team collects inputs from all department heads. Includes founder vision, market intelligence, current entity performance, risk signals, capital availability, and competitor movements.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Define Strategic Priorities</div>
+        <div class="step-desc">Founder/CEO defines the top 3–5 strategic themes for the period (e.g., Germany Ausbildung 2027 intake, Kuwait franchise, euRecruiter employer acquisition, UCC implementation).</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">Convert Priorities into OKRs</div>
+        <div class="step-desc">Each strategic priority becomes measurable Objectives with 2–4 Key Results. Each KR must have a quantifiable target and a clear owner.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title">Cross-functional Feasibility Validation</div>
+        <div class="step-desc">Finance validates budget feasibility. Operations validates execution capacity. HR validates manpower readiness. Technology validates system readiness.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <div class="step-title">Assign Ownership & Cascade</div>
+        <div class="step-desc">Corporate → CXO → Department → Manager → Team Member. Each level receives context-appropriate OKRs aligned to the corporate theme.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-content">
+        <div class="step-title">Monthly Review via UCC</div>
+        <div class="step-desc">OKR achievement rates reviewed monthly via the UCC dashboard. Misaligned OKRs flagged by AI and escalated for correction.</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Strategic Input Capture Template</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Description</th><th>Example</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Strategic Theme</td><td>The overarching strategic initiative</td><td>Germany Ausbildung 2027 Expansion</td></tr>
+        <tr><td>Entity Impacted</td><td>Which Career360 entities are involved</td><td>Career360 Academy, Altus Career</td></tr>
+        <tr><td>Target Market</td><td>Geography and audience</td><td>India candidates, German employers</td></tr>
+        <tr><td>Revenue Potential</td><td>Estimated revenue impact</td><td>High (€2M+)</td></tr>
+        <tr><td>Risk Level</td><td>Strategic, operational, financial risk</td><td>Medium — language failure, visa delay</td></tr>
+        <tr><td>Required Budget</td><td>Investment needed to execute</td><td>₹50L marketing + trainer costs</td></tr>
+        <tr><td>Required Team</td><td>Roles and headcount needed</td><td>Marketing, Sales, Trainers, Ops</td></tr>
+        <tr><td>Timeline</td><td>Execution horizon</td><td>90 / 180 / 360 days</td></tr>
+        <tr><td>Priority</td><td>Ranking within the portfolio</td><td>Critical</td></tr>
+        <tr><td>Decision Owner</td><td>Who approves this strategy</td><td>Founder / CEO</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">OKR Cascade Model</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Objective</th><th>Key Result</th><th>Target</th><th>Owner</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Build Germany Ausbildung pipeline</td><td>Qualified leads generated in 90 days</td><td>500</td><td>Marketing Head</td></tr>
+        <tr><td>Improve training outcomes</td><td>B1 pass rate among enrolled candidates</td><td>80%</td><td>Academic Head</td></tr>
+        <tr><td>Build employer supply</td><td>German employer conversations initiated</td><td>50</td><td>euRecruiter Head</td></tr>
+        <tr><td>Reduce processing time</td><td>Average days from enrollment to visa</td><td>&lt;90 days</td><td>Ops Manager</td></tr>
+        <tr><td>Grow agent network</td><td>New agents onboarded in Kerala</td><td>30</td><td>Agent Manager</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">AI Automation in Strategic Management</h2>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <div class="card-title">Strategy Summarizer</div>
+      <p>Converts founder notes and meeting transcripts into structured strategic themes using NLP. Eliminates interpretation errors.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Opportunity Scoring AI</div>
+      <p>Scores countries and programs on demand, risk, and ROI using multi-variable models. Outputs ranked opportunity matrix.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Risk Detection AI</div>
+      <p>Flags weak assumptions in strategic plans, identifies blind spots, and cross-checks against historical data.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">OKR Misalignment Detector</div>
+      <p>Continuously monitors OKR progress and flags misaligned or stalled Key Results before the review cycle.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">Strategic Deliverables</h2>
+  <div class="card-grid card-grid-3">
+    <div class="card"><div class="card-title">Corporate Strategy Document</div><p>Group-level strategic narrative with entity-wise positioning</p></div>
+    <div class="card"><div class="card-title">90/180/360-Day Roadmap</div><p>Time-phased milestones per initiative and entity</p></div>
+    <div class="card"><div class="card-title">OKR Tree</div><p>Cascaded objectives from corporate to individual contributor</p></div>
+    <div class="card"><div class="card-title">KPI Dictionary</div><p>300+ KPIs mapped to processes, owners, and dashboards</p></div>
+    <div class="card"><div class="card-title">Risk Register</div><p>Risk ID, probability, impact score, mitigation plan, owner</p></div>
+    <div class="card"><div class="card-title">Board Review Template</div><p>Monthly auto-generated executive performance report</p></div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════ CH 4: INTELLIGENCE ══ -->
+<div id="ch4">
+<div class="chapter-header chapter-break">
+  <div class="chapter-num">Chapter 04</div>
+  <h1 class="chapter-title">Enterprise Intelligence Layer</h1>
+  <p class="chapter-desc">The decision engine of Career360 — converting raw market signals into actionable intelligence across every domain: market research, competitor analysis, persona research, and web mining.</p>
+</div>
+
+<div class="chapter">
+  <h2 class="section-title">Market Research Process</h2>
+  <p>Market research at Career360 operates at three levels of depth — Beginner (explore), Intermediate (evaluate), and Advanced (predict). All outputs feed the strategic decision layer.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Level</th><th>Activities</th><th>Outputs</th></tr></thead>
+      <tbody>
+        <tr><td>Beginner</td><td>Select target country · Collect basic data · Identify demand sectors · Map visa rules</td><td>Country summary report</td></tr>
+        <tr><td>Intermediate</td><td>Build attractiveness score · Compare competitors · Analyze pricing · Map employer demand vs supply</td><td>GTM recommendation</td></tr>
+        <tr><td>Advanced</td><td>Build predictive demand model · Scrape job boards · Analyze policy changes · Build country ROI model</td><td>Country entry decision with ROI forecast</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Country Attractiveness Scorecard</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Field</th><th>Description</th><th>Example: Germany</th></tr></thead>
+      <tbody>
+        <tr><td>Labor Demand Score</td><td>Shortage occupation index</td><td>9/10 — High</td></tr>
+        <tr><td>Candidate Supply Score</td><td>Available trained talent</td><td>7/10 — Good</td></tr>
+        <tr><td>Visa Feasibility Score</td><td>Ease of processing</td><td>6/10 — Moderate</td></tr>
+        <tr><td>Regulatory Complexity</td><td>Compliance burden</td><td>5/10 — Medium</td></tr>
+        <tr><td>Competitor Intensity</td><td>Market saturation</td><td>4/10 — Low–Medium</td></tr>
+        <tr><td>Pricing Potential</td><td>Willingness to pay</td><td>8/10 — High</td></tr>
+        <tr><td>Total Opportunity Score</td><td>Weighted composite</td><td>82/100 — Proceed</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Competitor Research Process</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content"><div class="step-title">Identify & List Competitors</div><div class="step-desc">Direct (agents, institutes), Indirect (EdTech platforms, migration consultants)</div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content"><div class="step-title">Capture Offerings, Pricing & Claims</div><div class="step-desc">Website, ads, brochures, social media content analysis</div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content"><div class="step-title">Benchmark Positioning Gap</div><div class="step-desc">Compare Career360 vs competitors on: training quality, native speakers, placement rate, visa support</div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content"><div class="step-title">Prepare Counter Messaging</div><div class="step-desc">Update sales scripts, website copy, and ad creative based on gaps identified</div></div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Web Research & Scraping Engine</h2>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <div class="card-title">Employer Data Mining</div>
+      <p>Automated scraping of career pages, LinkedIn profiles, job boards. Extract: company name, HR contact, job title, salary, language requirement, hiring volume.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Job Demand Intelligence</div>
+      <p>Real-time extraction of shortage occupations across Germany, Poland, UAE. Feed directly into program development and marketing targeting.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">University Data Extraction</div>
+      <p>For Study Abroad division — extract program details, fees, intake dates, language requirements from university websites globally.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Salary & Demand Intelligence</div>
+      <p>Monthly salary benchmarks by country, sector, and role level. Used in candidate counseling and pricing strategy validation.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════ CH 5: BUSINESS LAYER ══ -->
+<div id="ch5">
+<div class="chapter-header chapter-break">
+  <div class="chapter-num">Chapter 05</div>
+  <h1 class="chapter-title">Business Layer</h1>
+  <p class="chapter-desc">The value creation engine — Opportunity Exploration, Pricing Strategy, Brand Positioning, and Partnership Models.</p>
+</div>
+
+<div class="chapter">
+  <h2 class="section-title">Opportunity Exploration Process</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Stage</th><th>Key Activities</th><th>Output</th></tr></thead>
+      <tbody>
+        <tr><td>Stage 1: Market Entry Strategy</td><td>Country Prioritization Matrix · Regulatory Feasibility · Entry Model Selection (Direct / FOCO / FICO / JV)</td><td>Market entry decision</td></tr>
+        <tr><td>Stage 2: Supply-Side Development</td><td>Employer Identification · Outreach Campaign · Job Order Acquisition · ATS Integration · Contracting</td><td>Employer pipeline</td></tr>
+        <tr><td>Stage 3: Demand-Side Development</td><td>Source Market Selection · Channel Strategy (Digital + Agent + Institutional) · Lead Pipeline Creation</td><td>Candidate pipeline</td></tr>
+        <tr><td>Stage 4: Monetization Strategy</td><td>Training Revenue · Placement Fees · SaaS Subscriptions · Franchise Revenue · Event Monetization</td><td>Revenue model per market</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Pricing Strategy Framework</h2>
+
+  <div class="callout insight">
+    <div class="callout-label">Leadership Insight</div>
+    <p>Pricing is positioning. If you compete on price, you commoditize yourself. Career360 must compete on <strong>certainty of outcome</strong> — the candidate pays for a structured pathway, not just a training seat.</p>
+  </div>
+
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <div class="card-title">Cost-Based Floor</div>
+      <p>Training cost + operational overhead + margin. Defines minimum viable price. Never go below this without strategic reason.</p>
+    </div>
+    <div class="card navy">
+      <div class="card-title">Value-Based Positioning</div>
+      <p>Price anchored to salary uplift, career transformation, and certainty of visa. This is where Career360 must play.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Dynamic Pricing</div>
+      <p>Country-specific, persona-specific pricing. Installment options, pay-after-placement models for different segments.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">Partnership Models</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Partner Type</th><th>Model</th><th>Career360 Contribution</th><th>Partner Contribution</th></tr></thead>
+      <tbody>
+        <tr><td>Universities</td><td>Institutional Partnership</td><td>Student referrals + admission support</td><td>Seats + fee sharing</td></tr>
+        <tr><td>Employers</td><td>Hiring Partnership</td><td>Trained, language-ready candidates</td><td>Job orders + salary + visa support</td></tr>
+        <tr><td>Master Agents</td><td>Revenue Share (60/40)</td><td>Training, placement, brand</td><td>Lead generation + local execution</td></tr>
+        <tr><td>Franchisees (FOCO)</td><td>Franchise Owned, Company Operated</td><td>Operations + quality control</td><td>Location + initial investment</td></tr>
+        <tr><td>Franchisees (FICO)</td><td>Franchise & Investor CO</td><td>Training + systems</td><td>Full investment + local management</td></tr>
+        <tr><td>Government / Embassies</td><td>MOU / Program Partnership</td><td>Compliance + candidate readiness</td><td>Visa facilitation + endorsement</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════ CH 6: CORE PROCESS ══ -->
+<div id="ch6">
+<div class="chapter-header chapter-break">
+  <div class="chapter-num">Chapter 06</div>
+  <h1 class="chapter-title">Core Process Architecture</h1>
+  <p class="chapter-desc">End-to-end value delivery — the Candidate Lifecycle, Employer Lifecycle, and Agent Lifecycle mapped stage by stage with workflows, data fields, and AI augmentation.</p>
+</div>
+
+<div class="chapter">
+  <h2 class="section-title">Candidate Lifecycle — 8 Stages</h2>
+
+  <!-- Candidate Lifecycle Visual -->
+  <div class="flow-container">
+    <div class="flow-title">Candidate Journey — Enquiry to Retention</div>
+    <svg viewBox="0 0 800 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
+      <defs>
+        <marker id="arr2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L6,3 z" fill="#C8A84B"/>
+        </marker>
+      </defs>
+      <!-- Stages -->
+      <g transform="translate(0,0)">
+        <rect x="4" y="20" width="90" height="56" rx="6" fill="#0A1628"/>
+        <text x="49" y="43" text-anchor="middle" fill="#C8A84B" font-family="Lato" font-size="9" font-weight="700">AWARENESS</text>
+        <text x="49" y="57" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="Lato" font-size="8">Content / Events</text>
+        <text x="49" y="68" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="Lato" font-size="8">/ Referrals</text>
+      </g>
+      <line x1="94" y1="48" x2="108" y2="48" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#arr2)"/>
+      <g transform="translate(108,0)">
+        <rect x="4" y="20" width="90" height="56" rx="6" fill="#122040"/>
+        <text x="49" y="43" text-anchor="middle" fill="#E8C96B" font-family="Lato" font-size="9" font-weight="700">LEAD MGMT</text>
+        <text x="49" y="57" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="Lato" font-size="8">Capture · Score</text>
+        <text x="49" y="68" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="Lato" font-size="8">· Nurture</text>
+      </g>
+      <line x1="202" y1="48" x2="216" y2="48" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#arr2)"/>
+      <g transform="translate(216,0)">
+        <rect x="4" y="20" width="90" height="56" rx="6" fill="#1E3055"/>
+        <text x="49" y="43" text-anchor="middle" fill="#C8A84B" font-family="Lato" font-size="9" font-weight="700">COUNSELING</text>
+        <text x="49" y="57" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="Lato" font-size="8">Eligibility ·</text>
+        <text x="49" y="68" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="Lato" font-size="8">Enrollment</text>
+      </g>
+      <line x1="310" y1="48" x2="324" y2="48" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#arr2)"/>
+      <g transform="translate(324,0)">
+        <rect x="4" y="20" width="90" height="56" rx="6" fill="rgba(26,122,138,0.4)" stroke="#1A7A8A" stroke-width="1"/>
+        <text x="49" y="43" text-anchor="middle" fill="#2A9AAA" font-family="Lato" font-size="9" font-weight="700">TRAINING</text>
+        <text x="49" y="57" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="Lato" font-size="8">A1→B1/B2</text>
+        <text x="49" y="68" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="Lato" font-size="8">Assessment</text>
+      </g>
+      <line x1="418" y1="48" x2="432" y2="48" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#arr2)"/>
+      <g transform="translate(432,0)">
+        <rect x="4" y="20" width="90" height="56" rx="6" fill="rgba(42,122,74,0.3)" stroke="#2A7A4A" stroke-width="1"/>
+        <text x="49" y="43" text-anchor="middle" fill="#3AAA6A" font-family="Lato" font-size="9" font-weight="700">PLACEMENT</text>
+        <text x="49" y="57" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="Lato" font-size="8">Match · Interview</text>
+        <text x="49" y="68" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="Lato" font-size="8">· Offer</text>
+      </g>
+      <line x1="526" y1="48" x2="540" y2="48" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#arr2)"/>
+      <g transform="translate(540,0)">
+        <rect x="4" y="20" width="90" height="56" rx="6" fill="rgba(200,168,75,0.2)" stroke="#C8A84B" stroke-width="1"/>
+        <text x="49" y="43" text-anchor="middle" fill="#C8A84B" font-family="Lato" font-size="9" font-weight="700">VISA & DOCS</text>
+        <text x="49" y="57" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="Lato" font-size="8">Verify · Submit</text>
+        <text x="49" y="68" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="Lato" font-size="8">· Track</text>
+      </g>
+      <line x1="634" y1="48" x2="648" y2="48" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#arr2)"/>
+      <g transform="translate(648,0)">
+        <rect x="4" y="20" width="144" height="56" rx="6" fill="rgba(200,168,75,0.1)" stroke="#C8A84B" stroke-width="1"/>
+        <text x="72" y="43" text-anchor="middle" fill="#C8A84B" font-family="Lato" font-size="9" font-weight="700">POST-LANDING</text>
+        <text x="72" y="57" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="Lato" font-size="8">Accommodation · Onboarding</text>
+        <text x="72" y="68" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="Lato" font-size="8">· Retention</text>
+      </g>
+    </svg>
+  </div>
+
+  <h3 class="subsection-title">Stage 1: Lead Generation</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Channel</th><th>Method</th><th>KPI</th></tr></thead>
+      <tbody>
+        <tr><td>Digital Marketing</td><td>Meta, Google, YouTube ads</td><td>CPL, CTR</td></tr>
+        <tr><td>Content Marketing</td><td>YouTube, Instagram, Blogs</td><td>Views, Leads per video</td></tr>
+        <tr><td>Events & Seminars</td><td>School visits, webinars, offline expos</td><td>Registrations, conversion</td></tr>
+        <tr><td>Agent Network</td><td>Referral submissions via Agent portal</td><td>Lead quality score</td></tr>
+        <tr><td>Ambassador Program</td><td>Student testimonial & referral</td><td>Referral rate</td></tr>
+        <tr><td>Institutional</td><td>School and college partnerships</td><td>Institutional leads</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="subsection-title">Stage 2: Lead Management (CRM)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Field</th><th>Type</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>Lead ID</td><td>Auto-generated</td><td>Unique tracking</td></tr>
+        <tr><td>Source / Campaign</td><td>Dropdown</td><td>Attribution</td></tr>
+        <tr><td>Program Interest</td><td>Dropdown</td><td>Routing</td></tr>
+        <tr><td>Education Level</td><td>Dropdown</td><td>Eligibility</td></tr>
+        <tr><td>Budget Readiness</td><td>Range</td><td>Qualification</td></tr>
+        <tr><td>Lead Score</td><td>Auto (AI)</td><td>Prioritization</td></tr>
+        <tr><td>Counselor Assigned</td><td>User lookup</td><td>SLA tracking</td></tr>
+        <tr><td>Conversion Probability</td><td>Auto (AI %)</td><td>Sales focus</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="subsection-title">Stage 3: Counseling Session Template</h3>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <div class="card-title">Topics to Cover (Checklist)</div>
+      <ul style="margin:0;padding-left:20px">
+        <li>Program explained ✓</li>
+        <li>Eligibility criteria ✓</li>
+        <li>Training timeline ✓</li>
+        <li>Total fee & payment plan ✓</li>
+        <li>Language requirement ✓</li>
+        <li>Placement process ✓</li>
+        <li>Visa process & risk ✓</li>
+        <li>Life in Germany ✓</li>
+      </ul>
+    </div>
+    <div class="card teal">
+      <div class="card-title">Objection Types & Response Strategy</div>
+      <ul style="margin:0;padding-left:20px">
+        <li><strong>Cost:</strong> Salary ROI, installment option</li>
+        <li><strong>Language fear:</strong> Native trainer proof</li>
+        <li><strong>Visa doubt:</strong> Success rate data</li>
+        <li><strong>Parent resistance:</strong> Parent counseling session</li>
+        <li><strong>Timeline:</strong> Batch schedule clarity</li>
+        <li><strong>Trust:</strong> Success stories, social proof</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="subsection-title">Stage 5: Training Delivery</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Metric</th><th>Standard</th><th>Alert Trigger</th></tr></thead>
+      <tbody>
+        <tr><td>Attendance Rate</td><td>&gt;85%</td><td>Below 75% → Remedial alert</td></tr>
+        <tr><td>Weekly Assessment Score</td><td>&gt;70%</td><td>Below 60% → Extra classes</td></tr>
+        <tr><td>Speaking Score</td><td>B1 readiness</td><td>Low → AI speech analysis</td></tr>
+        <tr><td>Dropout Risk</td><td>Low</td><td>Medium/High → Intervention</td></tr>
+        <tr><td>Batch Fill Rate</td><td>&gt;80%</td><td>Below 60% → Marketing alert</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Employer Lifecycle</h2>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Employer Discovery</div><div class="step-desc">Web scraping career pages, LinkedIn, job boards. Extract HR contacts, validate company legitimacy, sector classification.</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Outreach & Engagement</div><div class="step-desc">Personalized email campaign, LinkedIn connect, phone call. Share company profile and candidate capability statement.</div></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Requirement Capture (JD)</div><div class="step-desc">Capture job title, salary, location, language requirement, contract terms, visa support, accommodation support, hiring volume and timeline.</div></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">Contracting & SLA</div><div class="step-desc">Draft MOU, define fee model, define replacement clause (typically 3–6 months), SLA for candidate quality and delivery timelines.</div></div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-content"><div class="step-title">Active Account Management</div><div class="step-desc">Monthly relationship review, hiring forecast, candidate feedback loop, escalation handling, priority score maintenance.</div></div></div>
+  </div>
+
+  <h2 class="section-title">Agent Lifecycle</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Stage</th><th>Activities</th><th>System</th><th>KPI</th></tr></thead>
+      <tbody>
+        <tr><td>Identification</td><td>Find education consultants, school connectors, Gulf manpower agents</td><td>Web Research</td><td>Agents identified</td></tr>
+        <tr><td>Due Diligence</td><td>Verify license, experience, reputation, candidate database size, risk level</td><td>Agent CRM</td><td>Diligence pass rate</td></tr>
+        <tr><td>Onboarding</td><td>Sign agreement, provide program training, pricing rules, CRM login, SOP</td><td>LMS + CRM</td><td>Onboarding TAT</td></tr>
+        <tr><td>Performance Tracking</td><td>Leads submitted, qualified leads, registrations, commission, fraud flags</td><td>Agent Dashboard</td><td>Agent productivity score</td></tr>
+        <tr><td>Commission Payout</td><td>Milestone-based payment (enrollment, visa, landing)</td><td>Finance System</td><td>Payout accuracy</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════ CH 7: L0-L3 DECOMP ══ -->
+<div id="ch7">
+<div class="chapter-header chapter-break">
+  <div class="chapter-num">Chapter 07</div>
+  <h1 class="chapter-title">L0–L3 Process Decomposition</h1>
+  <p class="chapter-desc">Micro-level task architecture — every process broken to its atomic level with inputs, systems, AI layer, outputs, KPIs, and governance triggers.</p>
+</div>
+
+<div class="chapter">
+
+  <div class="callout insight">
+    <div class="callout-label">Strategic Reality</div>
+    <p>Most companies operate at L1–L2. High-performing enterprises operate at L3 with data linkage. Market leaders operate at <strong>L3 + AI-driven automation (UCC)</strong>. This is the standard Career360 must achieve.</p>
+  </div>
+
+  <h2 class="section-title">Standard L3 Task Template</h2>
+  <p>Every L3 task across Career360 must be documented in this format to enable automation, training, and measurement.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Field</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>L3 Task Name</td><td>Specific atomic action (e.g., "Score new lead via AI model")</td></tr>
+        <tr><td>Inputs Required</td><td>Data, documents, or outputs from previous steps</td></tr>
+        <tr><td>System Used</td><td>CRM / ATS / LMS / DMS / KBM / UCC / CDP</td></tr>
+        <tr><td>AI Layer</td><td>What AI does at this step (scoring, prediction, generation)</td></tr>
+        <tr><td>Outputs Generated</td><td>What this task produces for the next step</td></tr>
+        <tr><td>KPI</td><td>How this task is measured</td></tr>
+        <tr><td>Governance Trigger</td><td>What event triggers review or escalation</td></tr>
+        <tr><td>SLA</td><td>Maximum allowed time for this task</td></tr>
+        <tr><td>Owner Role</td><td>Which role is responsible</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Key L3 Decompositions</h2>
+
+  <h3 class="subsection-title">Lead Generation Engine</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>L3 Task</th><th>System</th><th>AI Layer</th><th>KPI</th></tr></thead>
+      <tbody>
+        <tr><td>Launch Meta / Google ad campaigns</td><td>Ads Manager + CRM</td><td>AI budget optimization, bid strategy</td><td>CPL, CTR</td></tr>
+        <tr><td>Generate ad creative variants</td><td>DAM + AI Tool</td><td>AI creative generation, variant testing</td><td>Creative CTR</td></tr>
+        <tr><td>Capture leads via landing page form</td><td>CRM</td><td>Auto duplicate detection</td><td>Form completion rate</td></tr>
+        <tr><td>Auto-score incoming lead</td><td>CRM + AI Engine</td><td>ML lead scoring model (0–100)</td><td>Lead quality score</td></tr>
+        <tr><td>Auto-route lead to counselor</td><td>CRM</td><td>Workload-balanced auto-assignment</td><td>Assignment SLA</td></tr>
+        <tr><td>Send WhatsApp welcome message</td><td>CRM + WhatsApp API</td><td>AI personalized message</td><td>Response rate</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="subsection-title">Training Delivery Engine</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>L3 Task</th><th>System</th><th>AI Layer</th><th>KPI</th></tr></thead>
+      <tbody>
+        <tr><td>Conduct baseline placement test</td><td>LMS</td><td>AI assessment scoring</td><td>Level assignment accuracy</td></tr>
+        <tr><td>Assign to batch & level</td><td>LMS</td><td>Batch recommendation model</td><td>Batch fill rate</td></tr>
+        <tr><td>Track daily attendance</td><td>LMS</td><td>Absence pattern detection</td><td>Attendance rate</td></tr>
+        <tr><td>Conduct weekly assessment</td><td>LMS</td><td>Adaptive test difficulty</td><td>Pass rate</td></tr>
+        <tr><td>Analyze speech quality</td><td>LMS + AI</td><td>Speech recognition → pronunciation score</td><td>Speaking score</td></tr>
+        <tr><td>Flag weak learners</td><td>LMS + UCC</td><td>AI dropout risk prediction</td><td>Dropout rate</td></tr>
+        <tr><td>Assign remedial classes</td><td>LMS</td><td>Adaptive learning path generation</td><td>Remedial effectiveness rate</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="subsection-title">Visa & Documentation Engine</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>L3 Task</th><th>AI Layer</th><th>SLA</th></tr></thead>
+      <tbody>
+        <tr><td>Generate document checklist per candidate</td><td>AI rule-based checklist from program type, country, visa category</td><td>Within 24 hrs of enrollment</td></tr>
+        <tr><td>OCR scan uploaded documents</td><td>AI OCR → extract name, date, validity → validate against requirements</td><td>Within 2 hrs of upload</td></tr>
+        <tr><td>Detect missing or expired documents</td><td>Auto-flag missing fields, expiry within 12 months</td><td>Real-time</td></tr>
+        <tr><td>Calculate visa success probability</td><td>ML model: document completeness × country × profile strength</td><td>Before submission</td></tr>
+        <tr><td>Track embassy appointment</td><td>Calendar integration, auto-reminder 7 days and 1 day before</td><td>Real-time</td></tr>
+        <tr><td>Log visa outcome</td><td>Auto-update candidate status, trigger post-landing workflow</td><td>Same day as outcome</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════ CH 8: FUNCTIONAL ══ -->
+<div id="ch8">
+<div class="chapter-header chapter-break">
+  <div class="chapter-num">Chapter 08</div>
+  <h1 class="chapter-title">Functional & Support Processes</h1>
+  <p class="chapter-desc">The enabling engines — Marketing, Sales, Operations, Finance, HR, IT, Data, Content, and Compliance — each with roles, responsibilities, and deliverables.</p>
+</div>
+
+<div class="chapter">
+  <h2 class="section-title">Marketing & Growth</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Function</th><th>Key Activities</th><th>KPIs</th><th>Owner</th></tr></thead>
+      <tbody>
+        <tr><td>Campaign Management</td><td>Campaign brief → creative → launch → optimize</td><td>CPL, CTR, ROAS</td><td>Marketing Manager</td></tr>
+        <tr><td>Creative Production</td><td>Scripts, video, design, thumbnails</td><td>Creative CTR, output volume</td><td>Content Director</td></tr>
+        <tr><td>Performance Marketing</td><td>Meta, Google, YouTube ad management</td><td>CPL, conversion rate</td><td>Performance Marketer</td></tr>
+        <tr><td>SEO & Content</td><td>Blog, video, landing page optimization</td><td>Organic traffic, ranking</td><td>SEO Analyst</td></tr>
+        <tr><td>Social Media</td><td>Platform management, engagement</td><td>Followers, engagement rate</td><td>Social Manager</td></tr>
+        <tr><td>Market Research</td><td>Persona, competitor, trend analysis</td><td>Insight quality score</td><td>Research Analyst</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Sales Process</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Stage</th><th>Counselor Activity</th><th>System</th><th>KPI</th></tr></thead>
+      <tbody>
+        <tr><td>Lead Contact</td><td>First call within 2 hrs of lead creation</td><td>CRM</td><td>First response time</td></tr>
+        <tr><td>Qualification</td><td>Verify: age, education, budget, language, urgency</td><td>CRM form</td><td>Qualification rate</td></tr>
+        <tr><td>Counseling</td><td>Full program explanation, objection handling</td><td>CRM + Script KB</td><td>Counseling-to-registration rate</td></tr>
+        <tr><td>Follow-up</td><td>WhatsApp, call, email nurture sequence</td><td>CRM auto-tasks</td><td>Follow-up compliance</td></tr>
+        <tr><td>Registration</td><td>Collect documents, payment, LMS onboarding</td><td>CRM + Finance</td><td>Enrollment conversion rate</td></tr>
+        <tr><td>Pipeline Forecast</td><td>Weekly revenue forecast by counselor</td><td>CRM + UCC</td><td>Forecast accuracy</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Finance</h2>
+  <div class="card-grid card-grid-2">
+    <div class="card"><div class="card-title">Revenue Streams</div><ul><li>Training program fees</li><li>Visa & documentation processing</li><li>Placement fees from employers</li><li>SaaS subscriptions (HRTech)</li><li>Franchise fees</li><li>Event monetization</li></ul></div>
+    <div class="card"><div class="card-title">Key Finance KPIs</div><ul><li>Revenue per candidate</li><li>Cost Acquisition Cost (CAC)</li><li>Lifetime Value (LTV)</li><li>Gross margin by program</li><li>Collection efficiency %</li><li>Profitability by country</li></ul></div>
+  </div>
+
+  <h2 class="section-title">HR & Remote Workforce Model</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>HR Function</th><th>Remote-Specific Adaptation</th></tr></thead>
+      <tbody>
+        <tr><td>Workforce Planning</td><td>Geo-based capacity planning (India, GCC, EU teams)</td></tr>
+        <tr><td>Onboarding</td><td>Digital onboarding via LMS + KBM + role-based training</td></tr>
+        <tr><td>Performance Management</td><td>Outcome-based KPIs + daily work log + UCC dashboard</td></tr>
+        <tr><td>Remote Monitoring</td><td>Productivity tracking, SLA adherence, task completion rate</td></tr>
+        <tr><td>Collaboration</td><td>Role-based HUB dashboards, shared KBM, Slack/Teams</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Technology & Platform</h2>
+  <div class="card-grid card-grid-3">
+    <div class="card"><div class="card-title">CRM</div><p>Lead to enrollment pipeline. Counselor workflows, scoring, nurturing, revenue tracking.</p></div>
+    <div class="card"><div class="card-title">ATS</div><p>Job orders, candidate matching, interview scheduling, employer relationship management.</p></div>
+    <div class="card"><div class="card-title">LMS</div><p>Training delivery, attendance, assessment, adaptive learning, certification tracking.</p></div>
+    <div class="card"><div class="card-title">DMS</div><p>Document collection, verification, version control, visa case management.</p></div>
+    <div class="card"><div class="card-title">KBM</div><p>SOPs, tutorials, role manuals, process documentation, certification quizzes.</p></div>
+    <div class="card"><div class="card-title">UCC</div><p>Unified Command Centre — real-time dashboards, event engine, AI insights, executive control.</p></div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════ CH 9: RACI ══ -->
+<div id="ch9">
+<div class="chapter-header chapter-break">
+  <div class="chapter-num">Chapter 09</div>
+  <h1 class="chapter-title">RACI Matrix & Governance</h1>
+  <p class="chapter-desc">Role clarity, accountability, and escalation framework across the entire candidate lifecycle and supporting functions.</p>
+</div>
+
+<div class="chapter">
+
+  <div class="callout">
+    <div class="callout-label">RACI Legend</div>
+    <p><strong>R = Responsible</strong> (does the work) · <strong>A = Accountable</strong> (owns the outcome) · <strong>C = Consulted</strong> (input needed) · <strong>I = Informed</strong> (kept in loop)</p>
+  </div>
+
+  <h2 class="section-title">Candidate Lifecycle RACI</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Task</th><th>R</th><th>A</th><th>C</th><th>I</th></tr></thead>
+      <tbody>
+        <tr><td>Lead Capture & Campaign</td><td>Marketing Exec</td><td>Marketing Manager</td><td>Tech Team</td><td>Sales</td></tr>
+        <tr><td>Lead Qualification Call</td><td>Counselor</td><td>Sales Manager</td><td>Marketing</td><td>Ops</td></tr>
+        <tr><td>Counseling Session</td><td>Counselor</td><td>Sales Manager</td><td>Program Head</td><td>Ops, Finance</td></tr>
+        <tr><td>Registration & Payment</td><td>Counselor</td><td>Sales Manager</td><td>Finance</td><td>Ops, LMS Admin</td></tr>
+        <tr><td>Training Delivery</td><td>Trainer</td><td>Academic Head</td><td>Ops</td><td>Sales</td></tr>
+        <tr><td>Candidate Matching (ATS)</td><td>Placement Officer</td><td>Ops Head</td><td>Employer Team</td><td>Sales</td></tr>
+        <tr><td>Visa & Documentation</td><td>Ops Executive</td><td>Ops Manager</td><td>Legal</td><td>Sales, Candidate</td></tr>
+        <tr><td>Post-Landing Support</td><td>Ops Team</td><td>Ops Head</td><td>Employer</td><td>Sales, Finance</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Escalation Matrix</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Issue</th><th>L1 Escalation</th><th>L2 Escalation</th><th>L3 Escalation</th><th>SLA</th></tr></thead>
+      <tbody>
+        <tr><td>Lead not contacted</td><td>Sales Manager</td><td>Head of Sales</td><td>CEO</td><td>2 hrs / 4 hrs / 8 hrs</td></tr>
+        <tr><td>Visa rejection risk</td><td>Ops Manager</td><td>Legal / Compliance</td><td>CEO</td><td>Same day</td></tr>
+        <tr><td>Candidate dropout risk</td><td>Academic Head</td><td>Ops Head</td><td>CEO</td><td>24 hrs</td></tr>
+        <tr><td>Employer complaint</td><td>Employer Manager</td><td>Ops Head</td><td>CEO</td><td>4 hrs</td></tr>
+        <tr><td>Agent fraud suspicion</td><td>Agent Manager</td><td>Legal</td><td>CEO</td><td>Immediate</td></tr>
+        <tr><td>Payment overdue 7+ days</td><td>Finance Manager</td><td>CFO</td><td>CEO</td><td>7 days</td></tr>
+        <tr><td>Data breach / security</td><td>IT Manager</td><td>Cybersecurity Head</td><td>CEO / Board</td><td>Immediate</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Approval Authority Matrix</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Activity</th><th>Approval Owner</th><th>Threshold</th></tr></thead>
+      <tbody>
+        <tr><td>Strategic Initiative</td><td>Founder / CEO</td><td>All</td></tr>
+        <tr><td>New Market Entry</td><td>CEO + Strategy Head</td><td>All</td></tr>
+        <tr><td>Pricing Change</td><td>CEO + Finance Head</td><td>Any change</td></tr>
+        <tr><td>Campaign Budget</td><td>Marketing Head + Finance</td><td>&gt;₹1L</td></tr>
+        <tr><td>Discount Authorization</td><td>Sales Head + Finance</td><td>&gt;10%</td></tr>
+        <tr><td>Employer Contract</td><td>Ops Head / Legal</td><td>All</td></tr>
+        <tr><td>Agent Agreement</td><td>Agent Manager + Legal</td><td>All</td></tr>
+        <tr><td>AI Automation Deployment</td><td>CTO + Data Head</td><td>All</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Governance Cadence</h2>
+  <div class="card-grid card-grid-4">
+    <div class="card navy">
+      <div class="card-title">Daily</div>
+      <ul style="color:rgba(255,255,255,0.7)"><li>Lead tracking</li><li>SLA monitoring</li><li>Issue resolution</li><li>Content KPIs</li></ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Weekly</div>
+      <ul><li>KPI review</li><li>Funnel analysis</li><li>Team performance</li><li>Campaign review</li></ul>
+    </div>
+    <div class="card teal">
+      <div class="card-title">Monthly</div>
+      <ul><li>Strategy review</li><li>Financial review</li><li>Process improvement</li><li>Risk review</li></ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Quarterly</div>
+      <ul><li>Capability maturity</li><li>Technology upgrades</li><li>Market expansion</li><li>OKR reset</li></ul>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════ CH 10: KPI ══ -->
+<div id="ch10">
+<div class="chapter-header chapter-break">
+  <div class="chapter-num">Chapter 10</div>
+  <h1 class="chapter-title">KPI Dictionary</h1>
+  <p class="chapter-desc">The measurement framework — KPIs mapped to process, owner, formula, and dashboard. What gets measured, gets managed.</p>
+</div>
+
+<div class="chapter">
+  <h2 class="section-title">Marketing KPIs</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>KPI</th><th>Formula</th><th>Target</th><th>Dashboard</th></tr></thead>
+      <tbody>
+        <tr><td>Cost Per Lead (CPL)</td><td>Ad Spend ÷ Total Leads</td><td>≤₹500</td><td>Marketing HUB</td></tr>
+        <tr><td>Click Through Rate (CTR)</td><td>Clicks ÷ Impressions × 100</td><td>&gt;3%</td><td>Marketing HUB</td></tr>
+        <tr><td>Lead Quality Score</td><td>Qualified Leads ÷ Total Leads × 100</td><td>&gt;40%</td><td>Marketing + Sales</td></tr>
+        <tr><td>Content-to-Lead Rate</td><td>Leads ÷ Total Content Views × 100</td><td>&gt;2%</td><td>Content HUB</td></tr>
+        <tr><td>Revenue per Content</td><td>Revenue Attributed ÷ Content Pieces</td><td>↑ Monthly</td><td>UCC Founder</td></tr>
+        <tr><td>Social Engagement Rate</td><td>Interactions ÷ Impressions × 100</td><td>&gt;5%</td><td>Marketing HUB</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Sales KPIs</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>KPI</th><th>Formula</th><th>Target</th></tr></thead>
+      <tbody>
+        <tr><td>Lead Response Time</td><td>Avg minutes from lead creation to first call</td><td>&lt;120 min</td></tr>
+        <tr><td>Lead-to-Counseling Rate</td><td>Counseling Sessions ÷ Leads × 100</td><td>&gt;50%</td></tr>
+        <tr><td>Counseling-to-Registration Rate</td><td>Registrations ÷ Counseling × 100</td><td>&gt;30%</td></tr>
+        <tr><td>Revenue per Counselor</td><td>Total Revenue ÷ Active Counselors</td><td>↑ Monthly</td></tr>
+        <tr><td>Follow-up Compliance</td><td>Completed Follow-ups ÷ Planned × 100</td><td>&gt;90%</td></tr>
+        <tr><td>Forecast Accuracy</td><td>Actual Revenue ÷ Forecasted Revenue × 100</td><td>85–115%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Training KPIs</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>KPI</th><th>Formula</th><th>Target</th></tr></thead>
+      <tbody>
+        <tr><td>Attendance Rate</td><td>Sessions Attended ÷ Total Sessions × 100</td><td>&gt;85%</td></tr>
+        <tr><td>Assessment Pass Rate</td><td>Passed ÷ Total Appeared × 100</td><td>&gt;80%</td></tr>
+        <tr><td>Dropout Rate</td><td>Dropouts ÷ Total Enrolled × 100</td><td>&lt;10%</td></tr>
+        <tr><td>B1 Readiness Rate</td><td>B1-ready ÷ Total Enrolled × 100</td><td>&gt;75%</td></tr>
+        <tr><td>Trainer Quality Score</td><td>Student feedback avg (1–10)</td><td>&gt;8/10</td></tr>
+        <tr><td>Remedial Effectiveness</td><td>Post-remedial pass rate vs pre-remedial</td><td>+20%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Operations & Placement KPIs</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>KPI</th><th>Formula</th><th>Target</th></tr></thead>
+      <tbody>
+        <tr><td>Visa Success Rate</td><td>Approved ÷ Applied × 100</td><td>&gt;85%</td></tr>
+        <tr><td>Processing TAT</td><td>Avg days from enrollment to visa approval</td><td>&lt;90 days</td></tr>
+        <tr><td>Document Completion Rate</td><td>Complete Cases ÷ Total Cases × 100</td><td>&gt;95%</td></tr>
+        <tr><td>Placement Rate</td><td>Placed ÷ Training Completed × 100</td><td>&gt;80%</td></tr>
+        <tr><td>Job Fill Rate</td><td>Filled JDs ÷ Total Open JDs × 100</td><td>&gt;70%</td></tr>
+        <tr><td>Retention Rate (1 year)</td><td>Retained in job ÷ Placed × 100</td><td>&gt;85%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Employer KPIs</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>KPI</th><th>Formula</th><th>Target</th></tr></thead>
+      <tbody>
+        <tr><td>Employer Conversion Rate</td><td>Signed Employers ÷ Contacted × 100</td><td>&gt;15%</td></tr>
+        <tr><td>Employer Satisfaction Score</td><td>Avg feedback score (1–10)</td><td>&gt;8/10</td></tr>
+        <tr><td>Employer Retention Rate</td><td>Active Employers ÷ Total Signed × 100</td><td>&gt;70%</td></tr>
+        <tr><td>Time to Fill</td><td>Avg days from JD to offer acceptance</td><td>&lt;60 days</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════ CH 11: DATA ══ -->
+<div id="ch11">
+<div class="chapter-header chapter-break">
+  <div class="chapter-num">Chapter 11</div>
+  <h1 class="chapter-title">Data Architecture & Master Forms</h1>
+  <p class="chapter-desc">The single source of truth — standardized data fields, validation rules, and master form templates for every entity and process in Career360.</p>
+</div>
+
+<div class="chapter">
+  <h2 class="section-title">Universal Form Design Principle</h2>
+
+  <div class="callout insight">
+    <div class="callout-label">Design Principle</div>
+    <p>Most companies design forms like paperwork. Career360 must design forms like <strong>decision engines</strong>. Every field must answer: Can we convert? Can we deliver? Can we scale? Can we predict?</p>
+  </div>
+
+  <h3 class="subsection-title">7-Layer Form Structure</h3>
+  <div class="card-grid card-grid-2">
+    <div class="card"><div class="card-title">1. Meta Layer</div><p>System-generated fields: Record ID, Process ID, Entity, Created timestamp, Version</p></div>
+    <div class="card"><div class="card-title">2. Entity Layer</div><p>Who or what: Candidate / Employer / Agent / Partner identity fields</p></div>
+    <div class="card"><div class="card-title">3. Process Layer</div><p>Why and context: L0/L1/L2/L3 linkage, stage, trigger event</p></div>
+    <div class="card"><div class="card-title">4. Action Layer</div><p>What is being done: Activities, decisions, outcomes of this interaction</p></div>
+    <div class="card"><div class="card-title">5. Decision Layer</div><p>Outcome: Status, next step, routing decision</p></div>
+    <div class="card"><div class="card-title">6. Control Layer</div><p>Audit, SLA, risk: Created by, SLA due date, risk score, priority</p></div>
+    <div class="card navy"><div class="card-title">7. AI Layer</div><p>Scores, predictions: Lead score, conversion probability, dropout risk, visa success probability</p></div>
+  </div>
+
+  <h2 class="section-title">Candidate Master Data Dictionary</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Field</th><th>Type</th><th>Mandatory</th><th>Validation Rule</th></tr></thead>
+      <tbody>
+        <tr><td>Candidate ID</td><td>Auto-generated</td><td>Yes</td><td>Unique, system-generated</td></tr>
+        <tr><td>Full Name</td><td>Text</td><td>Yes</td><td>2–100 chars, no special chars</td></tr>
+        <tr><td>Phone Number</td><td>Number</td><td>Yes</td><td>Must include country code</td></tr>
+        <tr><td>Date of Birth</td><td>Date</td><td>Yes</td><td>Age must be within program range (17–40)</td></tr>
+        <tr><td>Passport Number</td><td>Text</td><td>Yes</td><td>Valid format, not expired</td></tr>
+        <tr><td>Passport Expiry</td><td>Date</td><td>Yes</td><td>Minimum 12 months from today</td></tr>
+        <tr><td>Education Level</td><td>Dropdown</td><td>Yes</td><td>Must match program eligibility</td></tr>
+        <tr><td>German Language Level</td><td>Dropdown</td><td>Yes</td><td>A1, A2, B1, B2, C1, None</td></tr>
+        <tr><td>Budget Availability</td><td>Range</td><td>Yes</td><td>Must meet minimum program cost</td></tr>
+        <tr><td>Program Interest</td><td>Dropdown</td><td>Yes</td><td>Linked to entity offering</td></tr>
+        <tr><td>Lead Score</td><td>Auto (AI)</td><td>Yes</td><td>0–100, generated on creation</td></tr>
+        <tr><td>Conversion Probability</td><td>Auto (AI %)</td><td>Optional</td><td>Updated after counseling session</td></tr>
+        <tr><td>Visa Success Probability</td><td>Auto (AI %)</td><td>Optional</td><td>Generated at document stage</td></tr>
+        <tr><td>Dropout Risk</td><td>Auto (Low/Med/High)</td><td>Yes</td><td>Updated weekly from LMS data</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Data Validation Rule Library</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Field</th><th>Rule</th><th>Error Message</th></tr></thead>
+      <tbody>
+        <tr><td>Phone</td><td>Must include country code, min 10 digits</td><td>"Include country code (e.g., +91)"</td></tr>
+        <tr><td>Email</td><td>Valid email format, verified</td><td>"Enter a valid email address"</td></tr>
+        <tr><td>Passport Expiry</td><td>Must be &gt;12 months from today</td><td>"Passport must be valid for at least 12 months"</td></tr>
+        <tr><td>Payment Amount</td><td>Cannot be negative or zero</td><td>"Enter a valid payment amount"</td></tr>
+        <tr><td>Batch Capacity</td><td>Cannot exceed maximum capacity set</td><td>"Batch is full — create new batch"</td></tr>
+        <tr><td>Visa Submission</td><td>All mandatory documents must be "Received"</td><td>"Complete document checklist before visa submission"</td></tr>
+        <tr><td>Commission Claim</td><td>Milestone must be marked complete in CRM</td><td>"Milestone not yet verified — cannot process claim"</td></tr>
+        <tr><td>Follow-up Date</td><td>Cannot be in the past</td><td>"Set a future date for follow-up"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Notification Rule Library</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Trigger</th><th>Notification</th><th>Channel</th></tr></thead>
+      <tbody>
+        <tr><td>New lead created</td><td>Notify assigned counselor immediately</td><td>WhatsApp + Dashboard</td></tr>
+        <tr><td>Lead not contacted within 2 hrs</td><td>Escalate to Sales Manager</td><td>WhatsApp + Email</td></tr>
+        <tr><td>Payment pending &gt;3 days</td><td>Notify finance + counselor</td><td>Email + Dashboard alert</td></tr>
+        <tr><td>Attendance below 75%</td><td>Alert trainer + program manager</td><td>Dashboard + Email</td></tr>
+        <tr><td>Document missing</td><td>Notify operations owner</td><td>Task + WhatsApp</td></tr>
+        <tr><td>Visa appointment in 7 days</td><td>Remind candidate + ops</td><td>WhatsApp + Email</td></tr>
+        <tr><td>OKR off track</td><td>Notify department head</td><td>Dashboard + Email</td></tr>
+        <tr><td>Agent fraud risk HIGH</td><td>Alert agent manager + governance</td><td>Immediate escalation</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════ CH 12: UCC ══ -->
+<div id="ch12">
+<div class="chapter-header chapter-break">
+  <div class="chapter-num">Chapter 12</div>
+  <h1 class="chapter-title">UCC — Unified Command Centre</h1>
+  <p class="chapter-desc">The real-time intelligence cockpit of Career360 — event engine, AI decision layer, and executive dashboards that convert data into decisions.</p>
+</div>
+
+<div class="chapter">
+
+  <div class="highlight-block">
+    <h3>Most businesses operate on reports (the past).<br>Elite businesses operate on events (present) + predictions (future).</h3>
+    <p>The UCC is Career360's transition from reactive management to proactive intelligence. Every action across CRM, LMS, ATS, Finance, and Content feeds the UCC in real time.</p>
+  </div>
+
+  <h2 class="section-title">UCC Architecture Layers</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Layer</th><th>Purpose</th><th>Technology</th></tr></thead>
+      <tbody>
+        <tr><td>Data Ingestion</td><td>Streams data from all systems in real time</td><td>Kafka / API Gateway</td></tr>
+        <tr><td>Event Processing</td><td>KPI calculations, anomaly detection</td><td>Python / Node.js</td></tr>
+        <tr><td>Event Engine</td><td>Triggers alerts and automated actions</td><td>Rule Engine + AI</td></tr>
+        <tr><td>Analytics Layer</td><td>Dashboards, drilldowns, trend analysis</td><td>Power BI / Looker</td></tr>
+        <tr><td>Decision Layer</td><td>AI recommendations and approval workflows</td><td>ML Models + LLM</td></tr>
+        <tr><td>Action Layer</td><td>Task creation, workflow trigger, escalation</td><td>CRM + WhatsApp API</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">UCC Event Dictionary (Key Events)</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Event ID</th><th>Event Name</th><th>Trigger</th><th>Severity</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>EVT-001</td><td>Lead Created</td><td>Form submission</td><td>Info</td><td>Assign counselor + WhatsApp</td></tr>
+        <tr><td>EVT-002</td><td>Lead Not Contacted</td><td>SLA breach (2 hrs)</td><td>Medium</td><td>Escalate to Sales Manager</td></tr>
+        <tr><td>EVT-003</td><td>Counseling Completed</td><td>CRM status update</td><td>Info</td><td>Trigger follow-up workflow</td></tr>
+        <tr><td>EVT-004</td><td>Payment Pending</td><td>24-hour delay</td><td>Medium</td><td>Auto-reminder sequence</td></tr>
+        <tr><td>EVT-005</td><td>Attendance Risk</td><td>Attendance &lt;75%</td><td>High</td><td>Alert trainer + assign remedial</td></tr>
+        <tr><td>EVT-006</td><td>JD Created in ATS</td><td>New job order added</td><td>Info</td><td>Start candidate matching</td></tr>
+        <tr><td>EVT-007</td><td>Interview Scheduled</td><td>Candidate shortlisted</td><td>Info</td><td>Notify candidate + employer</td></tr>
+        <tr><td>EVT-008</td><td>Visa Application Submitted</td><td>Docs complete + submitted</td><td>Info</td><td>Track embassy timeline</td></tr>
+        <tr><td>EVT-009</td><td>Candidate Landed</td><td>Arrival confirmed</td><td>Info</td><td>Start retention workflow</td></tr>
+        <tr><td>EVT-010</td><td>Agent Fraud Risk</td><td>Pattern anomaly detected</td><td>Critical</td><td>Immediate escalation to Agent Manager + Legal</td></tr>
+        <tr><td>EVT-011</td><td>CPL Threshold Breached</td><td>CPL &gt; target by 20%</td><td>Medium</td><td>Alert Marketing Head + optimization task</td></tr>
+        <tr><td>EVT-012</td><td>OKR Off Track</td><td>Progress &lt;60% at midpoint</td><td>High</td><td>Alert Department Head + Strategy</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Dashboard Structure by Role</h2>
+  <div class="card-grid card-grid-2">
+    <div class="card navy">
+      <div class="card-title">Founder / CEO Cockpit</div>
+      <ul style="color:rgba(255,255,255,0.7)">
+        <li>Total Revenue (live)</li>
+        <li>Lead → Revenue Funnel</li>
+        <li>Country Performance Map</li>
+        <li>Active Candidate Count</li>
+        <li>Risk Alerts</li>
+        <li>AI Revenue Forecast</li>
+        <li>OKR Achievement Rate</li>
+        <li>Cash Flow</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Sales / Counselor HUB</div>
+      <ul>
+        <li>New Leads (today)</li>
+        <li>Hot Leads (AI-scored)</li>
+        <li>Follow-ups Due Today</li>
+        <li>Pending Counseling</li>
+        <li>Registration Pipeline</li>
+        <li>AI Next-Best-Action</li>
+        <li>Conversion Rate Trend</li>
+      </ul>
+    </div>
+    <div class="card teal">
+      <div class="card-title">Training HUB</div>
+      <ul>
+        <li>Active Batches</li>
+        <li>Attendance Risk Students</li>
+        <li>Assessment Scores</li>
+        <li>Trainer Performance</li>
+        <li>Exam Readiness Rate</li>
+        <li>AI Dropout Predictions</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Operations / Visa HUB</div>
+      <ul>
+        <li>Pending Documents</li>
+        <li>High-Risk Cases</li>
+        <li>Appointment Tracker</li>
+        <li>SLA Breach Cases</li>
+        <li>Visa Success Rate</li>
+        <li>Post-Landing Status</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="section-title">AI Models in UCC</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Model</th><th>Input</th><th>Output</th><th>Used By</th></tr></thead>
+      <tbody>
+        <tr><td>Lead Scoring Model</td><td>Demographics, behavior, source</td><td>Score 0–100, Hot/Warm/Cold</td><td>Sales Dashboard</td></tr>
+        <tr><td>Conversion Prediction</td><td>Counseling notes, engagement, score</td><td>Probability % to register</td><td>Sales HUB</td></tr>
+        <tr><td>Dropout Prediction</td><td>Attendance, scores, payment status</td><td>Low/Medium/High risk flag</td><td>Training HUB</td></tr>
+        <tr><td>Candidate Matching</td><td>Skills, language, visa eligibility</td><td>Ranked candidate list for JD</td><td>ATS / Employer HUB</td></tr>
+        <tr><td>Visa Success Probability</td><td>Document completeness, profile, country</td><td>Probability % + risk flags</td><td>Ops HUB</td></tr>
+        <tr><td>Revenue Forecasting</td><td>Pipeline, conversion rates, seasonality</td><td>Next 30/90 day revenue forecast</td><td>Founder Cockpit</td></tr>
+        <tr><td>Fraud Detection</td><td>Agent behavior patterns, lead patterns</td><td>Fraud risk score + alerts</td><td>Agent HUB</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════ CH 13: SYSTEM ARCH ══ -->
+<div id="ch13">
+<div class="chapter-header chapter-break">
+  <div class="chapter-num">Chapter 13</div>
+  <h1 class="chapter-title">System Architecture</h1>
+  <p class="chapter-desc">Database schema, API design, 47-app integration framework, and the technology stack that powers the Career360 enterprise operating system.</p>
+</div>
+
+<div class="chapter">
+  <h2 class="section-title">Core System Stack</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Layer</th><th>System</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>Experience Layer</td><td>Web App / Mobile App (React / Angular)</td><td>Role-based HUB interfaces for all users</td></tr>
+        <tr><td>Application Layer</td><td>HUB Platform (Node.js / Python)</td><td>Workflow engine, form logic, process automation</td></tr>
+        <tr><td>Data Layer</td><td>PostgreSQL + MongoDB + Data Warehouse</td><td>Structured storage, unstructured data, analytics</td></tr>
+        <tr><td>Integration Layer</td><td>API Gateway (REST + GraphQL)</td><td>Connect CRM, ATS, LMS, Finance, Content HUB</td></tr>
+        <tr><td>Intelligence Layer</td><td>Python ML Engine + LLM</td><td>Lead scoring, prediction, NLP, matching</td></tr>
+        <tr><td>Analytics Layer</td><td>UCC (Power BI / Looker)</td><td>Real-time dashboards, KPI tracking</td></tr>
+        <tr><td>Content Layer</td><td>CMS / DAM / KBM (ECMS)</td><td>Content management, media assets, knowledge</td></tr>
+        <tr><td>Security Layer</td><td>IAM + Audit Logs + ISO 27001</td><td>Role-based access, data protection, audit trail</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Core Database Tables (PostgreSQL)</h2>
+
+  <div class="h4">Leads Table</div>
+  <div style="background:#0A1628;border-radius:8px;padding:20px;overflow-x:auto;margin-bottom:16px">
+    <pre style="color:#C8A84B;font-family:'Fira Code',monospace;font-size:12px;white-space:pre">CREATE TABLE leads (
+  lead_id    SERIAL PRIMARY KEY,
+  name       TEXT NOT NULL,
+  phone      TEXT NOT NULL,
+  email      TEXT NOT NULL,
+  source     TEXT,           -- Meta / Google / Agent / Website
+  campaign   TEXT,           -- Campaign name
+  program    TEXT,           -- Ausbildung / Nursing / Study Abroad
+  status     TEXT,           -- New / Qualified / Registered / Lost
+  score      NUMERIC(5,2),   -- AI lead score 0–100
+  assigned_to INT REFERENCES users(user_id),
+  created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);</pre>
+  </div>
+
+  <div class="h4">Candidates Table</div>
+  <div style="background:#0A1628;border-radius:8px;padding:20px;overflow-x:auto;margin-bottom:16px">
+    <pre style="color:#C8A84B;font-family:'Fira Code',monospace;font-size:12px;white-space:pre">CREATE TABLE candidates (
+  candidate_id  SERIAL PRIMARY KEY,
+  name          TEXT NOT NULL,
+  phone         TEXT,
+  email         TEXT,
+  dob           DATE,
+  passport_no   TEXT,
+  passport_exp  DATE,
+  education     TEXT,
+  program       TEXT,
+  language_level TEXT,  -- A1 / A2 / B1 / B2 / C1
+  budget        NUMERIC,
+  status        TEXT,   -- Registered / Training / Placed / Landed
+  dropout_risk  TEXT,   -- Low / Medium / High (AI)
+  created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);</pre>
+  </div>
+
+  <div class="h4">UCC Events Table</div>
+  <div style="background:#0A1628;border-radius:8px;padding:20px;overflow-x:auto;margin-bottom:24px">
+    <pre style="color:#C8A84B;font-family:'Fira Code',monospace;font-size:12px;white-space:pre">CREATE TABLE events (
+  event_id     SERIAL PRIMARY KEY,
+  event_name   TEXT NOT NULL,
+  category     TEXT,     -- Sales / Training / Ops / Finance / Risk
+  record_id    INT,      -- Linked lead / candidate / employer ID
+  severity     TEXT,     -- Info / Medium / High / Critical
+  action_req   BOOLEAN,
+  assigned_to  INT REFERENCES users(user_id),
+  status       TEXT,     -- Open / Closed / Escalated
+  created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);</pre>
+  </div>
+
+  <h2 class="section-title">API Structure</h2>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <div class="card-title">Core Entity APIs</div>
+      <ul>
+        <li><code style="background:var(--gray-100);padding:2px 6px;border-radius:3px;font-size:12px">POST /leads</code> — Create new lead</li>
+        <li><code style="background:var(--gray-100);padding:2px 6px;border-radius:3px;font-size:12px">GET /leads/{id}</code> — Get lead details</li>
+        <li><code style="background:var(--gray-100);padding:2px 6px;border-radius:3px;font-size:12px">POST /candidates</code> — Enroll candidate</li>
+        <li><code style="background:var(--gray-100);padding:2px 6px;border-radius:3px;font-size:12px">GET /candidates/{id}</code> — Full profile</li>
+        <li><code style="background:var(--gray-100);padding:2px 6px;border-radius:3px;font-size:12px">POST /employers</code> — Add employer</li>
+        <li><code style="background:var(--gray-100);padding:2px 6px;border-radius:3px;font-size:12px">POST /jobs</code> — Create job order</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Dashboard & UCC APIs</div>
+      <ul>
+        <li><code style="background:var(--gray-100);padding:2px 6px;border-radius:3px;font-size:12px">GET /dashboard/founder</code> — CEO cockpit</li>
+        <li><code style="background:var(--gray-100);padding:2px 6px;border-radius:3px;font-size:12px">GET /dashboard/sales</code> — Sales HUB</li>
+        <li><code style="background:var(--gray-100);padding:2px 6px;border-radius:3px;font-size:12px">GET /dashboard/training</code> — Training HUB</li>
+        <li><code style="background:var(--gray-100);padding:2px 6px;border-radius:3px;font-size:12px">GET /events</code> — UCC event stream</li>
+        <li><code style="background:var(--gray-100);padding:2px 6px;border-radius:3px;font-size:12px">POST /events</code> — Create UCC event</li>
+        <li><code style="background:var(--gray-100);padding:2px 6px;border-radius:3px;font-size:12px">GET /alerts</code> — Active alert list</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="section-title">System Integration Data Flow</h2>
+  <div class="flow-container">
+    <div class="flow-title">47-App Integration Flow</div>
+    <div class="swimlane" style="margin:0">
+      <div class="swimlane-header">Content → CRM → LMS → ATS → Finance → UCC</div>
+      <div class="swimlane-row">
+        <div class="swimlane-lane">Content</div>
+        <div class="swimlane-tasks">
+          <span class="swim-task">YouTube / IG</span><span class="swim-arrow">→</span>
+          <span class="swim-task">Landing Page</span><span class="swim-arrow">→</span>
+          <span class="swim-task">Lead Form</span><span class="swim-arrow">→</span>
+          <span class="swim-task">CRM Lead Created</span>
+        </div>
+      </div>
+      <div class="swimlane-row">
+        <div class="swimlane-lane">CRM + CDP</div>
+        <div class="swimlane-tasks">
+          <span class="swim-task">Score Lead</span><span class="swim-arrow">→</span>
+          <span class="swim-task">Assign Counselor</span><span class="swim-arrow">→</span>
+          <span class="swim-task">Qualify + Counsel</span><span class="swim-arrow">→</span>
+          <span class="swim-task">Enroll → LMS</span>
+        </div>
+      </div>
+      <div class="swimlane-row">
+        <div class="swimlane-lane">LMS → ATS</div>
+        <div class="swimlane-tasks">
+          <span class="swim-task">Train A1→B1</span><span class="swim-arrow">→</span>
+          <span class="swim-task">B1 Certified</span><span class="swim-arrow">→</span>
+          <span class="swim-task">Push to ATS</span><span class="swim-arrow">→</span>
+          <span class="swim-task">Match with JD</span>
+        </div>
+      </div>
+      <div class="swimlane-row">
+        <div class="swimlane-lane">Ops → Finance</div>
+        <div class="swimlane-tasks">
+          <span class="swim-task">Documents</span><span class="swim-arrow">→</span>
+          <span class="swim-task">Visa</span><span class="swim-arrow">→</span>
+          <span class="swim-task">Landing</span><span class="swim-arrow">→</span>
+          <span class="swim-task">Placement Fee Logged</span>
+        </div>
+      </div>
+      <div class="swimlane-row">
+        <div class="swimlane-lane">UCC</div>
+        <div class="swimlane-tasks">
+          <span class="swim-task">All Events</span><span class="swim-arrow">→</span>
+          <span class="swim-task">AI Processing</span><span class="swim-arrow">→</span>
+          <span class="swim-task">Alerts + Dashboards</span><span class="swim-arrow">→</span>
+          <span class="swim-task">Decisions</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════ CH 14: TOM ══ -->
+<div id="ch14">
+<div class="chapter-header chapter-break">
+  <div class="chapter-num">Chapter 14</div>
+  <h1 class="chapter-title">Target Operating Model</h1>
+  <p class="chapter-desc">The complete enterprise architecture — service blueprint, capability maturity, transformation roadmap, and the principles that govern Career360's journey from people-dependent to process-driven.</p>
+</div>
+
+<div class="chapter">
+
+  <h2 class="section-title">Operating Model Layers</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Layer</th><th>Purpose</th><th>Components</th></tr></thead>
+      <tbody>
+        <tr><td>Corporate Governance</td><td>Strategy, capital, control</td><td>Board decisions, OKRs, risk register, portfolio management</td></tr>
+        <tr><td>Business Layer</td><td>Programs and market entry</td><td>Ausbildung, Nursing, Study Abroad, Staffing, HRTech</td></tr>
+        <tr><td>Growth Engine</td><td>Revenue generation</td><td>Content + Marketing + Sales + CRM</td></tr>
+        <tr><td>Delivery Engine</td><td>Value fulfillment</td><td>Training + Placement + Visa + Post-landing</td></tr>
+        <tr><td>Enablement Layer</td><td>Operational support</td><td>HR + Finance + IT + Data + Legal + Compliance</td></tr>
+        <tr><td>Intelligence Layer</td><td>Decision optimization</td><td>UCC + AI/ML + Analytics + KBM</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Service Blueprint</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Stage</th><th>Customer Experience</th><th>Frontstage System</th><th>Backstage System</th></tr></thead>
+      <tbody>
+        <tr><td>Awareness</td><td>Sees content, lands on website</td><td>Content HUB, CMS, Ads</td><td>DAM, Analytics</td></tr>
+        <tr><td>Interest</td><td>Fills form, WhatsApp enquiry</td><td>Landing page, CRM</td><td>CDP, Lead Scoring AI</td></tr>
+        <tr><td>Consideration</td><td>Counseling call</td><td>CRM Counseling form</td><td>KBM, AI assistant</td></tr>
+        <tr><td>Decision</td><td>Registers, pays fee</td><td>CRM Enrollment form, Finance</td><td>LMS Admin, Payment Gateway</td></tr>
+        <tr><td>Experience</td><td>Training classes</td><td>LMS</td><td>Assessment Engine, AI</td></tr>
+        <tr><td>Outcome</td><td>Interview, offer, visa</td><td>ATS, DMS</td><td>Ops System, Embassy Portal</td></tr>
+        <tr><td>Advocacy</td><td>Success story, referral</td><td>Ambassador HUB, Content</td><td>CRM Referral Track</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Capability Maturity Model</h2>
+  <div class="maturity-bar">
+    <div class="flow-title">Career360 Target: Level 4 → Level 5 by 2027</div>
+    <div class="maturity-levels">
+      <div class="maturity-level ml-1">
+        <div class="ml-num" style="color:#C04040">1</div>
+        <div class="ml-name">Ad-hoc</div>
+        <div class="ml-desc">Manual, fragmented, person-dependent</div>
+      </div>
+      <div class="maturity-level ml-2">
+        <div class="ml-num" style="color:#D4A020">2</div>
+        <div class="ml-name">Defined</div>
+        <div class="ml-desc">SOPs exist, basic systems in use</div>
+      </div>
+      <div class="maturity-level ml-3">
+        <div class="ml-num" style="color:#C8A84B">3</div>
+        <div class="ml-name">Integrated</div>
+        <div class="ml-desc">CRM, ATS, LMS connected and live</div>
+      </div>
+      <div class="maturity-level ml-4">
+        <div class="ml-num" style="color:#1A7A8A">4</div>
+        <div class="ml-name">Intelligent</div>
+        <div class="ml-desc">Data-driven decisions via UCC</div>
+      </div>
+      <div class="maturity-level ml-5">
+        <div class="ml-num" style="color:#2A7A4A">5</div>
+        <div class="ml-name">Autonomous</div>
+        <div class="ml-desc">AI-driven automation, self-optimizing</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Implementation Roadmap</h2>
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <div class="card-icon">🚀</div>
+      <div class="card-title">Phase 1 (0–30 Days)</div>
+      <p><strong>Foundation:</strong> Define all processes, create SOPs, build CRM structure, begin lead tracking system.</p>
+      <div style="margin-top:8px"><span class="badge badge-red">Urgent</span></div>
+    </div>
+    <div class="card teal">
+      <div class="card-icon" style="background:rgba(26,122,138,0.15)">⚙️</div>
+      <div class="card-title">Phase 2 (30–90 Days)</div>
+      <p><strong>Integration:</strong> Implement dashboards, train teams, introduce CRM automation, improve lead conversion.</p>
+      <div style="margin-top:8px"><span class="badge badge-teal">High Priority</span></div>
+    </div>
+    <div class="card navy">
+      <div class="card-icon" style="background:rgba(200,168,75,0.15)">🤖</div>
+      <div class="card-title">Phase 3 (90–180 Days)</div>
+      <p><strong>Intelligence:</strong> Full UCC rollout, AI integration, optimize operations, expand into new markets.</p>
+      <div style="margin-top:8px"><span class="badge badge-gold">Strategic</span></div>
+    </div>
+  </div>
+
+  <h2 class="section-title">CEO Operating Principle</h2>
+  <div class="highlight-block">
+    <h3>Career360 must not depend on "who knows what."</h3>
+    <p>It must depend on: <strong>Documented process → structured data → trained people → digital systems → AI automation → management dashboards → continuous improvement.</strong></p>
+    <p>That is how the group becomes <strong>scalable, investable, auditable, and globally executable</strong>.</p>
+    <p style="margin-top:16px;font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold)">A scalable enterprise is built not by hiring more people first — but by creating clear process, clean data, trained people, digital workflows, AI automation, and governance dashboards. Only after that should manpower be scaled.</p>
+  </div>
+
+  <h2 class="section-title">Process Digitalization Checklist</h2>
+  <p>Every process must be approved only after these items are completed:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Deliverable</th><th>Owner</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Process ID created in registry</td><td>Process Manager</td><td>□ Done</td></tr>
+        <tr><td>2</td><td>L0–L3 decomposition mapped</td><td>Strategy Team</td><td>□ Done</td></tr>
+        <tr><td>3</td><td>Owner and RACI assigned</td><td>HR + Process Manager</td><td>□ Done</td></tr>
+        <tr><td>4</td><td>Data fields defined and validated</td><td>Data Team</td><td>□ Done</td></tr>
+        <tr><td>5</td><td>Digital form built in HUB</td><td>Tech Team</td><td>□ Done</td></tr>
+        <tr><td>6</td><td>SLA and KPI linked</td><td>Operations Head</td><td>□ Done</td></tr>
+        <tr><td>7</td><td>UCC dashboard widget configured</td><td>Data + Tech</td><td>□ Done</td></tr>
+        <tr><td>8</td><td>KB article and tutorial created</td><td>KBM Manager</td><td>□ Done</td></tr>
+        <tr><td>9</td><td>Automation trigger defined</td><td>Tech + Ops</td><td>□ Done</td></tr>
+        <tr><td>10</td><td>Audit rule configured</td><td>Compliance</td><td>□ Done</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════ FOOTER ══ -->
+<div class="page-footer">
+  <p><strong>CAREER360 GROUP</strong> — Enterprise Operating Model</p>
+  <p style="margin-top:8px">Confidential Internal Document · For Team Use Only · 2025–2026</p>
+  <p style="margin-top:8px">Global Talent Supply Chain Platform · Transforming Careers Across Borders</p>
+</div>
+
+</body>
+</html>

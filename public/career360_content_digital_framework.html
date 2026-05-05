@@ -1,0 +1,2185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career360 | Content Engine & Digital Process Capture Framework</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0D0D0D;
+  --graphite: #1A1A2E;
+  --deep: #16213E;
+  --mid: #0F3460;
+  --fire: #E94560;
+  --amber: #F5A623;
+  --lime: #00D4A4;
+  --sky: #4FC3F7;
+  --white: #FFFFFF;
+  --off: #F7F5F0;
+  --soft: #EDEDF0;
+  --muted: #8A8A9A;
+  --border: #E2E2E8;
+  --shadow: rgba(0,0,0,0.08);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--ink);
+  color: var(--white);
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* ── COVER ── */
+.cover {
+  min-height: 100vh;
+  background: var(--graphite);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 80px 80px 60px;
+}
+
+.cover-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 80% 20%, rgba(233,69,96,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 600px at 10% 80%, rgba(79,195,247,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 300px 300px at 50% 50%, rgba(0,212,164,0.06) 0%, transparent 70%);
+}
+
+.cover-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.cover-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(233,69,96,0.15);
+  border: 1px solid rgba(233,69,96,0.5);
+  border-radius: 4px;
+  padding: 6px 16px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--fire);
+  margin-bottom: 28px;
+  width: fit-content;
+  position: relative;
+}
+
+.cover-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--lime);
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.cover h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(44px, 6vw, 88px);
+  font-weight: 800;
+  line-height: 1.0;
+  position: relative;
+  max-width: 900px;
+}
+
+.cover h1 .accent { color: var(--fire); }
+.cover h1 .sub { color: rgba(255,255,255,0.4); font-size: 0.55em; display: block; margin-top: 8px; font-weight: 600; letter-spacing: 1px; }
+
+.cover-meta {
+  display: flex;
+  gap: 40px;
+  margin-top: 48px;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.cm-item { text-align: left; }
+.cm-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--amber);
+}
+.cm-key {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-top: 2px;
+}
+
+.cover-line {
+  position: absolute;
+  right: 80px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(233,69,96,0.4), rgba(79,195,247,0.4), transparent);
+}
+
+.cover-dot {
+  position: absolute;
+  right: 71px;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--fire);
+  background: var(--graphite);
+}
+
+/* ── TOC ── */
+.toc-page {
+  background: var(--deep);
+  padding: 80px;
+}
+
+.toc-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--fire);
+  margin-bottom: 40px;
+}
+
+.toc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+.toc-entry {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 24px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.2s;
+}
+
+.toc-entry:hover { background: rgba(233,69,96,0.06); }
+
+.toc-n {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 20px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.12);
+  min-width: 32px;
+}
+
+.toc-info {}
+.toc-label { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.85); }
+.toc-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+/* ── CHAPTER BREAK ── */
+.ch-break {
+  background: var(--ink);
+  padding: 80px;
+  position: relative;
+  overflow: hidden;
+  border-top: 3px solid var(--fire);
+}
+
+.ch-break::before {
+  content: attr(data-num);
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Syne', sans-serif;
+  font-size: 160px;
+  font-weight: 800;
+  color: rgba(255,255,255,0.03);
+  line-height: 1;
+}
+
+.ch-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--fire);
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+.ch-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 800;
+  line-height: 1.1;
+  max-width: 700px;
+}
+
+.ch-desc {
+  font-size: 16px;
+  color: rgba(255,255,255,0.5);
+  max-width: 560px;
+  margin-top: 16px;
+  line-height: 1.7;
+}
+
+/* ── LIGHT PAGE ── */
+.page-light {
+  background: var(--off);
+  color: var(--ink);
+  padding: 72px 80px;
+}
+
+.page-dark {
+  background: var(--graphite);
+  color: var(--white);
+  padding: 72px 80px;
+}
+
+.page-mid {
+  background: var(--deep);
+  color: var(--white);
+  padding: 72px 80px;
+}
+
+h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+
+.page-light h2 { color: var(--ink); }
+.page-dark h2, .page-mid h2 { color: var(--white); }
+
+h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 32px 0 14px;
+  color: inherit;
+}
+
+h4 {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--fire);
+  margin: 24px 0 10px;
+}
+
+p { margin-bottom: 14px; font-size: 15px; line-height: 1.8; }
+
+.lead {
+  font-size: 18px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.65);
+  font-weight: 300;
+  margin-bottom: 32px;
+}
+
+.page-light .lead { color: rgba(13,13,13,0.55); }
+
+/* ── RULE LINE ── */
+.rule {
+  height: 1px;
+  background: var(--border);
+  margin: 32px 0;
+}
+
+.rule-dark { background: rgba(255,255,255,0.08); }
+
+/* ── HIGHLIGHT CHIP ── */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.chip-fire { background: rgba(233,69,96,0.15); color: var(--fire); }
+.chip-lime { background: rgba(0,212,164,0.15); color: var(--lime); }
+.chip-amber { background: rgba(245,166,35,0.15); color: var(--amber); }
+.chip-sky { background: rgba(79,195,247,0.15); color: var(--sky); }
+
+/* ── INSIGHT BOX ── */
+.insight-box {
+  border-left: 3px solid var(--fire);
+  padding: 20px 24px;
+  background: rgba(233,69,96,0.07);
+  margin: 24px 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.insight-box.lime { border-color: var(--lime); background: rgba(0,212,164,0.07); }
+.insight-box.amber { border-color: var(--amber); background: rgba(245,166,35,0.07); }
+
+.ib-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--fire);
+  margin-bottom: 8px;
+}
+
+.insight-box.lime .ib-label { color: var(--lime); }
+.insight-box.amber .ib-label { color: var(--amber); }
+
+/* ── GRIDS ── */
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 20px 0; }
+.g4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin: 20px 0; }
+
+@media(max-width:768px) { .g2,.g3,.g4 { grid-template-columns: 1fr; } }
+
+/* ── CARDS ── */
+.card {
+  border-radius: 10px;
+  padding: 22px;
+  border: 1px solid var(--border);
+  background: var(--white);
+}
+
+.card-dark {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 22px;
+}
+
+.card-fire {
+  background: rgba(233,69,96,0.08);
+  border: 1px solid rgba(233,69,96,0.25);
+  border-radius: 10px;
+  padding: 22px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.card-icon {
+  width: 40px; height: 40px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.card-title { font-size: 16px; font-weight: 700; }
+
+/* ── PROCESS STEP ── */
+.steps { position: relative; margin: 24px 0; }
+.steps::before {
+  content:'';
+  position: absolute;
+  left: 19px; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--fire), var(--lime));
+}
+
+.step {
+  display: flex;
+  gap: 18px;
+  padding: 14px 0;
+  align-items: flex-start;
+  position: relative;
+}
+
+.step-n {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--ink);
+  border: 2px solid var(--fire);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-weight: 500;
+  color: var(--fire);
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.step-body { flex: 1; padding-top: 6px; }
+.step-title { font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+.step-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+.page-light .step-desc { color: rgba(13,13,13,0.55); }
+.page-light .step-n { background: var(--off); }
+
+/* ── TABLE ── */
+.tbl { width: 100%; border-collapse: collapse; font-size: 13px; margin: 16px 0; }
+.tbl th {
+  background: var(--ink);
+  color: var(--white);
+  padding: 11px 14px;
+  text-align: left;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.tbl td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+.tbl tr:hover td { background: rgba(233,69,96,0.04); }
+
+.tbl.dark th { background: rgba(233,69,96,0.25); }
+.tbl.dark td { border-color: rgba(255,255,255,0.07); color: rgba(255,255,255,0.8); }
+.tbl.dark tr:nth-child(even) td { background: rgba(255,255,255,0.03); }
+.tbl.dark tr:hover td { background: rgba(233,69,96,0.08); }
+
+/* ── PIPELINE FLOW ── */
+.pipeline {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  margin: 24px 0;
+  overflow-x: auto;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.pl-stage {
+  flex: 1;
+  min-width: 100px;
+  padding: 18px 14px;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pl-stage::after {
+  content: '›';
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: rgba(255,255,255,0.3);
+  z-index: 3;
+}
+
+.pl-stage:last-child::after { display: none; }
+
+.pl-icon { font-size: 22px; margin-bottom: 6px; }
+.pl-name { font-size: 11px; font-weight: 700; line-height: 1.3; }
+.pl-tag { font-size: 9px; opacity: 0.65; margin-top: 3px; }
+
+/* ── ROLE CARD ── */
+.role-block {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.rb-head {
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.rb-avatar {
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.rb-name { font-size: 16px; font-weight: 700; }
+.rb-dept { font-size: 11px; opacity: 0.55; margin-top: 2px; letter-spacing: 1px; text-transform: uppercase; }
+
+.rb-body { padding: 18px 22px; background: rgba(0,0,0,0.2); }
+.rb-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--fire); margin-bottom: 8px; margin-top: 14px; }
+.rb-label:first-child { margin-top: 0; }
+
+.rb-list { list-style: none; }
+.rb-list li {
+  padding: 5px 0;
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.rb-list li:last-child { border: none; }
+.rb-list li::before { content: '→'; color: var(--fire); flex-shrink: 0; font-weight: 700; margin-top: 1px; }
+
+/* ── UI SCREEN MOCKUP ── */
+.screen-container {
+  background: var(--ink);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  margin: 24px 0;
+}
+
+.screen-bar {
+  background: #1A1A2E;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.sb-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+
+.sb-url {
+  flex: 1;
+  background: rgba(255,255,255,0.06);
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  font-family: 'JetBrains Mono', monospace;
+  margin: 0 12px;
+}
+
+.screen-body {
+  display: flex;
+  min-height: 400px;
+}
+
+.screen-sidebar {
+  width: 200px;
+  background: rgba(0,0,0,0.35);
+  border-right: 1px solid rgba(255,255,255,0.05);
+  padding: 16px 0;
+  flex-shrink: 0;
+}
+
+.ss-brand {
+  padding: 0 16px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  margin-bottom: 12px;
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--fire);
+}
+
+.ss-item {
+  padding: 9px 16px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: default;
+  transition: all 0.15s;
+}
+
+.ss-item.active {
+  background: rgba(233,69,96,0.12);
+  color: var(--fire);
+  border-left: 2px solid var(--fire);
+}
+
+.ss-item:hover:not(.active) { color: rgba(255,255,255,0.7); }
+
+.ss-section {
+  padding: 10px 16px 4px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+}
+
+.screen-main { flex: 1; padding: 20px 24px; overflow: hidden; }
+
+.sm-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.sm-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.sm-actions { display: flex; gap: 8px; }
+
+.btn {
+  padding: 7px 16px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: default;
+  border: none;
+}
+
+.btn-primary { background: var(--fire); color: white; }
+.btn-ghost { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.1); }
+
+.kpi-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.kpi-box {
+  flex: 1;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.kpi-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.kpi-lbl { font-size: 10px; color: var(--muted); margin-top: 3px; letter-spacing: 1px; text-transform: uppercase; }
+
+.kpi-delta {
+  font-size: 10px;
+  margin-top: 5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 7px;
+  border-radius: 3px;
+}
+
+.delta-up { background: rgba(0,212,164,0.15); color: var(--lime); }
+.delta-dn { background: rgba(233,69,96,0.15); color: var(--fire); }
+
+/* PIPELINE KANBAN */
+.kanban {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.kanban-col {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 12px 10px;
+  min-height: 180px;
+}
+
+.kc-header {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kc-count {
+  background: rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 1px 7px;
+  font-size: 10px;
+}
+
+.kc-card {
+  background: rgba(255,255,255,0.06);
+  border-radius: 6px;
+  padding: 9px 11px;
+  margin-bottom: 7px;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+
+.kcc-title { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.85); line-height: 1.3; }
+.kcc-tag { font-size: 9px; color: var(--muted); margin-top: 4px; }
+.kcc-bar { height: 2px; border-radius: 1px; background: rgba(255,255,255,0.07); margin-top: 8px; }
+.kcc-fill { height: 100%; border-radius: 1px; }
+
+/* DATA TABLE IN SCREEN */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.data-table th {
+  padding: 8px 12px;
+  text-align: left;
+  color: rgba(255,255,255,0.35);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: transparent;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.data-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.75);
+  vertical-align: middle;
+}
+
+.data-table tr:hover td { background: rgba(255,255,255,0.03); }
+
+.status-pill {
+  display: inline-flex;
+  padding: 3px 9px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.sp-green { background: rgba(0,212,164,0.15); color: var(--lime); }
+.sp-orange { background: rgba(245,166,35,0.15); color: var(--amber); }
+.sp-red { background: rgba(233,69,96,0.15); color: var(--fire); }
+.sp-blue { background: rgba(79,195,247,0.15); color: var(--sky); }
+.sp-gray { background: rgba(255,255,255,0.07); color: var(--muted); }
+
+/* FORM SCREEN */
+.form-section { margin-bottom: 20px; }
+.form-group { margin-bottom: 12px; }
+.form-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 5px;
+  display: block;
+}
+
+.form-input {
+  width: 100%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 9px 12px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.8);
+  font-family: 'Inter', sans-serif;
+}
+
+.form-input.filled { border-color: rgba(0,212,164,0.4); }
+.form-input.error { border-color: rgba(233,69,96,0.5); }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.form-row.three { grid-template-columns: 1fr 1fr 1fr; }
+
+.form-select {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 9px 12px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+  appearance: none;
+}
+
+.ai-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(79,195,247,0.12);
+  border: 1px solid rgba(79,195,247,0.3);
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--sky);
+  letter-spacing: 0.5px;
+}
+
+/* COST MODEL */
+.cost-bar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 8px 0;
+  font-size: 13px;
+}
+
+.cb-label { width: 180px; color: rgba(255,255,255,0.7); flex-shrink: 0; font-size: 12px; }
+.cb-bar { flex: 1; height: 8px; background: rgba(255,255,255,0.07); border-radius: 4px; overflow: hidden; }
+.cb-fill { height: 100%; border-radius: 4px; }
+.cb-val { width: 70px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--amber); }
+
+/* TEAM ORG CHART */
+.org-chart { margin: 24px 0; }
+.oc-level { display: flex; justify-content: center; gap: 16px; margin-bottom: 8px; flex-wrap: wrap; position: relative; }
+.oc-box {
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid;
+  min-width: 130px;
+}
+
+.oc-connector { text-align: center; font-size: 18px; color: rgba(255,255,255,0.2); margin: 0; }
+
+/* FOOTER */
+.pg-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 80px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  background: var(--ink);
+  font-size: 10px;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.pg-footer-light {
+  border-color: var(--border);
+  background: var(--off);
+  color: rgba(13,13,13,0.3);
+}
+
+/* QUOTE */
+.big-quote {
+  padding: 72px 80px;
+  background: var(--mid);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.big-quote::before {
+  content: '"';
+  position: absolute;
+  font-family: 'Syne', sans-serif;
+  font-size: 300px;
+  font-weight: 800;
+  color: rgba(233,69,96,0.06);
+  top: -80px;
+  left: 30px;
+  line-height: 1;
+}
+
+.bq-text {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(20px, 3vw, 32px);
+  font-weight: 700;
+  line-height: 1.4;
+  max-width: 760px;
+  margin: 0 auto 16px;
+  position: relative;
+}
+
+.bq-attr { font-size: 12px; color: var(--fire); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+
+/* PHASE BLOCK */
+.phase-block {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  margin: 20px 0;
+}
+
+.pb-item {
+  padding: 28px 24px;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+
+.pb-item:last-child { border-right: none; }
+.pb-num { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; opacity: 0.5; margin-bottom: 8px; }
+.pb-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; margin-bottom: 12px; }
+.pb-list { list-style: none; }
+.pb-list li { font-size: 12px; padding: 4px 0; color: rgba(255,255,255,0.6); display: flex; gap: 8px; }
+.pb-list li::before { content: '→'; color: var(--fire); flex-shrink: 0; }
+
+/* MINI CHART */
+.mini-chart { display: flex; align-items: flex-end; gap: 4px; height: 60px; }
+.mc-bar { flex: 1; border-radius: 2px 2px 0 0; min-width: 14px; transition: opacity 0.2s; }
+.mc-bar:hover { opacity: 0.7; }
+
+/* TAG */
+.tag { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 3px; font-size: 11px; font-weight: 500; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.65); margin: 3px; border: 1px solid rgba(255,255,255,0.08); }
+.page-light .tag { background: rgba(0,0,0,0.06); color: rgba(13,13,13,0.65); border-color: var(--border); }
+
+/* SCORE CARD */
+.score-card {
+  background: rgba(0,0,0,0.25);
+  border-radius: 10px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sc-val { font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800; min-width: 60px; }
+.sc-info { flex: 1; }
+.sc-label { font-size: 13px; font-weight: 600; }
+.sc-sub { font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 3px; }
+.sc-bar { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 10px; }
+.sc-fill { height: 100%; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- ═══ COVER ═══ -->
+<div class="cover">
+  <div class="cover-bg"></div>
+  <div class="cover-grid"></div>
+  <div class="cover-line"></div>
+  <div class="cover-dot"></div>
+
+  <div class="cover-tag">Book Two</div>
+  <div class="cover-eyebrow">// CONTENT_ENGINE + DIGITAL_PROCESS_FRAMEWORK</div>
+
+  <h1>
+    Content<br><span class="accent">Production</span><br>Operating<br>System
+    <span class="sub">Career360 Content Factory · Digital Capture Framework · UI Screen Design</span>
+  </h1>
+
+  <div class="cover-meta">
+    <div class="cm-item"><div class="cm-val">18</div><div class="cm-key">Process Stages</div></div>
+    <div class="cm-item"><div class="cm-val">500+</div><div class="cm-key">Videos / Month</div></div>
+    <div class="cm-item"><div class="cm-val">6x</div><div class="cm-key">Content ROI</div></div>
+    <div class="cm-item"><div class="cm-val">47</div><div class="cm-key">Screen Modules</div></div>
+  </div>
+</div>
+
+<!-- ═══ TOC ═══ -->
+<div class="toc-page">
+  <div class="toc-title">// Contents</div>
+  <div class="toc-grid">
+    <div class="toc-entry"><div class="toc-n">01</div><div class="toc-info"><div class="toc-label">Content Operating Model</div><div class="toc-sub">L0–L3 decomposition & value chain</div></div></div>
+    <div class="toc-entry"><div class="toc-n">02</div><div class="toc-info"><div class="toc-label">Content Strategy Layer</div><div class="toc-sub">Pillars, personas, campaigns</div></div></div>
+    <div class="toc-entry"><div class="toc-n">03</div><div class="toc-info"><div class="toc-label">Content Production Factory</div><div class="toc-sub">Idea → Script → Shoot → Edit → Publish</div></div></div>
+    <div class="toc-entry"><div class="toc-n">04</div><div class="toc-info"><div class="toc-label">Team Structure & Roles</div><div class="toc-sub">All roles, responsibilities, deliverables</div></div></div>
+    <div class="toc-entry"><div class="toc-n">05</div><div class="toc-info"><div class="toc-label">Resource & Vendor Management</div><div class="toc-sub">Studios, talent, influencers, ambassadors</div></div></div>
+    <div class="toc-entry"><div class="toc-n">06</div><div class="toc-info"><div class="toc-label">Cost, Capacity & ROI Model</div><div class="toc-sub">Unit economics, scaling, benchmarks</div></div></div>
+    <div class="toc-entry"><div class="toc-n">07</div><div class="toc-info"><div class="toc-label">Digital Process Capture Framework</div><div class="toc-sub">Universal forms & field architecture</div></div></div>
+    <div class="toc-entry"><div class="toc-n">08</div><div class="toc-info"><div class="toc-label">HUB Dashboard UI — Screen by Screen</div><div class="toc-sub">Every role's interface designed</div></div></div>
+    <div class="toc-entry"><div class="toc-n">09</div><div class="toc-info"><div class="toc-label">Automation & AI Layer</div><div class="toc-sub">Trigger map, workflow engine, AI rules</div></div></div>
+    <div class="toc-entry"><div class="toc-n">10</div><div class="toc-info"><div class="toc-label">90-Day Execution Plan</div><div class="toc-sub">Daily rhythm, phase targets, KPI tracker</div></div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ CH 1: CONTENT OPERATING MODEL ═══════════════════════════════════ -->
+<div class="ch-break" data-num="01">
+  <div class="ch-num">// 01 — CONTENT OPERATING MODEL</div>
+  <div class="ch-title">The Content<br>Value Chain</div>
+  <div class="ch-desc">Not a creative department. A precision content manufacturing system that turns ideas into leads and leads into revenue.</div>
+</div>
+
+<div class="page-dark">
+  <h2>Content as Infrastructure</h2>
+  <p class="lead">Most companies treat content as marketing spend. Career360 must treat it as revenue infrastructure — every video is a sales asset, every view is a funnel entry, every conversion is measurable.</p>
+
+  <!-- L0 → L3 CHAIN -->
+  <h3>The L0 → L3 Content Operating Chain</h3>
+  <div style="background:rgba(0,0,0,0.3); border-radius:14px; overflow:hidden; margin:20px 0; border:1px solid rgba(255,255,255,0.07);">
+    <!-- L0 -->
+    <div style="background:rgba(233,69,96,0.2); padding:14px 22px; display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(255,255,255,0.07);">
+      <span style="font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:500; background:var(--fire); color:white; padding:3px 10px; border-radius:3px;">L0</span>
+      <span style="font-weight:700; font-size:16px;">Content Value Chain</span>
+      <span style="margin-left:auto; font-size:12px; color:rgba(255,255,255,0.4);">Strategy → Production → Distribution → Analytics → Optimization</span>
+    </div>
+
+    <!-- L1 rows -->
+    <div style="display:grid; grid-template-columns: repeat(5,1fr); gap:1px; background:rgba(255,255,255,0.05);">
+      <div style="background:var(--graphite); padding:16px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--fire); margin-bottom:10px;">L1 — Strategy</div>
+        <div style="font-size:11px; color:rgba(255,255,255,0.6); line-height:1.8;">
+          Content Pillars<br>Persona Mapping<br>Platform Plan<br>Budget Allocation<br>Campaign Themes
+        </div>
+      </div>
+      <div style="background:var(--graphite); padding:16px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--lime); margin-bottom:10px;">L1 — Creation</div>
+        <div style="font-size:11px; color:rgba(255,255,255,0.6); line-height:1.8;">
+          Idea Research<br>Script Writing<br>Storyboarding<br>Hook Design<br>CTA Crafting
+        </div>
+      </div>
+      <div style="background:var(--graphite); padding:16px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--amber); margin-bottom:10px;">L1 — Production</div>
+        <div style="font-size:11px; color:rgba(255,255,255,0.6); line-height:1.8;">
+          Studio Booking<br>Talent Coordination<br>A-Roll Shoot<br>B-Roll Capture<br>Audio Recording
+        </div>
+      </div>
+      <div style="background:var(--graphite); padding:16px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--sky); margin-bottom:10px;">L1 — Post-Prod</div>
+        <div style="font-size:11px; color:rgba(255,255,255,0.6); line-height:1.8;">
+          Video Editing<br>Motion Graphics<br>Subtitle Creation<br>Thumbnail Design<br>SEO Optimization
+        </div>
+      </div>
+      <div style="background:var(--graphite); padding:16px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--fire); margin-bottom:10px;">L1 — Analytics</div>
+        <div style="font-size:11px; color:rgba(255,255,255,0.6); line-height:1.8;">
+          Performance Tracking<br>Lead Attribution<br>Funnel Analysis<br>A/B Testing<br>Optimization Loop
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIPELINE -->
+  <h3>Content Production Pipeline</h3>
+  <div class="pipeline">
+    <div class="pl-stage" style="background:rgba(233,69,96,0.2);">
+      <div class="pl-icon">💡</div>
+      <div class="pl-name">IDEA BANK</div>
+      <div class="pl-tag">Research + scoring</div>
+    </div>
+    <div class="pl-stage" style="background:rgba(233,69,96,0.15);">
+      <div class="pl-icon">📝</div>
+      <div class="pl-name">SCRIPT</div>
+      <div class="pl-tag">Hook + body + CTA</div>
+    </div>
+    <div class="pl-stage" style="background:rgba(245,166,35,0.12);">
+      <div class="pl-icon">🎬</div>
+      <div class="pl-name">SHOOT</div>
+      <div class="pl-tag">A-roll + B-roll</div>
+    </div>
+    <div class="pl-stage" style="background:rgba(79,195,247,0.12);">
+      <div class="pl-icon">✂️</div>
+      <div class="pl-name">EDIT</div>
+      <div class="pl-tag">Cut + subtitles + music</div>
+    </div>
+    <div class="pl-stage" style="background:rgba(0,212,164,0.12);">
+      <div class="pl-icon">🎨</div>
+      <div class="pl-name">DESIGN</div>
+      <div class="pl-tag">Thumbnail + graphics</div>
+    </div>
+    <div class="pl-stage" style="background:rgba(0,212,164,0.16);">
+      <div class="pl-icon">🔍</div>
+      <div class="pl-name">SEO</div>
+      <div class="pl-tag">Title + tags + keywords</div>
+    </div>
+    <div class="pl-stage" style="background:rgba(0,212,164,0.20); border-radius:0 10px 10px 0;">
+      <div class="pl-icon">🚀</div>
+      <div class="pl-name">PUBLISH</div>
+      <div class="pl-tag">Schedule + distribute</div>
+    </div>
+  </div>
+
+  <h3>Content Revenue Attribution Model</h3>
+  <div style="background:rgba(0,0,0,0.3); border-radius:12px; padding:28px; margin:16px 0;">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+      <div style="text-align:center;">
+        <div style="font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:var(--fire);">1,000,000</div>
+        <div style="font-size:11px; color:var(--muted);">Total Views</div>
+      </div>
+      <div style="font-size:20px; color:rgba(255,255,255,0.2);">→</div>
+      <div style="text-align:center;">
+        <div style="font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:var(--amber);">20,000</div>
+        <div style="font-size:11px; color:var(--muted);">Clicks (2% CTR)</div>
+      </div>
+      <div style="font-size:20px; color:rgba(255,255,255,0.2);">→</div>
+      <div style="text-align:center;">
+        <div style="font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:var(--lime);">2,000</div>
+        <div style="font-size:11px; color:var(--muted);">Leads (10%)</div>
+      </div>
+      <div style="font-size:20px; color:rgba(255,255,255,0.2);">→</div>
+      <div style="text-align:center;">
+        <div style="font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:var(--sky);">400</div>
+        <div style="font-size:11px; color:var(--muted);">Counseling (20%)</div>
+      </div>
+      <div style="font-size:20px; color:rgba(255,255,255,0.2);">→</div>
+      <div style="text-align:center;">
+        <div style="font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:var(--white);">100</div>
+        <div style="font-size:11px; color:var(--muted);">Students (25%)</div>
+      </div>
+      <div style="font-size:20px; color:rgba(255,255,255,0.2);">→</div>
+      <div style="text-align:center;">
+        <div style="font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:var(--lime);">₹1CR</div>
+        <div style="font-size:11px; color:var(--muted);">Revenue Generated</div>
+      </div>
+    </div>
+    <div style="margin-top:16px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.07); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+      <span style="font-size:12px; color:rgba(255,255,255,0.45);">Content cost for 500 videos: <strong style="color:var(--amber);">₹15 Lakhs</strong></span>
+      <span style="font-size:12px; color:rgba(255,255,255,0.45);">Revenue Generated: <strong style="color:var(--lime);">₹1 Crore</strong></span>
+      <span style="font-size:14px; font-weight:700; color:var(--lime);">ROI: 6–8x 🚀</span>
+    </div>
+  </div>
+</div>
+
+<div class="pg-footer"><span>Career360 Content Operating System</span><span>CAREER360 GROUP · CONFIDENTIAL</span><span>Chapter 01</span></div>
+
+<!-- ═══════════════════════════════════ CH 3: CONTENT PRODUCTION PROCESS ═══════════════════════════════════ -->
+<div class="ch-break" data-num="03">
+  <div class="ch-num">// 03 — PRODUCTION PROCESS</div>
+  <div class="ch-title">Idea to<br>Published Asset</div>
+  <div class="ch-desc">Every piece of content follows the same 10-stage manufacturing process — with defined owners, SLAs, and quality gates at each transition.</div>
+</div>
+
+<div class="page-light">
+  <h2>Stage-by-Stage Production SOP</h2>
+  <p class="lead" style="color:rgba(13,13,13,0.55);">Each stage has a defined owner, input requirements, quality checklist, and handoff protocol. No stage begins without the prior stage being signed off.</p>
+
+  <!-- STAGE STEPS -->
+  <div class="steps">
+    <div class="step">
+      <div class="step-n" style="border-color:var(--fire); background:white;">01</div>
+      <div class="step-body">
+        <div class="step-title">Research & Trend Mining</div>
+        <div class="step-desc" style="color:rgba(13,13,13,0.55);">Social listening analyst mines trending keywords (Germany jobs, Ausbildung salary), competitor content gaps, YouTube search demand, and comment sentiment. Outputs structured insight report.</div>
+        <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
+          <span class="chip chip-fire">Owner: Research Analyst</span>
+          <span class="chip chip-lime">SLA: Daily</span>
+          <span class="chip chip-amber">Output: Trend Report</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n" style="border-color:var(--lime); background:white;">02</div>
+      <div class="step-body">
+        <div class="step-title">Idea Generation & Scoring</div>
+        <div class="step-desc" style="color:rgba(13,13,13,0.55);">Team generates ideas from research. Each idea is scored on: Demand Signal (40%), Emotional Trigger (30%), Production Complexity (20%), Brand Fit (10%). Ideas scoring >70 are approved for scripting.</div>
+        <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
+          <span class="chip chip-fire">Owner: Content Strategist</span>
+          <span class="chip chip-lime">SLA: 2x / week</span>
+          <span class="chip chip-amber">Output: Approved Idea Bank</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n" style="border-color:var(--amber); background:white;">03</div>
+      <div class="step-body">
+        <div class="step-title">Script Writing</div>
+        <div class="step-desc" style="color:rgba(13,13,13,0.55);">Script writer uses the HOOK → BODY → CTA framework. Hook: First 3–5 seconds must stop scroll. Body: Structured narrative with proof points. CTA: Single clear action. AI suggests improvements before human approval.</div>
+        <div style="margin-top:10px; background:rgba(13,13,13,0.05); border-radius:8px; padding:14px;">
+          <div style="font-size:11px; font-weight:700; color:var(--fire); letter-spacing:1px; text-transform:uppercase; margin-bottom:8px;">Script Structure Template</div>
+          <div style="display:grid; grid-template-columns: 100px 1fr; gap:8px; font-size:12px;">
+            <span style="font-weight:600; color:var(--fire);">HOOK (0–5s)</span><span>"Did you know you can earn ₹70,000/month in Germany after 12th grade?"</span>
+            <span style="font-weight:600; color:rgba(13,13,13,0.5);">PROBLEM (5–20s)</span><span>Paint the pain — no career options, uncertain future, parents worried</span>
+            <span style="font-weight:600; color:var(--lime); color:#00A07A;">SOLUTION (20–50s)</span><span>Introduce Ausbildung pathway — structured, paid, visa-backed</span>
+            <span style="font-weight:600; color:var(--fire); color:#0058A0;">PROOF (50–80s)</span><span>Success story, employer partnerships, placement numbers</span>
+            <span style="font-weight:600; color:#555;">CTA (80–90s)</span><span>"Book your free counseling today — link in bio"</span>
+          </div>
+        </div>
+        <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
+          <span class="chip chip-fire">Owner: Script Writer</span>
+          <span class="chip chip-lime">SLA: 10 scripts/day</span>
+          <span class="chip chip-amber">Output: Approved Script</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n" style="border-color:var(--sky); background:white;">04</div>
+      <div class="step-body">
+        <div class="step-title">Storyboard Creation</div>
+        <div class="step-desc" style="color:rgba(13,13,13,0.55);">Creative Director builds scene-by-scene visual breakdown. Each scene specifies: shot type (wide/medium/close), camera angle, talent positioning, B-roll suggestions, text overlay placement, and transition type.</div>
+        <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
+          <span class="chip chip-fire">Owner: Creative Director</span>
+          <span class="chip chip-lime">SLA: 24 hrs post-script</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n" style="border-color:var(--fire); background:white;">05</div>
+      <div class="step-body">
+        <div class="step-title">Production Planning & Resource Booking</div>
+        <div class="step-desc" style="color:rgba(13,13,13,0.55);">Local Production Coordinator books studio, confirms talent availability, tests equipment, prepares checklist. Daily batch shoots planned 48 hours in advance. Backup talent and equipment always identified.</div>
+        <div style="margin-top:8px;">
+          <div style="font-size:11px; font-weight:700; color:var(--fire); letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">Pre-Shoot Checklist</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:4px; font-size:12px;">
+            <div>✓ Script printed & approved</div><div>✓ Talent confirmed & briefed</div>
+            <div>✓ Studio booked & accessible</div><div>✓ Camera — 4K ready</div>
+            <div>✓ 3-point lighting setup</div><div>✓ Lavalier mic tested (-60dB)</div>
+            <div>✓ Backup talent identified</div><div>✓ B-roll shot list prepared</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n" style="border-color:var(--amber); background:white;">06</div>
+      <div class="step-body">
+        <div class="step-title">Shoot Execution</div>
+        <div class="step-desc" style="color:rgba(13,13,13,0.55);">A-roll (direct to camera, clear voice, natural delivery) + B-roll (supporting visuals, context scenes, environment shots). Multiple takes. Quality check before wrapping. Footage uploaded same day.</div>
+        <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
+          <span class="chip chip-fire">Owner: Cameraman + Producer</span>
+          <span class="chip chip-lime">Output: 15–20 reels/day</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n" style="border-color:var(--lime); background:white;">07</div>
+      <div class="step-body">
+        <div class="step-title">Video Editing</div>
+        <div class="step-desc" style="color:rgba(13,13,13,0.55);">Fast-paced editing optimized for retention. No dead frames. Subtitles mandatory. Brand-compliant transitions. Music added. Auto-subtitles reviewed and corrected. Duration finalized for platform (60s Reels / 8–15 min YouTube).</div>
+        <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
+          <span class="chip chip-fire">Owner: Video Editor</span>
+          <span class="chip chip-lime">SLA: 10–15 edits/day</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n" style="border-color:var(--sky); background:white;">08</div>
+      <div class="step-body">
+        <div class="step-title">Thumbnail & Graphic Design</div>
+        <div class="step-desc" style="color:rgba(13,13,13,0.55);">CTR-optimized thumbnail: bold text (3–5 words max), expressive face, high contrast, branded colors. A/B variant always created. Designer creates 20 thumbnails/day. AI suggests best-performing variant.</div>
+        <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
+          <span class="chip chip-fire">Owner: Graphic Designer</span>
+          <span class="chip chip-lime">Output: 20 designs/day</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n" style="border-color:var(--amber); background:white;">09</div>
+      <div class="step-body">
+        <div class="step-title">SEO Optimization</div>
+        <div class="step-desc" style="color:rgba(13,13,13,0.55);">Title includes primary keyword in first 60 chars. Description front-loaded with searchable terms. Tags cover primary + secondary + LSI keywords. Chapters added for YouTube. All metadata reviewed before scheduling.</div>
+        <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
+          <span class="chip chip-fire">Owner: SEO Analyst</span>
+          <span class="chip chip-lime">SLA: 4 hrs post-edit</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n" style="border-color:var(--lime); background:white;">10</div>
+      <div class="step-body">
+        <div class="step-title">Publish, Distribute & Track</div>
+        <div class="step-desc" style="color:rgba(13,13,13,0.55);">Scheduled via publishing tool. Caption + hashtags prepared. WhatsApp/Telegram community push. Performance tracking begins at T+1hr, T+24hr, T+7d. Low performers flagged for optimization within 48 hours.</div>
+        <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
+          <span class="chip chip-fire">Owner: Social Manager</span>
+          <span class="chip chip-lime">Output: Live + tracked</span>
+          <span class="chip chip-amber">KPI: CTR, Views, Leads</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pg-footer pg-footer-light"><span>Career360 Content Operating System</span><span>CAREER360 GROUP · CONFIDENTIAL</span><span>Chapter 03</span></div>
+
+<!-- ═══════════════════════════════════ CH 4: TEAM STRUCTURE ═══════════════════════════════════ -->
+<div class="ch-break" data-num="04">
+  <div class="ch-num">// 04 — TEAM STRUCTURE</div>
+  <div class="ch-title">Roles,<br>Responsibilities<br>& Deliverables</div>
+  <div class="ch-desc">Every role in the content factory is defined with mandate, daily tasks, quality standards, and measurable output targets.</div>
+</div>
+
+<div class="page-mid">
+  <h2>Content Factory Org Chart</h2>
+
+  <!-- ORG CHART -->
+  <div class="org-chart">
+    <div class="oc-level">
+      <div class="oc-box" style="background:rgba(233,69,96,0.2); border-color:var(--fire); color:var(--fire);">Head of Content (CCO)</div>
+    </div>
+    <div class="oc-connector">│</div>
+    <div class="oc-level">
+      <div class="oc-box" style="background:rgba(245,166,35,0.15); border-color:var(--amber); color:var(--amber);">Content Ops Director</div>
+      <div class="oc-box" style="background:rgba(0,212,164,0.15); border-color:var(--lime); color:var(--lime);">Brand & Narrative Director</div>
+    </div>
+    <div class="oc-connector">│</div>
+    <div class="oc-level">
+      <div class="oc-box" style="background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.15); font-size:11px;">Content Strategist</div>
+      <div class="oc-box" style="background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.15); font-size:11px;">Research Analyst</div>
+      <div class="oc-box" style="background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.15); font-size:11px;">Script Writers (5)</div>
+      <div class="oc-box" style="background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.15); font-size:11px;">Production Team</div>
+      <div class="oc-box" style="background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.15); font-size:11px;">Post-Prod Team</div>
+    </div>
+    <div class="oc-connector">│</div>
+    <div class="oc-level">
+      <div class="oc-box" style="background:rgba(255,255,255,0.03); border-color:rgba(255,255,255,0.08); font-size:10px;">SEO Analysts</div>
+      <div class="oc-box" style="background:rgba(255,255,255,0.03); border-color:rgba(255,255,255,0.08); font-size:10px;">Social Managers</div>
+      <div class="oc-box" style="background:rgba(255,255,255,0.03); border-color:rgba(255,255,255,0.08); font-size:10px;">Data Analysts</div>
+      <div class="oc-box" style="background:rgba(255,255,255,0.03); border-color:rgba(255,255,255,0.08); font-size:10px;">Localization Team</div>
+      <div class="oc-box" style="background:rgba(255,255,255,0.03); border-color:rgba(255,255,255,0.08); font-size:10px;">Student Ambassadors</div>
+    </div>
+  </div>
+
+  <!-- ROLE DETAILS -->
+  <h3>Key Role Profiles</h3>
+  <div class="g2">
+    <div class="role-block" style="border-color:rgba(233,69,96,0.3);">
+      <div class="rb-head" style="background:rgba(233,69,96,0.15);">
+        <div class="rb-avatar" style="background:rgba(233,69,96,0.2);">👑</div>
+        <div>
+          <div class="rb-name">Head of Content (CCO)</div>
+          <div class="rb-dept">Corporate · Governance Layer</div>
+        </div>
+      </div>
+      <div class="rb-body">
+        <div class="rb-label">Core Mandate</div>
+        <p style="font-size:13px; color:rgba(255,255,255,0.6);">Owns content as a revenue engine. Final brand authority. Investment decisions.</p>
+        <div class="rb-label">Daily Responsibilities</div>
+        <ul class="rb-list">
+          <li>Review content performance analytics (daily dashboard)</li>
+          <li>Approve content strategy and campaign themes</li>
+          <li>Govern brand narrative and messaging consistency</li>
+          <li>Content investment allocation and vendor decisions</li>
+        </ul>
+        <div class="rb-label">Key Deliverables</div>
+        <ul class="rb-list">
+          <li>Monthly content strategy report</li>
+          <li>Quarterly content investment review</li>
+          <li>Brand playbook (updated quarterly)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role-block" style="border-color:rgba(0,212,164,0.3);">
+      <div class="rb-head" style="background:rgba(0,212,164,0.1);">
+        <div class="rb-avatar" style="background:rgba(0,212,164,0.15);">✍️</div>
+        <div>
+          <div class="rb-name">Script Writer</div>
+          <div class="rb-dept">Creative Team · Execution Layer</div>
+        </div>
+      </div>
+      <div class="rb-body">
+        <div class="rb-label">Core Mandate</div>
+        <p style="font-size:13px; color:rgba(255,255,255,0.6);">Converts ideas into compelling, conversion-optimized content scripts.</p>
+        <div class="rb-label">Daily Output Standard</div>
+        <ul class="rb-list">
+          <li>10 short-form scripts per day (Reels format)</li>
+          <li>2–3 long-form scripts per week (YouTube)</li>
+          <li>Hook testing — minimum 2 variants per script</li>
+          <li>Submit all scripts by 12pm for same-day shoots</li>
+        </ul>
+        <div class="rb-label">Key Deliverables</div>
+        <ul class="rb-list">
+          <li>Script bank (version-controlled in KBM)</li>
+          <li>Hook testing report (weekly)</li>
+          <li>CTA effectiveness analysis (monthly)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role-block" style="border-color:rgba(245,166,35,0.3);">
+      <div class="rb-head" style="background:rgba(245,166,35,0.1);">
+        <div class="rb-avatar" style="background:rgba(245,166,35,0.15);">📍</div>
+        <div>
+          <div class="rb-name">Local Production Coordinator</div>
+          <div class="rb-dept">Production · Ground Operations</div>
+        </div>
+      </div>
+      <div class="rb-body">
+        <div class="rb-label">Core Mandate</div>
+        <p style="font-size:13px; color:rgba(255,255,255,0.6);">Most critical role for scaling. Owns every shoot from booking to upload.</p>
+        <div class="rb-label">Daily Responsibilities</div>
+        <ul class="rb-list">
+          <li>Confirm next-day shoot schedule by 6pm</li>
+          <li>Verify talent availability and studio booking</li>
+          <li>Equipment test before each shoot</li>
+          <li>Supervise shoot quality in real-time</li>
+          <li>Upload raw footage same day; assign editors</li>
+        </ul>
+        <div class="rb-label">Key Deliverables</div>
+        <ul class="rb-list">
+          <li>Daily shoot completion report</li>
+          <li>Footage upload confirmation log</li>
+          <li>Quality control sign-off sheet</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="role-block" style="border-color:rgba(79,195,247,0.3);">
+      <div class="rb-head" style="background:rgba(79,195,247,0.1);">
+        <div class="rb-avatar" style="background:rgba(79,195,247,0.15);">📊</div>
+        <div>
+          <div class="rb-name">Content Data Analyst</div>
+          <div class="rb-dept">Analytics · Intelligence Layer</div>
+        </div>
+      </div>
+      <div class="rb-body">
+        <div class="rb-label">Core Mandate</div>
+        <p style="font-size:13px; color:rgba(255,255,255,0.6);">Converts performance data into content decisions. Identifies winners and killers.</p>
+        <div class="rb-label">Weekly Responsibilities</div>
+        <ul class="rb-list">
+          <li>Analyze CTR, retention, engagement for all content</li>
+          <li>Identify top 20% content patterns — replicate</li>
+          <li>Track lead attribution from content to CRM</li>
+          <li>Calculate revenue per content piece</li>
+          <li>A/B test thumbnail and title variants</li>
+        </ul>
+        <div class="rb-label">Key Deliverables</div>
+        <ul class="rb-list">
+          <li>Weekly performance report (dashboard)</li>
+          <li>Content ROI tracker (per piece)</li>
+          <li>Optimization action list (weekly)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDENT AMBASSADOR ENGINE -->
+  <h3>Student Ambassador Content Engine</h3>
+  <div style="background:rgba(0,0,0,0.3); border-radius:12px; padding:24px; margin:16px 0;">
+    <div class="g2">
+      <div>
+        <h4>Ambassador Content Types</h4>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div class="card-dark" style="padding:12px 16px;">
+            <div style="font-size:13px; font-weight:600; color:var(--lime);">📸 Daily Life in Germany</div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.5); margin-top:4px;">Accommodation, commute, workplace, food — authentic UGC</div>
+          </div>
+          <div class="card-dark" style="padding:12px 16px;">
+            <div style="font-size:13px; font-weight:600; color:var(--amber);">💬 Training Experience</div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.5); margin-top:4px;">Language learning journey, struggles, breakthrough moments</div>
+          </div>
+          <div class="card-dark" style="padding:12px 16px;">
+            <div style="font-size:13px; font-weight:600; color:var(--fire);">📋 Visa Journey</div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.5); margin-top:4px;">Document prep, embassy appointment, approval story</div>
+          </div>
+          <div class="card-dark" style="padding:12px 16px;">
+            <div style="font-size:13px; font-weight:600; color:var(--sky);">💰 Salary Reveal</div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.5); margin-top:4px;">First paycheck, monthly earnings, financial freedom story</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h4>Ambassador Workflow</h4>
+        <div class="steps" style="margin-top:8px;">
+          <div class="step" style="padding:10px 0;">
+            <div class="step-n" style="width:30px;height:30px;font-size:10px;">01</div>
+            <div class="step-body"><div class="step-title" style="font-size:13px;">Identify & Select</div><div class="step-desc">Placed students with strong communication skills</div></div>
+          </div>
+          <div class="step" style="padding:10px 0;">
+            <div class="step-n" style="width:30px;height:30px;font-size:10px;">02</div>
+            <div class="step-body"><div class="step-title" style="font-size:13px;">Onboard & Train</div><div class="step-desc">Video shooting on mobile, messaging guidelines, NDA</div></div>
+          </div>
+          <div class="step" style="padding:10px 0;">
+            <div class="step-n" style="width:30px;height:30px;font-size:10px;">03</div>
+            <div class="step-body"><div class="step-title" style="font-size:13px;">Assign Content Tasks</div><div class="step-desc">Weekly topics assigned; submitted via portal</div></div>
+          </div>
+          <div class="step" style="padding:10px 0;">
+            <div class="step-n" style="width:30px;height:30px;font-size:10px;">04</div>
+            <div class="step-body"><div class="step-title" style="font-size:13px;">Review & Publish</div><div class="step-desc">Quality check → approve → edit → publish on main channels</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pg-footer"><span>Career360 Content Operating System</span><span>CAREER360 GROUP · CONFIDENTIAL</span><span>Chapter 04</span></div>
+
+<!-- ═══════════════════════════════════ CH 6: COST & ROI ═══════════════════════════════════ -->
+<div class="ch-break" data-num="06">
+  <div class="ch-num">// 06 — COST & ROI MODEL</div>
+  <div class="ch-title">The Economics<br>of Content</div>
+  <div class="ch-desc">Unit-level economics, team sizing, output capacity and ROI framework. Content is a manufacturing operation — measured in output, cost per unit, and return on investment.</div>
+</div>
+
+<div class="page-light">
+  <h2>Content Unit Economics</h2>
+
+  <div class="g2">
+    <div>
+      <h3>Cost Per Video — India Base</h3>
+      <div style="background:rgba(13,13,13,0.04); border-radius:10px; padding:20px; border:1px solid var(--border);">
+        <div class="cost-bar">
+          <span class="cb-label" style="color:rgba(13,13,13,0.6);">Script Writer</span>
+          <div class="cb-bar"><div class="cb-fill" style="width:20%; background:var(--fire);"></div></div>
+          <span class="cb-val" style="color:rgba(13,13,13,0.7);">₹300</span>
+        </div>
+        <div class="cost-bar">
+          <span class="cb-label" style="color:rgba(13,13,13,0.6);">Videographer</span>
+          <div class="cb-bar"><div class="cb-fill" style="width:33%; background:var(--amber);"></div></div>
+          <span class="cb-val" style="color:rgba(13,13,13,0.7);">₹500</span>
+        </div>
+        <div class="cost-bar">
+          <span class="cb-label" style="color:rgba(13,13,13,0.6);">Editor</span>
+          <div class="cb-bar"><div class="cb-fill" style="width:40%; background:var(--lime); background:#00A07A;"></div></div>
+          <span class="cb-val" style="color:rgba(13,13,13,0.7);">₹600</span>
+        </div>
+        <div class="cost-bar">
+          <span class="cb-label" style="color:rgba(13,13,13,0.6);">Thumbnail Designer</span>
+          <div class="cb-bar"><div class="cb-fill" style="width:13%; background:var(--sky); background:#007BB5;"></div></div>
+          <span class="cb-val" style="color:rgba(13,13,13,0.7);">₹200</span>
+        </div>
+        <div class="cost-bar">
+          <span class="cb-label" style="color:rgba(13,13,13,0.6);">Talent</span>
+          <div class="cb-bar"><div class="cb-fill" style="width:20%; background:rgba(13,13,13,0.3);"></div></div>
+          <span class="cb-val" style="color:rgba(13,13,13,0.7);">₹300</span>
+        </div>
+        <div class="cost-bar">
+          <span class="cb-label" style="color:rgba(13,13,13,0.6);">Fixed Cost Alloc.</span>
+          <div class="cb-bar"><div class="cb-fill" style="width:80%; background:rgba(233,69,96,0.5);"></div></div>
+          <span class="cb-val" style="color:rgba(13,13,13,0.7);">₹1,200</span>
+        </div>
+        <div style="margin-top:14px; padding-top:14px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:14px; font-weight:600;">Total per Reel</span>
+          <span style="font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:var(--fire);">₹3,000–3,500</span>
+        </div>
+        <div style="font-size:11px; color:var(--muted); margin-top:4px;">GCC / Europe: ₹6,000–₹10,000 per video</div>
+      </div>
+    </div>
+    <div>
+      <h3>Cost Per Lead (vs Paid Ads)</h3>
+      <div style="background:rgba(13,13,13,0.04); border-radius:10px; padding:20px; border:1px solid var(--border);">
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <div style="background:rgba(233,69,96,0.08); border-radius:8px; padding:14px 16px; border:1px solid rgba(233,69,96,0.2);">
+            <div style="font-size:11px; font-weight:700; color:var(--fire); text-transform:uppercase; letter-spacing:1px;">Paid Ads CPL</div>
+            <div style="font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:var(--fire);">₹500–1,500</div>
+            <div style="font-size:11px; color:var(--muted);">Per qualified lead via Meta/Google</div>
+          </div>
+          <div style="background:rgba(0,160,122,0.08); border-radius:8px; padding:14px 16px; border:1px solid rgba(0,160,122,0.2);">
+            <div style="font-size:11px; font-weight:700; color:#00A07A; text-transform:uppercase; letter-spacing:1px;">Content CPL</div>
+            <div style="font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:#00A07A;">₹150</div>
+            <div style="font-size:11px; color:var(--muted);">₹3,000 video ÷ 20 leads = ₹150 CPL</div>
+          </div>
+          <div style="background:rgba(13,13,13,0.06); border-radius:8px; padding:14px 16px; text-align:center; border:1px solid var(--border);">
+            <div style="font-size:13px; font-weight:700;">Content is <span style="color:var(--fire);">5–10x cheaper</span> per lead than paid media</div>
+            <div style="font-size:11px; color:var(--muted); margin-top:4px;">And it compounds — old content keeps generating leads</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Team Size vs Output Capacity</h3>
+  <table class="tbl">
+    <thead>
+      <tr><th>Phase</th><th>Team Size</th><th>Monthly Output</th><th>Monthly Cost</th><th>Leads/Month</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Starter</strong> — Phase 1</td><td>~10 people</td><td>100 videos</td><td>₹3.5L</td><td>2,000</td></tr>
+      <tr><td><strong>Growth</strong> — Phase 2</td><td>~25 people</td><td>500 videos</td><td>₹15L</td><td>10,000</td></tr>
+      <tr><td><strong>Scale</strong> — Phase 3</td><td>60+ people</td><td>1,000+ videos</td><td>₹35L</td><td>20,000+</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box lime" style="border-color:#00A07A; background:rgba(0,160,122,0.07);">
+    <div class="ib-label" style="color:#00A07A;">Strategic Insight</div>
+    <strong>Companies that master content don't buy customers — they manufacture demand.</strong>
+    <p style="margin-top:6px; margin-bottom:0; font-size:13px;">At full scale (500+ videos/month), Career360's content engine generates 10,000+ leads/month at ₹150 CPL — creating a permanent, compounding competitive advantage that paid media cannot replicate.</p>
+  </div>
+</div>
+
+<div class="pg-footer pg-footer-light"><span>Career360 Content Operating System</span><span>CAREER360 GROUP · CONFIDENTIAL</span><span>Chapter 06</span></div>
+
+<!-- ═══════════════════════════════════ CH 8: UI SCREENS ═══════════════════════════════════ -->
+<div class="ch-break" data-num="08">
+  <div class="ch-num">// 08 — HUB DASHBOARD UI</div>
+  <div class="ch-title">Screen by<br>Screen Design</div>
+  <div class="ch-desc">Every role gets a purpose-built HUB interface. These are not generic dashboards — they are decision engines designed around each role's daily workflow.</div>
+</div>
+
+<!-- SCREEN 1: FOUNDER COCKPIT -->
+<div class="page-dark">
+  <h2>Screen 01 — Founder / CEO Cockpit (UCC)</h2>
+  <p class="lead">The highest-level view. Real-time revenue, funnel health, country performance, AI forecasts, and risk alerts. No noise — only what the CEO needs to make decisions.</p>
+
+  <div class="screen-container">
+    <div class="screen-bar">
+      <div class="sb-dot" style="background:#FF5F57;"></div>
+      <div class="sb-dot" style="background:#FEBC2E;"></div>
+      <div class="sb-dot" style="background:#28C840;"></div>
+      <div class="sb-url">hub.career360.com/founder/cockpit</div>
+      <span style="font-size:10px; color:rgba(255,255,255,0.3); font-family:'JetBrains Mono',monospace;">⬤ LIVE</span>
+    </div>
+    <div class="screen-body">
+      <div class="screen-sidebar">
+        <div class="ss-brand">C360 HUB</div>
+        <div class="ss-section">Command</div>
+        <div class="ss-item active">⬛ Founder Cockpit</div>
+        <div class="ss-item">📊 Revenue</div>
+        <div class="ss-item">🌍 Countries</div>
+        <div class="ss-item">⚡ Risk Alerts</div>
+        <div class="ss-section">Modules</div>
+        <div class="ss-item">👥 Leads</div>
+        <div class="ss-item">🎓 Training</div>
+        <div class="ss-item">🏢 Employers</div>
+        <div class="ss-item">📹 Content</div>
+        <div class="ss-section">Control</div>
+        <div class="ss-item">🤖 AI Insights</div>
+        <div class="ss-item">⚙️ Settings</div>
+      </div>
+      <div class="screen-main">
+        <div class="sm-topbar">
+          <div class="sm-title">Founder Cockpit</div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div class="ai-badge">⚡ AI LIVE</div>
+            <div class="btn btn-ghost">Export</div>
+            <div style="font-size:11px; color:var(--muted); font-family:'JetBrains Mono',monospace;">Today, 10:42 AM</div>
+          </div>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi-box"><div class="kpi-val" style="color:var(--lime);">₹2.4Cr</div><div class="kpi-lbl">Revenue MTD</div><div class="kpi-delta delta-up">↑ +18% vs last month</div></div>
+          <div class="kpi-box"><div class="kpi-val" style="color:var(--fire);">1,284</div><div class="kpi-lbl">Leads Today</div><div class="kpi-delta delta-up">↑ +22%</div></div>
+          <div class="kpi-box"><div class="kpi-val" style="color:var(--amber);">34.2%</div><div class="kpi-lbl">Conversion Rate</div><div class="kpi-delta delta-dn">↓ -2.1%</div></div>
+          <div class="kpi-box"><div class="kpi-val" style="color:var(--sky);">847</div><div class="kpi-lbl">Active Candidates</div><div class="kpi-delta delta-up">↑ +54</div></div>
+          <div class="kpi-box"><div class="kpi-val" style="color:var(--white);">92%</div><div class="kpi-lbl">SLA Compliance</div><div class="kpi-delta delta-up">↑ On track</div></div>
+        </div>
+
+        <!-- MINI CHARTS -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+          <div style="background:rgba(255,255,255,0.04); border-radius:8px; padding:14px; border:1px solid rgba(255,255,255,0.06);">
+            <div style="font-size:10px; color:var(--muted); font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-bottom:10px;">Revenue by Country (MTD)</div>
+            <div style="display:flex; flex-direction:column; gap:5px;">
+              <div style="display:flex; align-items:center; gap:8px; font-size:11px;">
+                <span style="width:60px; color:rgba(255,255,255,0.6);">Germany</span>
+                <div style="flex:1; height:6px; background:rgba(255,255,255,0.07); border-radius:3px;"><div style="width:68%; height:100%; background:var(--fire); border-radius:3px;"></div></div>
+                <span style="color:var(--amber); font-family:'JetBrains Mono',monospace;">₹1.6Cr</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px; font-size:11px;">
+                <span style="width:60px; color:rgba(255,255,255,0.6);">Kuwait</span>
+                <div style="flex:1; height:6px; background:rgba(255,255,255,0.07); border-radius:3px;"><div style="width:30%; height:100%; background:var(--amber); border-radius:3px;"></div></div>
+                <span style="color:var(--amber); font-family:'JetBrains Mono',monospace;">₹0.5Cr</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px; font-size:11px;">
+                <span style="width:60px; color:rgba(255,255,255,0.6);">Poland</span>
+                <div style="flex:1; height:6px; background:rgba(255,255,255,0.07); border-radius:3px;"><div style="width:15%; height:100%; background:var(--sky); border-radius:3px;"></div></div>
+                <span style="color:var(--amber); font-family:'JetBrains Mono',monospace;">₹0.3Cr</span>
+              </div>
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,0.04); border-radius:8px; padding:14px; border:1px solid rgba(255,255,255,0.06);">
+            <div style="font-size:10px; color:var(--muted); font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-bottom:10px;">⚡ AI Risk Alerts</div>
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <div style="background:rgba(233,69,96,0.12); border:1px solid rgba(233,69,96,0.3); border-radius:5px; padding:7px 10px; font-size:11px; color:rgba(255,255,255,0.8);">🔴 Lead SLA breach — 38 leads &gt;2hrs uncontacted</div>
+              <div style="background:rgba(245,166,35,0.10); border:1px solid rgba(245,166,35,0.3); border-radius:5px; padding:7px 10px; font-size:11px; color:rgba(255,255,255,0.8);">🟡 Batch attendance risk — 12 candidates &lt;75%</div>
+              <div style="background:rgba(79,195,247,0.10); border:1px solid rgba(79,195,247,0.3); border-radius:5px; padding:7px 10px; font-size:11px; color:rgba(255,255,255,0.8);">🔵 Content CTR drop — 14 videos below 3% threshold</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 2: CONTENT HUB -->
+<div class="page-dark" style="padding-top:40px;">
+  <h2>Screen 02 — Content HUB (Production Manager)</h2>
+  <p style="color:rgba(255,255,255,0.55); margin-bottom:24px;">Kanban-style production pipeline. Every content piece tracked from idea to published. SLA timers, owner tags, and AI quality scores visible at a glance.</p>
+
+  <div class="screen-container">
+    <div class="screen-bar">
+      <div class="sb-dot" style="background:#FF5F57;"></div>
+      <div class="sb-dot" style="background:#FEBC2E;"></div>
+      <div class="sb-dot" style="background:#28C840;"></div>
+      <div class="sb-url">hub.career360.com/content/pipeline</div>
+    </div>
+    <div class="screen-body" style="flex-direction:column;">
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:14px 20px; border-bottom:1px solid rgba(255,255,255,0.06);">
+        <div style="font-family:'Syne',sans-serif; font-size:16px; font-weight:800;">Content Pipeline</div>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <span style="font-size:11px; color:var(--muted);">Today: <strong style="color:var(--lime);">47 published</strong></span>
+          <div class="btn btn-primary">+ New Content</div>
+        </div>
+      </div>
+      <div style="padding:16px 20px;">
+        <div class="kanban">
+          <div class="kanban-col">
+            <div class="kc-header"><span>IDEA</span><span class="kc-count">24</span></div>
+            <div class="kc-card"><div class="kcc-title">Germany salary after Ausbildung 2025</div><div class="kcc-tag">Reel · High demand</div><div class="kcc-bar"><div class="kcc-fill" style="width:90%; background:var(--fire);"></div></div></div>
+            <div class="kc-card"><div class="kcc-title">B2 exam tips for healthcare workers</div><div class="kcc-tag">Reel · Education</div><div class="kcc-bar"><div class="kcc-fill" style="width:75%; background:var(--amber);"></div></div></div>
+            <div class="kc-card"><div class="kcc-title">Life of a nurse in Berlin (Day 1)</div><div class="kcc-tag">YouTube · Ambassador</div><div class="kcc-bar"><div class="kcc-fill" style="width:60%; background:var(--lime);"></div></div></div>
+          </div>
+          <div class="kanban-col">
+            <div class="kc-header"><span>SCRIPT</span><span class="kc-count">18</span></div>
+            <div class="kc-card"><div class="kcc-title">Kuwait job fair — what to expect</div><div class="kcc-tag">Reel · @Priya Sharma</div><div class="kcc-bar"><div class="kcc-fill" style="width:100%; background:var(--lime);"></div></div></div>
+            <div class="kc-card"><div class="kcc-title">10 German words every student must know</div><div class="kcc-tag">Reel · Educational</div><div class="kcc-bar"><div class="kcc-fill" style="width:80%; background:var(--amber);"></div></div></div>
+          </div>
+          <div class="kanban-col">
+            <div class="kc-header"><span>SHOOT</span><span class="kc-count">11</span></div>
+            <div class="kc-card"><div class="kcc-title">Ausbildung student tells her story</div><div class="kcc-tag">⏱ In progress</div><div class="kcc-bar"><div class="kcc-fill" style="width:55%; background:var(--sky);"></div></div></div>
+            <div class="kc-card"><div class="kcc-title">Employer interview — Munich hospital</div><div class="kcc-tag">⏱ Scheduled 3pm</div><div class="kcc-bar"><div class="kcc-fill" style="width:20%; background:rgba(255,255,255,0.3);"></div></div></div>
+          </div>
+          <div class="kanban-col">
+            <div class="kc-header"><span>EDIT + SEO</span><span class="kc-count">9</span></div>
+            <div class="kc-card"><div class="kcc-title">From Kerala to Germany — full journey</div><div class="kcc-tag">@Editor Ravi · 60% done</div><div class="kcc-bar"><div class="kcc-fill" style="width:60%; background:var(--fire);"></div></div></div>
+          </div>
+          <div class="kanban-col" style="border-color:rgba(0,212,164,0.3);">
+            <div class="kc-header" style="color:var(--lime);"><span>PUBLISHED</span><span class="kc-count" style="background:rgba(0,212,164,0.15); color:var(--lime);">47</span></div>
+            <div class="kc-card" style="border-color:rgba(0,212,164,0.2);"><div class="kcc-title">First week as Ausbildung nurse</div><div class="kcc-tag" style="color:var(--lime);">✓ 84K views · 340 leads</div><div class="kcc-bar"><div class="kcc-fill" style="width:100%; background:var(--lime);"></div></div></div>
+            <div class="kc-card" style="border-color:rgba(0,212,164,0.2);"><div class="kcc-title">Germany B1 exam result day!</div><div class="kcc-tag" style="color:var(--lime);">✓ 212K views · 890 leads</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 3: LEAD MANAGEMENT CRM -->
+<div class="page-dark" style="padding-top:40px;">
+  <h2>Screen 03 — Sales / Counselor HUB (Lead Management)</h2>
+  <p style="color:rgba(255,255,255,0.55); margin-bottom:24px;">Every counselor's operational workspace. Hot leads prioritized by AI. Follow-ups queued. Conversion probability visible before every call.</p>
+
+  <div class="screen-container">
+    <div class="screen-bar">
+      <div class="sb-dot" style="background:#FF5F57;"></div>
+      <div class="sb-dot" style="background:#FEBC2E;"></div>
+      <div class="sb-dot" style="background:#28C840;"></div>
+      <div class="sb-url">hub.career360.com/sales/leads</div>
+    </div>
+    <div class="screen-body">
+      <div class="screen-sidebar">
+        <div class="ss-brand">C360 HUB</div>
+        <div class="ss-section">Sales</div>
+        <div class="ss-item active">🔥 Hot Leads (38)</div>
+        <div class="ss-item">📞 Follow-ups (24)</div>
+        <div class="ss-item">📅 Counseling (12)</div>
+        <div class="ss-item">✅ Registration</div>
+        <div class="ss-item">💤 Nurture Pool</div>
+        <div class="ss-section">Analytics</div>
+        <div class="ss-item">📊 My Performance</div>
+        <div class="ss-item">🤖 AI Suggestions</div>
+      </div>
+      <div class="screen-main">
+        <div class="sm-topbar">
+          <div>
+            <div class="sm-title">Lead Queue</div>
+            <div style="font-size:11px; color:var(--muted); margin-top:2px;">Showing hot leads · Sorted by AI score</div>
+          </div>
+          <div class="sm-actions">
+            <div class="btn btn-ghost">Filter</div>
+            <div class="btn btn-primary">+ Add Lead</div>
+          </div>
+        </div>
+        <div class="kpi-row" style="gap:10px;">
+          <div class="kpi-box"><div class="kpi-val" style="color:var(--fire); font-size:18px;">38</div><div class="kpi-lbl">Hot Leads</div></div>
+          <div class="kpi-box"><div class="kpi-val" style="color:var(--amber); font-size:18px;">24</div><div class="kpi-lbl">Follow-ups Due</div></div>
+          <div class="kpi-box"><div class="kpi-val" style="color:var(--lime); font-size:18px;">68%</div><div class="kpi-lbl">My Conversion</div></div>
+          <div class="kpi-box"><div class="kpi-val" style="color:var(--sky); font-size:18px;">1.4h</div><div class="kpi-lbl">Avg Response</div></div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Candidate</th><th>Program</th><th>Source</th><th>AI Score</th><th>Status</th><th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div style="font-weight:600; font-size:12px;">Anjali Krishnan</div><div style="font-size:10px; color:var(--muted);">Kerala · 21yrs</div></td>
+              <td><span class="status-pill sp-blue">Ausbildung</span></td>
+              <td style="font-size:10px; color:var(--muted);">Instagram Reel</td>
+              <td><span style="font-family:'JetBrains Mono',monospace; color:var(--lime); font-weight:700;">94</span></td>
+              <td><span class="status-pill sp-orange">New - Uncontacted</span></td>
+              <td><div class="btn btn-primary" style="padding:5px 12px; font-size:10px;">📞 Call Now</div></td>
+            </tr>
+            <tr>
+              <td><div style="font-weight:600; font-size:12px;">Rahul Menon</div><div style="font-size:10px; color:var(--muted);">Tamil Nadu · 23yrs</div></td>
+              <td><span class="status-pill sp-green">Nursing</span></td>
+              <td style="font-size:10px; color:var(--muted);">YouTube Video</td>
+              <td><span style="font-family:'JetBrains Mono',monospace; color:var(--lime); font-weight:700;">88</span></td>
+              <td><span class="status-pill sp-blue">Counseling Scheduled</span></td>
+              <td><div class="btn btn-ghost" style="padding:5px 12px; font-size:10px;">View Profile</div></td>
+            </tr>
+            <tr>
+              <td><div style="font-weight:600; font-size:12px;">Priya Nair</div><div style="font-size:10px; color:var(--muted);">Karnataka · 20yrs</div></td>
+              <td><span class="status-pill sp-blue">Ausbildung</span></td>
+              <td style="font-size:10px; color:var(--muted);">Agent Referral</td>
+              <td><span style="font-family:'JetBrains Mono',monospace; color:var(--amber); font-weight:700;">72</span></td>
+              <td><span class="status-pill sp-orange">Follow-up Needed</span></td>
+              <td><div class="btn btn-primary" style="padding:5px 12px; font-size:10px;">💬 WhatsApp</div></td>
+            </tr>
+            <tr>
+              <td><div style="font-weight:600; font-size:12px;">Arjun Pillai</div><div style="font-size:10px; color:var(--muted);">Kerala · 19yrs</div></td>
+              <td><span class="status-pill sp-blue">Ausbildung</span></td>
+              <td style="font-size:10px; color:var(--muted);">Website Form</td>
+              <td><span style="font-family:'JetBrains Mono',monospace; color:var(--fire); font-weight:700;">45</span></td>
+              <td><span class="status-pill sp-gray">Nurture Pool</span></td>
+              <td><div class="btn btn-ghost" style="padding:5px 12px; font-size:10px;">Sequence</div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pg-footer"><span>Career360 Content Operating System</span><span>CAREER360 GROUP · CONFIDENTIAL</span><span>Chapter 08</span></div>
+
+<!-- SCREEN 4: CANDIDATE FORM -->
+<div class="page-dark" style="padding-top:60px;">
+  <h2>Screen 04 — Lead Qualification Form (Counselor)</h2>
+  <p style="color:rgba(255,255,255,0.55); margin-bottom:24px;">Smart form with AI-assisted scoring. Every field captured updates the lead score in real-time. Conditional logic shows relevant fields based on program and country selection.</p>
+
+  <div class="screen-container">
+    <div class="screen-bar">
+      <div class="sb-dot" style="background:#FF5F57;"></div>
+      <div class="sb-dot" style="background:#FEBC2E;"></div>
+      <div class="sb-dot" style="background:#28C840;"></div>
+      <div class="sb-url">hub.career360.com/leads/qualify/C360-L-4821</div>
+    </div>
+    <div class="screen-body">
+      <div class="screen-main" style="display:grid; grid-template-columns:1fr 280px; gap:20px; max-height:500px; overflow-y:auto;">
+        <div>
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;">
+            <div>
+              <div style="font-family:'Syne',sans-serif; font-size:16px; font-weight:800;">Lead Qualification</div>
+              <div style="font-size:11px; color:var(--muted);">ID: C360-L-4821 · Created 09:14 AM</div>
+            </div>
+            <div class="ai-badge">⚡ AI Score: <strong style="color:var(--lime);">87</strong></div>
+          </div>
+
+          <div class="form-section">
+            <div style="font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--fire); margin-bottom:12px; padding-bottom:6px; border-bottom:1px solid rgba(255,255,255,0.07);">Personal Details</div>
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Full Name *</label><div class="form-input filled">Anjali Krishnan</div></div>
+              <div class="form-group"><label class="form-label">Age *</label><div class="form-input filled">21</div></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Mobile *</label><div class="form-input filled">+91 98765 43210</div></div>
+              <div class="form-group"><label class="form-label">State</label><div class="form-input filled">Kerala</div></div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div style="font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--lime); margin-bottom:12px; padding-bottom:6px; border-bottom:1px solid rgba(255,255,255,0.07);">Qualification Assessment</div>
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Education Level *</label><div class="form-input filled">12th Pass — Science</div></div>
+              <div class="form-group"><label class="form-label">Program Interest *</label><div class="form-input filled">Germany Ausbildung</div></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">German Language Level</label><div class="form-input">Not started</div></div>
+              <div class="form-group"><label class="form-label">Budget Readiness *</label><div class="form-input">₹3–5 Lakhs available</div></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Parent Support *</label><div class="form-input filled">Father present in call — positive</div></div>
+              <div class="form-group"><label class="form-label">Decision Timeline</label><div class="form-input filled">Within 30 days</div></div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div style="font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--amber); margin-bottom:12px; padding-bottom:6px; border-bottom:1px solid rgba(255,255,255,0.07);">Call Outcome</div>
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Qualification Status *</label><div class="form-input" style="border-color:rgba(0,212,164,0.5); color:var(--lime);">✓ QUALIFIED — Hot Lead</div></div>
+              <div class="form-group"><label class="form-label">Next Action *</label><div class="form-input">Schedule Counseling</div></div>
+            </div>
+            <div class="form-group"><label class="form-label">Call Notes</label><div class="form-input" style="height:60px; display:flex; align-items:flex-start; padding-top:8px;">Father is very supportive. Family has already researched Ausbildung. Anjali interested in IT sector. Budget available. Very serious candidate.</div></div>
+          </div>
+
+          <div style="display:flex; gap:10px; margin-top:16px;">
+            <div class="btn btn-primary" style="flex:1; text-align:center;">Save & Schedule Counseling</div>
+            <div class="btn btn-ghost">Save Draft</div>
+          </div>
+        </div>
+
+        <!-- AI PANEL -->
+        <div style="background:rgba(0,0,0,0.3); border-left:1px solid rgba(255,255,255,0.06); padding:16px; border-radius:0 0 8px 0;">
+          <div style="font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--sky); margin-bottom:12px;">🤖 AI INSIGHTS</div>
+
+          <div class="score-card" style="margin-bottom:12px;">
+            <div class="sc-val" style="color:var(--lime); font-size:28px;">87</div>
+            <div class="sc-info">
+              <div class="sc-label" style="font-size:12px;">Lead Score</div>
+              <div class="sc-sub">HOT — High conversion probability</div>
+              <div class="sc-bar"><div class="sc-fill" style="width:87%; background:var(--lime);"></div></div>
+            </div>
+          </div>
+
+          <div style="background:rgba(0,212,164,0.08); border-radius:6px; padding:10px; margin-bottom:10px; border:1px solid rgba(0,212,164,0.2);">
+            <div style="font-size:10px; color:var(--lime); font-weight:700; margin-bottom:4px;">CONVERSION PROBABILITY</div>
+            <div style="font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:var(--lime);">74%</div>
+            <div style="font-size:10px; color:rgba(255,255,255,0.4);">Based on profile + behavior patterns</div>
+          </div>
+
+          <div style="font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--amber); margin-bottom:6px;">RECOMMENDED NEXT STEPS</div>
+          <div style="font-size:11px; color:rgba(255,255,255,0.6); line-height:1.8;">
+            1. Schedule counseling within 24 hrs<br>
+            2. Send Ausbildung brochure via WhatsApp<br>
+            3. Include father in counseling session<br>
+            4. Focus on IT Ausbildung programs
+          </div>
+
+          <div style="margin-top:12px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.06);">
+            <div style="font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--fire); margin-bottom:6px;">RISK FLAGS</div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.6);">⚠ No language training yet — flag for early enrollment</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 5: TRAINING DASHBOARD -->
+<div class="page-dark" style="padding-top:40px;">
+  <h2>Screen 05 — Training HUB (Academic Head / Trainer)</h2>
+  <p style="color:rgba(255,255,255,0.55); margin-bottom:24px;">All batches, attendance tracking, weak student identification, and AI-generated learning path adjustments. Real-time dropout risk alerts.</p>
+
+  <div class="screen-container">
+    <div class="screen-bar">
+      <div class="sb-dot" style="background:#FF5F57;"></div>
+      <div class="sb-dot" style="background:#FEBC2E;"></div>
+      <div class="sb-dot" style="background:#28C840;"></div>
+      <div class="sb-url">hub.career360.com/training/batches</div>
+    </div>
+    <div class="screen-body">
+      <div class="screen-main">
+        <div class="sm-topbar">
+          <div class="sm-title">Training Batches</div>
+          <div class="btn btn-primary">+ New Batch</div>
+        </div>
+        <div class="kpi-row" style="gap:10px;">
+          <div class="kpi-box"><div class="kpi-val" style="color:var(--lime); font-size:20px;">14</div><div class="kpi-lbl">Active Batches</div></div>
+          <div class="kpi-box"><div class="kpi-val" style="color:var(--amber); font-size:20px;">342</div><div class="kpi-lbl">Students Enrolled</div></div>
+          <div class="kpi-box"><div class="kpi-val" style="color:var(--fire); font-size:20px;">23</div><div class="kpi-lbl">At Risk (⚠)</div></div>
+          <div class="kpi-box"><div class="kpi-val" style="color:var(--sky); font-size:20px;">88%</div><div class="kpi-lbl">Avg Attendance</div></div>
+          <div class="kpi-box"><div class="kpi-val" style="color:var(--lime); font-size:20px;">79%</div><div class="kpi-lbl">B1 Pass Rate</div></div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Batch</th><th>Level</th><th>Trainer</th><th>Students</th><th>Attendance</th><th>Avg Score</th><th>Risk</th><th>Action</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div style="font-weight:600; font-size:12px;">A1 — Kerala Batch 12</div><div style="font-size:10px; color:var(--muted);">Started: Jun 1 · Ends: Aug 31</div></td>
+              <td><span class="status-pill sp-blue">A1</span></td>
+              <td style="font-size:11px;">Sreeja Thomas</td>
+              <td style="font-size:12px; font-weight:600;">28</td>
+              <td><span style="color:var(--lime); font-weight:700;">91%</span></td>
+              <td><span style="color:var(--lime);">82/100</span></td>
+              <td><span class="status-pill sp-green">Low</span></td>
+              <td><div class="btn btn-ghost" style="font-size:10px; padding:4px 10px;">View</div></td>
+            </tr>
+            <tr>
+              <td><div style="font-weight:600; font-size:12px;">B1 — Nursing Batch 5</div><div style="font-size:10px; color:var(--muted);">Started: May 15 · Ends: Jul 30</div></td>
+              <td><span class="status-pill sp-green">B1</span></td>
+              <td style="font-size:11px;">Hans Weber (Native)</td>
+              <td style="font-size:12px; font-weight:600;">22</td>
+              <td><span style="color:var(--amber); font-weight:700;">78%</span></td>
+              <td><span style="color:var(--amber);">68/100</span></td>
+              <td><span class="status-pill sp-orange">Medium</span></td>
+              <td><div class="btn btn-primary" style="font-size:10px; padding:4px 10px; background:rgba(233,69,96,0.8);">⚠ Action</div></td>
+            </tr>
+            <tr>
+              <td><div style="font-weight:600; font-size:12px;">A2 — IT Ausbildung Batch 3</div><div style="font-size:10px; color:var(--muted);">Started: Jun 10 · Ends: Sep 15</div></td>
+              <td><span class="status-pill sp-orange">A2</span></td>
+              <td style="font-size:11px;">Priya Kapoor</td>
+              <td style="font-size:12px; font-weight:600;">31</td>
+              <td><span style="color:var(--lime); font-weight:700;">93%</span></td>
+              <td><span style="color:var(--lime);">87/100</span></td>
+              <td><span class="status-pill sp-green">Low</span></td>
+              <td><div class="btn btn-ghost" style="font-size:10px; padding:4px 10px;">View</div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pg-footer"><span>Career360 Content Operating System</span><span>CAREER360 GROUP · CONFIDENTIAL</span><span>Chapter 08 — UI Screens</span></div>
+
+<!-- ═══════════════════════════════════ CH 9: AUTOMATION ═══════════════════════════════════ -->
+<div class="ch-break" data-num="09">
+  <div class="ch-num">// 09 — AI & AUTOMATION LAYER</div>
+  <div class="ch-title">The Automation<br>Playbook</div>
+  <div class="ch-desc">Every trigger, every action, every AI model. The system that runs the system — so your people can focus on what humans do best.</div>
+</div>
+
+<div class="page-light">
+  <h2>Automation Trigger Map</h2>
+  <p class="lead" style="color:rgba(13,13,13,0.55);">Automation is not a feature — it is a discipline. Every trigger must have a defined condition, action, owner, and audit log. No black-box automation.</p>
+
+  <table class="tbl">
+    <thead>
+      <tr><th>Module</th><th>Trigger Event</th><th>Condition</th><th>Automated Action</th><th>Human Review</th></tr>
+    </thead>
+    <tbody>
+      <tr><td rowspan="4" style="font-weight:700; vertical-align:top; padding-top:16px;">Lead Engine</td><td>New lead created</td><td>Always</td><td>Auto-score + assign counselor + WhatsApp welcome</td><td>If score &lt;30</td></tr>
+      <tr><td>Lead not contacted</td><td>&gt;2 hours from creation</td><td>Escalate to Sales Manager + UCC alert</td><td>Always</td></tr>
+      <tr><td>Duplicate detected</td><td>Phone/email match found</td><td>Merge records + notify original counselor</td><td>If data differs</td></tr>
+      <tr><td>Lead goes cold</td><td>No activity for 7 days</td><td>Add to nurture sequence + change status</td><td>Never</td></tr>
+      <tr><td rowspan="3" style="font-weight:700; vertical-align:top; padding-top:16px;">Training</td><td>Attendance drops</td><td>Attendance &lt;75%</td><td>Alert trainer + flag for remedial class</td><td>Always</td></tr>
+      <tr><td>Assessment score low</td><td>Score &lt;60%</td><td>Create remedial plan + notify academic head</td><td>Academic head approves</td></tr>
+      <tr><td>Candidate exam-ready</td><td>Score >80%, attendance >85%</td><td>Push to ATS matching queue</td><td>Operations confirms</td></tr>
+      <tr><td rowspan="3" style="font-weight:700; vertical-align:top; padding-top:16px;">Content</td><td>Video published</td><td>Always</td><td>Start analytics tracking, UTM capture, CRM tag</td><td>Never</td></tr>
+      <tr><td>CTR drops below threshold</td><td>CTR &lt;3% after 48 hrs</td><td>Flag for optimization + suggest thumbnail A/B</td><td>Content manager</td></tr>
+      <tr><td>Video drives high leads</td><td>&gt;50 leads in 24 hrs</td><td>Duplicate content format + boost distribution</td><td>Strategist approves</td></tr>
+      <tr><td rowspan="3" style="font-weight:700; vertical-align:top; padding-top:16px;">Operations</td><td>Document missing</td><td>Checklist incomplete</td><td>Auto-generate missing list + send to candidate</td><td>If visa deadline &lt;14 days</td></tr>
+      <tr><td>Visa appointment approaching</td><td>&lt;7 days to appointment</td><td>Reminder to candidate + ops team</td><td>Never</td></tr>
+      <tr><td>Agent fraud risk detected</td><td>AI fraud score &gt;80</td><td>Freeze agent account + alert agent manager</td><td>Always</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box" style="margin-top:24px;">
+    <div class="ib-label">Operating Principle</div>
+    <strong>You won't run operations. You will run a system that runs operations.</strong>
+    <p style="margin-top:6px; margin-bottom:0; font-size:13px;">The goal of automation is not to replace people — it is to eliminate the repetitive, error-prone tasks that slow people down. Every automation rule documented here frees your team to do what AI cannot: build relationships, resolve edge cases, and make judgment calls.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ CH 10: 90-DAY PLAN ═══════════════════════════════════ -->
+<div class="ch-break" data-num="10">
+  <div class="ch-num">// 10 — 90-DAY EXECUTION</div>
+  <div class="ch-title">From Blueprint<br>to Reality</div>
+  <div class="ch-desc">Day-by-day execution rhythm for the first 90 days. Daily cadence, weekly priorities, phase milestones, and KPI targets that make the system real.</div>
+</div>
+
+<div class="page-mid">
+  <h2>The 90-Day Launch Roadmap</h2>
+
+  <div class="phase-block">
+    <div class="pb-item" style="background:rgba(233,69,96,0.06);">
+      <div class="pb-num">Phase 01 · Days 1–30</div>
+      <div class="pb-title" style="color:var(--fire);">Foundation</div>
+      <div style="font-size:12px; color:rgba(255,255,255,0.5); margin-bottom:12px;">Build the factory floor</div>
+      <ul class="pb-list">
+        <li>Core team onboarded & trained</li>
+        <li>SOPs written & published in KBM</li>
+        <li>CRM + content tools configured</li>
+        <li>100 videos produced & analyzed</li>
+        <li>First 5 content pillars defined</li>
+        <li>Lead capture forms live</li>
+        <li>Target: 3–5 videos/day</li>
+      </ul>
+    </div>
+    <div class="pb-item" style="background:rgba(245,166,35,0.06);">
+      <div class="pb-num">Phase 02 · Days 31–60</div>
+      <div class="pb-title" style="color:var(--amber);">Scale</div>
+      <div style="font-size:12px; color:rgba(255,255,255,0.5); margin-bottom:12px;">Increase output, optimize performance</div>
+      <ul class="pb-list">
+        <li>300+ videos produced</li>
+        <li>Weekly analytics rhythm active</li>
+        <li>Top 20% content identified & scaled</li>
+        <li>Localization in 2 languages started</li>
+        <li>Automation workflows live</li>
+        <li>Agent portal deployed</li>
+        <li>Target: 10–15 videos/day</li>
+      </ul>
+    </div>
+    <div class="pb-item" style="background:rgba(0,212,164,0.06);">
+      <div class="pb-num">Phase 03 · Days 61–90</div>
+      <div class="pb-title" style="color:var(--lime);">Dominate</div>
+      <div style="font-size:12px; color:rgba(255,255,255,0.5); margin-bottom:12px;">Predictable lead engine running</div>
+      <ul class="pb-list">
+        <li>500–800 videos produced</li>
+        <li>AI integration active (scoring, matching)</li>
+        <li>Multi-country content (India + GCC)</li>
+        <li>1,000+ content asset library</li>
+        <li>UCC dashboard fully operational</li>
+        <li>Student ambassador network live</li>
+        <li>Target: 20–30 videos/day</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Daily Operating Rhythm</h3>
+  <div style="background:rgba(0,0,0,0.25); border-radius:12px; padding:24px; margin:16px 0;">
+    <div style="display:grid; grid-template-columns:100px 1fr; gap:0;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--fire); padding:10px 12px; border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">09:00–11:00</div>
+      <div style="padding:10px 12px; border-bottom:1px solid rgba(255,255,255,0.06); font-size:13px; color:rgba(255,255,255,0.75);"><strong>Morning Stand-Up</strong> — Yesterday's performance review, today's targets, blocker resolution</div>
+      <div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--amber); padding:10px 12px; border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">11:00–13:00</div>
+      <div style="padding:10px 12px; border-bottom:1px solid rgba(255,255,255,0.06); font-size:13px; color:rgba(255,255,255,0.75);"><strong>Production Planning</strong> — Script approvals, shoot scheduling, resource allocation</div>
+      <div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--lime); padding:10px 12px; border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">13:00–18:00</div>
+      <div style="padding:10px 12px; border-bottom:1px solid rgba(255,255,255,0.06); font-size:13px; color:rgba(255,255,255,0.75);"><strong>Production Window</strong> — Active shooting, editing, design, SEO — maximum output hours</div>
+      <div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--sky); padding:10px 12px; border-bottom:1px solid rgba(255,255,255,0.06); font-weight:600;">18:00–20:00</div>
+      <div style="padding:10px 12px; border-bottom:1px solid rgba(255,255,255,0.06); font-size:13px; color:rgba(255,255,255,0.75);"><strong>Publishing Window</strong> — Upload, caption writing, scheduling, distribution to communities</div>
+      <div style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--fire); padding:10px 12px; font-weight:600;">20:00–21:00</div>
+      <div style="padding:10px 12px; font-size:13px; color:rgba(255,255,255,0.75);"><strong>Analytics Review</strong> — First-hour performance check, identify winners, flag underperformers</div>
+    </div>
+  </div>
+
+  <h3>Content KPI Dashboard Targets</h3>
+  <div class="g4">
+    <div class="card-dark" style="text-align:center;">
+      <div style="font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:var(--fire);">500+</div>
+      <div style="font-size:11px; color:var(--muted); margin-top:4px;">Videos / Month</div>
+    </div>
+    <div class="card-dark" style="text-align:center;">
+      <div style="font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:var(--lime);">&gt;5%</div>
+      <div style="font-size:11px; color:var(--muted); margin-top:4px;">Avg CTR Target</div>
+    </div>
+    <div class="card-dark" style="text-align:center;">
+      <div style="font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:var(--amber);">&gt;50%</div>
+      <div style="font-size:11px; color:var(--muted); margin-top:4px;">Avg Retention Rate</div>
+    </div>
+    <div class="card-dark" style="text-align:center;">
+      <div style="font-family:'Syne',sans-serif; font-size:28px; font-weight:800; color:var(--sky);">₹150</div>
+      <div style="font-size:11px; color:var(--muted); margin-top:4px;">Target CPL</div>
+    </div>
+  </div>
+</div>
+
+<div class="pg-footer"><span>Career360 Content Operating System</span><span>CAREER360 GROUP · CONFIDENTIAL</span><span>Chapter 10</span></div>
+
+<!-- BIG QUOTE -->
+<div class="big-quote">
+  <p class="bq-text">"Most organizations fail because content is random, unstructured, and unmeasured. Career360's model ensures: Content = Predictable Output System."</p>
+  <div class="bq-attr">Career360 Content Production Operating Principle</div>
+</div>
+
+<!-- FINAL PAGE -->
+<div class="page-dark" style="text-align:center; padding:80px 40px;">
+  <div style="max-width:700px; margin:0 auto;">
+    <div style="font-size:48px; margin-bottom:24px;">🚀</div>
+    <div style="font-family:'Syne',sans-serif; font-size:32px; font-weight:800; margin-bottom:12px;">End State</div>
+    <p style="color:rgba(255,255,255,0.6); margin-bottom:40px; font-size:16px; line-height:1.8;">When executed fully, Career360 will operate not as a content team, but as a <strong style="color:var(--fire);">Content-to-Revenue Machine</strong> — where every video is a traceable sales asset, every view is a measurable funnel entry, and every rupee of content spend has a documented return.</p>
+
+    <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:16px; margin-bottom:40px;">
+      <div style="background:rgba(233,69,96,0.12); border:1px solid rgba(233,69,96,0.3); border-radius:10px; padding:20px;">
+        <div style="font-size:24px; margin-bottom:8px;">📹</div>
+        <div style="font-family:'Syne',sans-serif; font-size:16px; font-weight:700; color:var(--fire);">Content Factory</div>
+        <div style="font-size:12px; color:rgba(255,255,255,0.5); margin-top:6px;">500+ videos/month, 10,000+ leads</div>
+      </div>
+      <div style="background:rgba(0,212,164,0.12); border:1px solid rgba(0,212,164,0.3); border-radius:10px; padding:20px;">
+        <div style="font-size:24px; margin-bottom:8px;">🎯</div>
+        <div style="font-family:'Syne',sans-serif; font-size:16px; font-weight:700; color:var(--lime);">Lead Engine</div>
+        <div style="font-size:12px; color:rgba(255,255,255,0.5); margin-top:6px;">₹150 CPL, measurable attribution</div>
+      </div>
+      <div style="background:rgba(245,166,35,0.12); border:1px solid rgba(245,166,35,0.3); border-radius:10px; padding:20px;">
+        <div style="font-size:24px; margin-bottom:8px;">💰</div>
+        <div style="font-family:'Syne',sans-serif; font-size:16px; font-weight:700; color:var(--amber);">Revenue Engine</div>
+        <div style="font-size:12px; color:rgba(255,255,255,0.5); margin-top:6px;">6–8x ROI, predictable scale</div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:32px;">
+      <div style="font-family:'Syne',sans-serif; font-size:22px; font-weight:800; margin-bottom:8px;">Career360 Group</div>
+      <div style="font-size:13px; color:rgba(255,255,255,0.4); line-height:1.8;">
+        Content Operating System · Book Two<br>
+        Career360 Academy · Altus Career · euRecruiter · Career360 Tech
+      </div>
+      <div style="margin-top:16px; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.2);">Enterprise Intelligence Division · Confidential · 2025</div>
+    </div>
+  </div>
+</div>
+
+<div class="pg-footer"><span>Career360 Content Operating System · Book 2</span><span>CAREER360 GROUP · CONFIDENTIAL</span><span>End of Document</span></div>
+
+</body>
+</html>
